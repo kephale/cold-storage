@@ -1,9 +1,9 @@
 module.exports = {
-  pathPrefix: `/catalogs/default`,
+  pathPrefix: `/test-catalog`,
   siteMetadata: {
     title: 'album catalog',
     subtitle: 'sharing favourite solutions across tools and domains',
-    catalog_url: 'https://gitlab.com/album-app/catalogs/templates/catalog-gatsby',
+    catalog_url: 'https://github.com/frauzufall/test-catalog',
     menuLinks:[
       {
          name:'Catalog',
