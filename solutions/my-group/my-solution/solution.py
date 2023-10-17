@@ -47,7 +47,7 @@ def run():
         img = ij.op().filter().dog(img, 5.0, 2.0)
 
         # delete output file if it exists already, create parent folder
-        image_path = get_args().output_image_path
+        image_path = str(get_args().output_image_path)
         if os.path.exists(image_path):
             os.remove(image_path)
         Path(os.path.abspath(image_path)).parent.mkdir(parents=True, exist_ok=True)
