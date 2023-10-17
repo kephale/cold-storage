@@ -1,0 +1,34 @@
+album_api_version: 0.3.1
+args:
+- description: The output file name to where a random image is going to be saved.
+  name: output_image_path
+  required: true
+  type: file
+changelog: null
+cite:
+- doi: 10.1186/s12859-017-1934-z
+  text: 'Rueden, C. T., Schindelin, J., Hiner, M. C., DeZonia, B. E., Walter, A. E.,
+    Arena, E. T., & Eliceiri, K. W. (2017). ImageJ2: ImageJ for the next generation
+    of scientific image data. BMC Bioinformatics, 18(1).'
+  url: https://imagej.net
+covers:
+- description: Dummy cover image.
+  source: cover.png
+description: An Album solution template generating an ImgLib2 image with random values
+  in ImageJ2.
+documentation:
+- documentation.md
+group: my-group
+license: unlicense
+name: my-solution
+solution_creators:
+- Album team
+tags:
+- template
+- java
+- imagej2
+- scijava
+- scyjava
+timestamp: '2023-10-17T09:52:21.630506'
+title: ImageJ2 template
+version: 0.1.0
