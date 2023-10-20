@@ -2,7 +2,7 @@ import React from "react"
 
 const Home = () => {
   return (
-    <p>Welcome!</p>
+    <p>A listing of Kyle's album catalog for cryoET.</p>
   )
 }
 
