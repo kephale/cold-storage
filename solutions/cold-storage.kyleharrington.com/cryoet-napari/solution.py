@@ -12,7 +12,7 @@ env_file = StringIO(
   - conda-forge
   - defaults
   - rapidsai
-  - cryoem    
+  - cryoem
 dependencies:
   - python=3.10
   - zarr
