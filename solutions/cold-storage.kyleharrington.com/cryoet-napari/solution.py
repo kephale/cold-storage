@@ -87,6 +87,7 @@ dependencies:
       - "git+https://github.com/teamtomo/membrain-seg.git"
       - cryodrgn
       - tomotwin-cryoet
+      - lxml==4.9.0
 """
 )
 
