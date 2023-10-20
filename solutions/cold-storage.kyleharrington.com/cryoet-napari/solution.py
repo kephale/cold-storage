@@ -12,6 +12,7 @@ env_file = StringIO(
   - conda-forge
   - defaults
   - rapidsai
+  - cryoem    
 dependencies:
   - python=3.10
   - zarr
@@ -64,6 +65,7 @@ dependencies:
   - protobuf[version='>3.20']
   - tensorboard
   - optuna
+  - eman-dev
   - pip:
       - "git+https://github.com/napari/napari.git"
       - blik
