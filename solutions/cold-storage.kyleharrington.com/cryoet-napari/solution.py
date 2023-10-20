@@ -65,7 +65,7 @@ dependencies:
   - protobuf[version='>3.20']
   - tensorboard
   - optuna
-  - eman-dev
+  - eman-dev[version=<='2.99.53']
   - pip:
       - "git+https://github.com/napari/napari.git"
       - blik
