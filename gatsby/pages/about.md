@@ -4,4 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is a template catalog.
+This is the http://cold-storage.kyleharrington.com/ catalog.
+
+Maintained by Kyle Harrington: https://kyleharrington.com
