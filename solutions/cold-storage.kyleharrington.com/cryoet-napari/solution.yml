@@ -15,6 +15,6 @@ tags:
 - imaging
 - cryoet
 - Python
-timestamp: '2023-10-20T16:10:34.184520'
+timestamp: '2023-10-20T16:34:04.365617'
 title: Parent environment for some napari cryoet tools.
 version: 0.0.1

@@ -64,7 +64,6 @@ dependencies:
   - protobuf[version='>3.20']
   - tensorboard
   - optuna
-  - cuml
   - pip:
       - "git+https://github.com/napari/napari.git"
       - blik
