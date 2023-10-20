@@ -1,9 +1,9 @@
 module.exports = {
-  pathPrefix: `/test-catalog`,
+  pathPrefix: `/`,
   siteMetadata: {
-    title: 'album catalog',
-    subtitle: 'sharing favourite solutions across tools and domains',
-    catalog_url: 'https://github.com/frauzufall/test-catalog',
+    title: 'kyle harrington\'s cold-storage album catalog',
+    subtitle: 'cryoET solutions across tools and domains',
+    catalog_url: 'http://cold-storage.kyleharrington.com',
     menuLinks:[
       {
          name:'Catalog',
