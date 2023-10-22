@@ -14,7 +14,7 @@ env_file = StringIO(
   - rapidsai
   - cryoem
 dependencies:
-  - python=3.10
+  - python=3.11
   - zarr
   - numpy
   - imageio
