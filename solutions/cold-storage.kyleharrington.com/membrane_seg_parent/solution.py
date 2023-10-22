@@ -14,7 +14,7 @@ env_file = StringIO(
   - rapidsai
   - cryoem
 dependencies:
-  - python=3.11
+  - python=3.10
   - zarr
   - numpy
   - imageio
@@ -27,7 +27,7 @@ dependencies:
   - pyqt
   - matplotlib
   - xarray
-  - hdf5[version='=1.12.2']
+  - hdf5
   - omero-py
   - pytorch[version='>=2.1']
   - torchvision
