@@ -28,7 +28,7 @@ dependencies:
   - pyqt
   - matplotlib
   - xarray
-  - hdf5
+  - hdf5[version='=1.12.2']
   - omero-py
   - pytorch[version='>=2.1']
   - torchvision
