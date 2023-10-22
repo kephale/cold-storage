@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: null
+changelog: More
 cite:
 - text: Kyle Harrington.
   url: https://kyleharrington.com
@@ -15,6 +15,6 @@ tags:
 - imaging
 - cryoet
 - Python
-timestamp: '2023-10-22T15:11:15.502604'
+timestamp: '2023-10-22T15:21:23.657024'
 title: Parent environment for membrane_seg.
 version: 0.0.1

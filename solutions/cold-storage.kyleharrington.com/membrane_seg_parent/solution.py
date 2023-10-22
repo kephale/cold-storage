@@ -14,7 +14,7 @@ env_file = StringIO(
   - rapidsai
   - cryoem
 dependencies:
-  - python=3.10
+  - python=3.9
   - zarr
   - numpy
   - imageio
@@ -24,14 +24,12 @@ dependencies:
   - dask
   - pandas[version='<2']
   - scipy
-  - pyqt
   - matplotlib
   - xarray
   - hdf5
   - omero-py
   - pytorch[version='>=2.1']
   - torchvision
-  - diffusers
   - einops
   - pillow
   - openjpeg
@@ -53,35 +51,21 @@ dependencies:
   - flask
   - libnetcdf
   - ruff
-  - lxml
-  - jupyter
-  - notebook
-  - pytables
-  - ipywidgets
   - meshio
-  - mysql-connector-python
-  - protobuf[version='>3.20']
-  - tensorboard
-  - optuna
   - pip:
       - ipython
       - black
       - pre-commit
       - album
-      - transformers
-      - tensorstore
-      - pydantic-ome-ngff
+      - mrcfile
       - python-dotenv
       - ndjson
-      - snakeviz
-      - cryohub
       - cryoet-data-portal
       - napari-cryoet-data-portal
       - starfile
       - imodmodel
       - cryotypes
       - "git+https://github.com/teamtomo/membrain-seg.git"
-      - lxml==4.9.0
 """
 )
 
