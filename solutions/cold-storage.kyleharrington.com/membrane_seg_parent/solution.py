@@ -7,12 +7,9 @@ from album.runner.api import setup
 
 env_file = StringIO(
     """channels:
-  - nvidia
   - pytorch-nightly
   - conda-forge
   - defaults
-  - rapidsai
-  - cryoem
 dependencies:
   - python=3.9
   - zarr
