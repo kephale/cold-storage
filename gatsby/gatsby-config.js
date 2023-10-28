@@ -1,8 +1,8 @@
 module.exports = {
   pathPrefix: `/`,
   siteMetadata: {
-    title: 'kyle harrington\'s cold-storage album catalog',
-    subtitle: 'cryoET solutions across tools and domains',
+    title: 'kyle harrington\'s cold-storage album for cryoET',
+    subtitle: 'album solutions for processing/viz/ML of cryoET data',
     catalog_url: 'http://cold-storage.kyleharrington.com',
     menuLinks:[
       {
