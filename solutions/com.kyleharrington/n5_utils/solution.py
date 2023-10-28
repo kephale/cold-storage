@@ -32,10 +32,9 @@ def run():
     import os
     import subprocess
 
+    # This should be OS independent instead, currently macos only
     config.add_option('-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib')
     
-    ij = init_ij()
-
     View = jimport("org.janelia.saalfeldlab.View")
     CommandLine = jimport("picocli.CommandLine")
 
