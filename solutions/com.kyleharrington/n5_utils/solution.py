@@ -10,6 +10,7 @@ dependencies:
   - python=3.8
   - pyimagej=1.0.2
   - openjdk=11.0.9.1
+  - jgo
 """
 
 def init_ij():
@@ -69,6 +70,7 @@ def install():
 def run():
     import subprocess
     import os
+    from jgo import main
 
     # Define a function to check Java version and decide whether to use the ConcMarkSweepGC flag
     def needs_concmarksweepgc():
@@ -76,8 +78,8 @@ def run():
         return "1.8" in result.stdout
 
     # Generate cp.txt using Maven
-    maven_cmd = ["mvn", "-Dmdep.outputFile=cp.txt", "-Dmdep.includeScope=runtime", "dependency:build-classpath"]
-    subprocess.run(maven_cmd, check=True)
+    # maven_cmd = ["mvn", "-Dmdep.outputFile=cp.txt", "-Dmdep.includeScope=runtime", "dependency:build-classpath"]
+    # subprocess.run(maven_cmd, check=True)
 
     # Prepare the java command
     mem = 8  # assuming you want to use 8GB, change as per your needs
@@ -109,14 +111,16 @@ def run():
 
     cmd += args  # Combine the Java command with its arguments
 
+    main(['org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'] + args)
+    
     # Use subprocess to run the command
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    # result = subprocess.run(cmd, capture_output=True, text=True)
 
     # If you want to capture and print stdout or stderr
-    print(result.stdout)
-    print(result.stderr)
+    # print(result.stdout)
+    # print(result.stderr)
 
-    return result
+    # return result
 
 
 
