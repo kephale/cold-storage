@@ -97,14 +97,12 @@ def run():
 
     # Define the arguments
     args = [
-        "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
+        "-i", "s3:///janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
         "-d", "/em/fibsem-uint8",
         "-r", "16,16,16",
         "-c", "0,255",
         "-o", "4,4,4",
         "-a", "0,2,1",
-        "-t", "4",
-        "-s", "1.0,0.5,0.25,0.125"
     ]
 
     cmd += args  # Combine the Java command with its arguments
