@@ -85,19 +85,19 @@ def run():
     mem = 8  # assuming you want to use 8GB, change as per your needs
     jar_path = os.path.expanduser("~/.m2/repository/org/janelia/saalfeldlab/n5-utils/0.0.7-SNAPSHOT/n5-utils-0.0.7-SNAPSHOT.jar")
 
-    cmd = [
-        "java",
-        f"-Xmx{mem}g",
-        "-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib",
-        "-cp",
-        f"{jar_path}:cp.txt",  # Using cp.txt as part of the classpath
-        "org.janelia.saalfeldlab.View"
-    ]
+    # cmd = [
+    #     "java",
+    #     f"-Xmx{mem}g",
+    #     "-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib",
+    #     "-cp",
+    #     f"{jar_path}:cp.txt",  # Using cp.txt as part of the classpath
+    #     "org.janelia.saalfeldlab.View"
+    # ]
 
 
     # Define the arguments
     args = [
-        "-i", "s3:///janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
+        "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
         "-d", "/em/fibsem-uint8",
         "-r", "16,16,16",
         "-c", "0,255",
@@ -105,18 +105,20 @@ def run():
         "-a", "0,2,1",
     ]
 
+    cmd = ["jgo", "org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT"]
+    
     cmd += args  # Combine the Java command with its arguments
 
-    main(['org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'] + args)
+    # main(['org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'] + args)
     
     # Use subprocess to run the command
-    # result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True)
 
     # If you want to capture and print stdout or stderr
-    # print(result.stdout)
-    # print(result.stderr)
+    print(result.stdout)
+    print(result.stderr)
 
-    # return result
+    return result
 
 
 
