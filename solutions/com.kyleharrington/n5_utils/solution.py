@@ -34,6 +34,8 @@ def run():
 
     # This should be OS independent instead, currently macos only
     config.add_option('-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib')
+
+    config.endpoints.append('org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT')
     
     View = jimport("org.janelia.saalfeldlab.View")
     CommandLine = jimport("picocli.CommandLine")
