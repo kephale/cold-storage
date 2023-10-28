@@ -1,0 +1,20 @@
+album_api_version: 0.5.1
+args: []
+changelog: More
+cite:
+- text: Kyle Harrington.
+  url: https://kyleharrington.com
+covers: []
+description: A parent environment for cryoet solutions
+group: cold-storage.kyleharrington.com
+license: MIT
+name: membrane_seg_parent
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+timestamp: '2023-10-22T15:24:23.800634'
+title: Parent environment for membrane_seg.
+version: 0.0.1
