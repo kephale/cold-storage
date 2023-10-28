@@ -15,7 +15,7 @@ dependencies:
 def init_ij():
     import imagej
     # see this link for initialization options: https://github.com/imagej/pyimagej/blob/master/doc/Initialization.md
-    return imagej.init('org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT')
+    return imagej.init(['net.imagej:imagej', 'org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'])
 
 
 def install():
