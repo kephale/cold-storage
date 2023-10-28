@@ -28,10 +28,12 @@ def install():
 def run():
     from album.runner.api import get_args
     from pathlib import Path
-    from scyjava import jimport
+    from scyjava import config, jimport
     import os
     import subprocess
 
+    config.add_option('-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib')
+    
     ij = init_ij()
 
     View = jimport("org.janelia.saalfeldlab.View")
