@@ -34,22 +34,23 @@ def run():
     ij = init_ij()
 
     View = jimport("org.janelia.saalfeldlab.View")
+    CommandLine = jimport("picocli.CommandLine")
 
-    # Create an instance of the View class
-    view_instance = View()
+    # Define the arguments
+    args = [
+        "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
+        "-d", "/em/fibsem-uint8",
+        "-r", "16,16,16",
+        "-c", "0,255",
+        "-o", "4,4,4",
+        "-a", "0,2,1",
+        "-t", "4",
+        "-s", "1.0,0.5,0.25,0.125"
+    ]
 
-    # Set the parameters. Here's an example input:
-    view_instance.containerPaths = ["s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5"]
-    view_instance.groupLists = ["/em/fibsem-uint8"]
-    view_instance.resolutionStrings = ["16,16,16"]
-    view_instance.contrastStrings = ["0,255"]
-    view_instance.offsetStrings = ["4,4,4"]
-    view_instance.axesStrings = ["0,2,1"]
-    view_instance.numRenderingThreads = 4
-    view_instance.screenScales = [1.0, 0.5, 0.25, 0.125]
-
-    # Call the method of the View class
-    result = view_instance.call()
+    # Execute the View command with the arguments
+    # This will create an instance of View, set the parameters using picocli, and then execute it
+    exit_code = CommandLine(View()).execute(*args)
 
 
 
