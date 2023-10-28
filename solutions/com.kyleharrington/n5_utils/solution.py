@@ -30,12 +30,15 @@ def run():
     from pathlib import Path
     from scyjava import jimport
     import os
+    import subprocess
 
     ij = init_ij()
 
     View = jimport("org.janelia.saalfeldlab.View")
     CommandLine = jimport("picocli.CommandLine")
 
+    cmd_script = "n5-view"
+    
     # Define the arguments
     args = [
         "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
@@ -48,10 +51,17 @@ def run():
         "-s", "1.0,0.5,0.25,0.125"
     ]
 
-    # Execute the View command with the arguments
-    # This will create an instance of View, set the parameters using picocli, and then execute it
-    exit_code = CommandLine(View()).execute(*args)
+    # Combine the command script with its arguments
+    cmd = [cmd_script] + args
 
+    # Use subprocess to run the command
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    # If you want to capture and print stdout or stderr
+    # print(result.stdout)
+    # print(result.stderr)
+
+    return result
 
 
 
