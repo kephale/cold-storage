@@ -73,9 +73,9 @@ def run():
     from jgo import main
 
     # Define a function to check Java version and decide whether to use the ConcMarkSweepGC flag
-    def needs_concmarksweepgc():
-        result = subprocess.run(["java", "-version"], capture_output=True, text=True, stderr=subprocess.STDOUT)
-        return "1.8" in result.stdout
+    # def needs_concmarksweepgc():
+    #     result = subprocess.run(["java", "-version"], capture_output=True, text=True, stderr=subprocess.STDOUT)
+    #     return "1.8" in result.stdout
 
     # Generate cp.txt using Maven
     # maven_cmd = ["mvn", "-Dmdep.outputFile=cp.txt", "-Dmdep.includeScope=runtime", "dependency:build-classpath"]
@@ -94,8 +94,6 @@ def run():
         "org.janelia.saalfeldlab.View"
     ]
 
-    if needs_concmarksweepgc():
-        cmd.insert(2, "-XX:+UseConcMarkSweepGC")
 
     # Define the arguments
     args = [
