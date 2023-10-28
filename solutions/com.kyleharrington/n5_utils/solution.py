@@ -97,7 +97,7 @@ def run():
 
     # Define the arguments
     args = [
-        "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
+        "-i", "'s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5'",
         "-d", "/em/fibsem-uint8",
         "-r", "16,16,16",
         "-c", "0,255",
