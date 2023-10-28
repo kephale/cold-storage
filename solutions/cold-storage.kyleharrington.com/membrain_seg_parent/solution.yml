@@ -1,0 +1,21 @@
+album_api_version: 0.5.1
+args: []
+changelog: null
+cite:
+- text: teamtomo.
+  url: https://github.com/teamtomo/membrain-seg
+covers: []
+description: A parent environment with git main of membrain_seg
+group: cold-storage.kyleharrington.com
+license: MIT
+name: membrain_seg_parent
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- teamtomo
+timestamp: '2023-10-27T22:33:24.751389'
+title: Parent environment for membrain_seg.
+version: 0.0.1
