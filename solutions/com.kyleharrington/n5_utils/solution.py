@@ -70,27 +70,33 @@ def run():
     import subprocess
     import os
 
-    # Set memory and version specific arguments
-    MEM = 4  # assuming 4 GB, adjust as needed
-    JAVA_VERSION = subprocess.getoutput("java -version 2>&1")
-    GC_OPTION = "-XX:+UseConcMarkSweepGC" if "1.8" in JAVA_VERSION else ""
+    # Define a function to check Java version and decide whether to use the ConcMarkSweepGC flag
+    def needs_concmarksweepgc():
+        result = subprocess.run(["java", "-version"], capture_output=True, text=True, stderr=subprocess.STDOUT)
+        return "1.8" in result.stdout
 
-    # Define the JAR path
-    VERSION = "0.0.7-SNAPSHOT"  # Adjust if needed
-    JAR_PATH = os.path.expanduser(f"~/.m2/repository/org/janelia/saalfeldlab/n5-utils/{VERSION}/n5-utils-{VERSION}.jar")
+    # Generate cp.txt using Maven
+    maven_cmd = ["mvn", "-Dmdep.outputFile=cp.txt", "-Dmdep.includeScope=runtime", "dependency:build-classpath"]
+    subprocess.run(maven_cmd, check=True)
 
-    # Read classpath additions from cp.txt (assuming it exists in the current directory)
-    with open("cp.txt", 'r') as f:
-        cp_additional = f.read().strip()
+    # Prepare the java command
+    mem = 8  # assuming you want to use 8GB, change as per your needs
+    jar_path = os.path.expanduser("~/.m2/repository/org/janelia/saalfeldlab/n5-utils/0.0.7-SNAPSHOT/n5-utils-0.0.7-SNAPSHOT.jar")
+
+    cmd = [
+        "java",
+        f"-Xmx{mem}g",
+        "-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib",
+        "-cp",
+        f"{jar_path}:cp.txt",  # Using cp.txt as part of the classpath
+        "org.janelia.saalfeldlab.View"
+    ]
+
+    if needs_concmarksweepgc():
+        cmd.insert(2, "-XX:+UseConcMarkSweepGC")
 
     # Define the arguments
     args = [
-        "java",
-        "-Xmx{}g".format(MEM),
-        GC_OPTION,
-        "-Djna.library.path=/opt/homebrew/Cellar/c-blosc/1.21.1/lib",
-        "-cp", f"{JAR_PATH}:{cp_additional}",
-        "org.janelia.saalfeldlab.View",
         "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
         "-d", "/em/fibsem-uint8",
         "-r", "16,16,16",
@@ -101,8 +107,7 @@ def run():
         "-s", "1.0,0.5,0.25,0.125"
     ]
 
-    # Filter out any empty strings
-    cmd = [x for x in args if x]
+    cmd += args  # Combine the Java command with its arguments
 
     # Use subprocess to run the command
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -112,6 +117,7 @@ def run():
     print(result.stderr)
 
     return result
+
 
 
 setup(
