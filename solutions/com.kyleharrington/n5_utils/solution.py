@@ -58,8 +58,8 @@ def run():
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     # If you want to capture and print stdout or stderr
-    # print(result.stdout)
-    # print(result.stderr)
+    print(result.stdout)
+    print(result.stderr)
 
     return result
 
