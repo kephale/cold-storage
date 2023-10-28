@@ -105,7 +105,7 @@ def run():
         "-a", "0,2,1",
     ]
 
-    cmd = ["jgo", "org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT"]
+    cmd = ["jgo", "org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT:org.janelia.saalfeldlab.View"]
     
     cmd += args  # Combine the Java command with its arguments
 
