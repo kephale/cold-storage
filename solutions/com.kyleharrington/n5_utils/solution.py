@@ -16,7 +16,7 @@ dependencies:
 def init_ij():
     import imagej
     # see this link for initialization options: https://github.com/imagej/pyimagej/blob/master/doc/Initialization.md
-    return imagej.init(['net.imagej:imagej', 'org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'])
+    return imagej.init(['net.imagej:imagej', 'org.blosc:jblosc', 'org.janelia.saalfeldlab:n5-utils:0.0.7-SNAPSHOT'])
 
 
 def install():
@@ -94,10 +94,12 @@ def run():
     #     "org.janelia.saalfeldlab.View"
     # ]
 
-
+    # s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5
+    
     # Define the arguments
     args = [
-        "-i", "'http://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5'",
+        # "",
+        "-i", "s3://janelia-cosem-datasets/jrc_mus-liver/jrc_mus-liver.n5",
         "-d", "/em/fibsem-uint8",
         "-r", "16,16,16",
         "-c", "0,255",
@@ -118,6 +120,8 @@ def run():
     print(result.stdout)
     print(result.stderr)
 
+    # TODO: update the jgo parser to also match s3 paths, not just http
+    
     return result
 
 
@@ -143,3 +147,7 @@ setup(
     run=run,
     dependencies={'environment_file': env_file}
 )
+
+
+if __name__== "__main__":
+    run()
