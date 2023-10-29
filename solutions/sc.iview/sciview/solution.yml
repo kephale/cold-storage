@@ -1,6 +1,6 @@
 album_api_version: 0.3.1
 args: []
-changelog: Initial
+changelog: Removing
 cite:
 - text: sciview team.
   url: https://github.com/scenerygraphics/sciview
@@ -23,6 +23,6 @@ tags:
 - 3d
 - vr
 - ar
-timestamp: '2023-10-29T12:08:36.283014'
+timestamp: '2023-10-29T17:45:34.909728'
 title: sciview
 version: 0.1.0

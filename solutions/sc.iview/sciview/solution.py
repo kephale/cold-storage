@@ -6,7 +6,7 @@ from album.runner.api import setup
 def init_ij():
     import imagej
     # see this link for initialization options: https://github.com/imagej/pyimagej/blob/master/doc/Initialization.md
-    return imagej.init(['net.imagej:imagej', 'org.blosc:jblosc', 'sc.iview:sciview'])
+    return imagej.init(['org.blosc:jblosc', 'sc.iview:sciview'])
 
 
 def install():
