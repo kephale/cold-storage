@@ -11,29 +11,13 @@ env_file = StringIO(
   - conda-forge
   - defaults
 dependencies:
-  - python=3.9
-  - zarr
+  - python>=3.11
   - numpy
   - imageio
-  - ome-zarr
-  - opencv
   - pip
-  - dask
-  - pandas[version='<2']
-  - scipy
-  - matplotlib
-  - xarray
-  - hdf5
-  - omero-py
-  - pytorch[version='>=2.1']
-  - torchvision
-  - einops
-  - pillow
-  - openjpeg
   - imagecodecs
+  - scipy    
   - fftw
-  - s3fs
-  - pooch
   - qtpy
   - superqt
   - yappi
@@ -44,25 +28,16 @@ dependencies:
   - h5py
   - mypy
   - pint
-  - opencv
-  - flask
-  - libnetcdf
   - ruff
-  - meshio
   - pip:
       - ipython
       - black
       - pre-commit
-      - album
       - mrcfile
-      - python-dotenv
-      - ndjson
-      - cryoet-data-portal
-      - napari-cryoet-data-portal
       - starfile
       - imodmodel
       - cryotypes
-      - "git+https://github.com/teamtomo/membrain-seg.git"
+      - "git+https://github.com/KosinskiLab/pyTME.git"
 """
 )
 
