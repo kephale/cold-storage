@@ -34,7 +34,7 @@ def run():
 setup(
     group="pytme",
     name="preprocess-gui",
-    version="0.0.1",
+    version="0.0.2",
     title="preprocessing gui for pytme.",
     description="A napari-based preprocessing tool for pytme",
     solution_creators=["Kyle Harrington"],
