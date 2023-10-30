@@ -34,7 +34,7 @@ def run():
 setup(
     group="pytme",
     name="preprocess",
-    version="0.0.1",
+    version="0.0.2",
     title="preprocessing for pytme.",
     description="A command-line preprocessing tool for pytme",
     solution_creators=["Kyle Harrington"],
