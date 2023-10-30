@@ -1,0 +1,32 @@
+import React from "react";
+import { Helmet } from "react-helmet";
+import Header from "./header";
+import "@fontsource/ubuntu";
+import "../css/layout.css";
+import "../css/base-theme.css";
+import "../css/theme.css";
+
+const Layout = ({ site, children }) => {
+  return (
+    <>
+      <Helmet
+        title={site.siteMetadata.title}
+        meta={[
+          { name: 'description', content: 'sample description' },
+          { name: 'keywords', content: 'sample, album, collection' },
+        ]}
+      >
+      </Helmet>
+      <div className="root" style={{ backgroundColor: "#bbc2c4" }}>
+        <Header siteMeta={site.siteMetadata} />
+        <div className="main">
+          <div className="content">
+            {children}
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Layout;
