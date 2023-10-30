@@ -5,6 +5,9 @@ from album.runner.api import setup, get_data_path
 # More information: https://docs.album.solutions/en/latest/solution-development/
 
 def local_script_path():
+    if not os.path.exists(get_data_path()):
+        os.makedirs(get_data_path())
+    
     return os.path.join(get_data_path(), "preprocessor_gui.py")
 
 def install():
