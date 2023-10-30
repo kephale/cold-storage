@@ -1,0 +1,34 @@
+album_api_version: 0.5.1
+args:
+- description: The output file name (mrc).
+  name: output_path
+  required: true
+  type: file
+- description: The input file name (mrc) to be preprocessed.
+  name: input_path
+  required: true
+  type: file
+- description: A YAML file specifying preprocessing parameters. This can be created
+    with pytme:preprocess-gui.
+  name: parameter_path
+  required: true
+  type: file
+changelog: Initial
+cite:
+- text: KosinskiLab.
+  url: https://github.com/KosinskiLab/pyTME
+covers: []
+description: A command-line preprocessing tool for pytme
+group: pytme
+license: MIT
+name: preprocess
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- template matching
+timestamp: '2023-10-30T10:55:46.451820'
+title: preprocessing for pytme.
+version: 0.0.1
