@@ -64,6 +64,7 @@ setup(
         }
         
     ],
+    install=install,
     run=run,
     dependencies={
         "parent": {
