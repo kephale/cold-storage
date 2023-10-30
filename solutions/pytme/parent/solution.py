@@ -16,7 +16,7 @@ dependencies:
   - imageio
   - pip
   - imagecodecs
-  - scipy    
+  - scipy
   - fftw
   - qtpy
   - superqt
@@ -29,6 +29,10 @@ dependencies:
   - mypy
   - pint
   - ruff
+  - napari
+  - magicgui
+  - pyfftw
+  - pyqt
   - pip:
       - ipython
       - black
@@ -49,7 +53,7 @@ def run():
 setup(
     group="pytme",
     name="parent",
-    version="0.0.1",
+    version="0.0.2",
     title="Parent environment for pytme.",
     description="A parent environment with git main of pytme",
     solution_creators=["Kyle Harrington"],
