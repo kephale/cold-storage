@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Add
+changelog: Fix
 cite:
 - text: KosinskiLab.
   url: https://github.com/KosinskiLab/pyTME
@@ -19,6 +19,6 @@ tags:
 - cryoet
 - Python
 - template matching
-timestamp: '2023-10-30T10:45:03.900823'
+timestamp: '2023-10-30T11:10:06.291619'
 title: preprocessing gui for pytme.
 version: 0.0.1
