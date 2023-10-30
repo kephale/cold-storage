@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+html, body, .root {
+  background-color: #bbc2c4;
+}
+
 li {
     margin: 20px 0;
 }
