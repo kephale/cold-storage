@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Header from "./header";
+import Header from "gatsby-theme-album/src/components/header";
 import "@fontsource/ubuntu";
-import "../css/layout.css";
-import "../css/base-theme.css";
-import "../css/theme.css";
+import "gatsby-theme-album/src/css/layout.css";
+import "gatsby-theme-album/src/css/base-theme.css";
+import "gatsby-theme-album/src/css/theme.css";
 
 const Layout = ({ site, children }) => {
   return (
