@@ -47,6 +47,7 @@ setup(
     }],
     album_api_version="0.5.1",
     args=[],
+    install=install,
     run=run,
     dependencies={
         "parent": {
