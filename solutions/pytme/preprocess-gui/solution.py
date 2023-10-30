@@ -38,7 +38,10 @@ setup(
     cite=[{"text": "KosinskiLab.", "url": "https://github.com/KosinskiLab/pyTME"}],
     tags=["imaging", "cryoet", "Python", "template matching"],
     license="MIT",
-    covers=[],
+    covers=[{
+        "description": "Cover image for pyTME's preprocess gui. Shows an instance of napari running the plugin. Image comes from https://kosinskilab.github.io/pyTME/quickstart/preprocessing.html.",
+        "source": "cover.png"
+    }],
     album_api_version="0.5.1",
     args=[],
     run=run,
