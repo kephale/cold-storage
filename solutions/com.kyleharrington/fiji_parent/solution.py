@@ -8,7 +8,7 @@ env_file = """channels:
   - defaults
 dependencies:
   - python=3.8
-  - pyimagej=1.0.2
+  - pyimagej
   - openjdk=11.0.9.1
   - jgo
 """
@@ -33,7 +33,7 @@ def run():
 setup(
     group="com.kyleharrington",
     name="fiji_parent",
-    version="0.1.0",
+    version="0.1.1",
     title="Java-based software parent solution",
     description="Parent of Java-based software solutions: Fiji, ImageJ, ImgLib2, etc.",
     authors=["Kyle Harrington"],
