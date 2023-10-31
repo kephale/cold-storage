@@ -12,6 +12,7 @@ description: sciview is a 3D/VR/AR visualization tool for large data from the Fi
   community
 documentation: []
 group: sc.iview
+install: null
 license: MIT
 name: sciview
 solution_creators:
@@ -23,6 +24,6 @@ tags:
 - 3d
 - vr
 - ar
-timestamp: '2023-10-30T21:47:25.976247'
+timestamp: '2023-10-30T21:54:14.745430'
 title: sciview
 version: 0.1.1

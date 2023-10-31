@@ -1,36 +1,30 @@
 import os
 from album.runner.api import setup, get_data_path
 
-
 def local_repository_path():
-    if not os.path.exists(get_data_path()):
-        os.makedirs(get_data_path())
+    data_path = get_data_path()
+    if not os.path.exists(data_path):
+        os.makedirs(data_path)
     
-    return os.path.join(get_data_path(), "git")
-
-
-def install():
-    import subprocess
-        
-    repo_url = "https://github.com/scenerygraphics/sciview"
-    clone_path = local_repository_path()
-    
-    # Check if the repo already exists, if not, clone it
-    if not os.path.exists(os.path.join(clone_path, ".git")):
-        subprocess.check_call(["git", "clone", repo_url, clone_path])
-    
-    # Use subprocess to run ./gradlew build
-    build_cmd = os.path.join(clone_path, "gradlew")
-    subprocess.check_call([build_cmd, "build"])
+    return os.path.join(data_path, "git")
 
 def run():
     import subprocess
     
-    # run with ./gradlew runImageJMain
+    repo_url = "https://github.com/scenerygraphics/sciview"
     clone_path = local_repository_path()
+    
+    # Check if the repo already exists, if not, clone and build it
+    if not os.path.exists(os.path.join(clone_path, ".git")):
+        subprocess.check_call(["git", "clone", repo_url, clone_path])
+        
+        # Use subprocess to run ./gradlew build
+        build_cmd = os.path.join(clone_path, "gradlew")
+        subprocess.check_call([build_cmd, "build"])
+    
+    # Run with ./gradlew runImageJMain
     run_cmd = os.path.join(clone_path, "gradlew")
     subprocess.check_call([run_cmd, "runImageJMain"])
-
 
 setup(
     group="sc.iview",
@@ -52,7 +46,7 @@ setup(
     }],
     album_api_version="0.3.1",
     args=[],
-    install=install,
+    install=None,   # No longer using install function
     run=run,
     dependencies={
         "parent": {
@@ -62,7 +56,6 @@ setup(
         }
     },
 )
-
 
 if __name__== "__main__":
     run()
