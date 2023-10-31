@@ -1,0 +1,21 @@
+album_api_version: 0.5.1
+args: []
+changelog: null
+cite:
+- text: KosinskiLab.
+  url: https://github.com/KosinskiLab/pyTME
+covers: []
+description: A parent environment with git main of pytme
+group: pytme
+license: MIT
+name: parent
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- template matching
+timestamp: '2023-10-30T11:19:27.735875'
+title: Parent environment for pytme.
+version: 0.0.2

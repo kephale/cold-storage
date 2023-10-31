@@ -1,0 +1,24 @@
+album_api_version: 0.5.1
+args: []
+changelog: null
+cite:
+- text: KosinskiLab.
+  url: https://github.com/KosinskiLab/pyTME
+covers:
+- description: Cover image for pyTME's preprocess gui. Shows an instance of napari
+    running the plugin. Image comes from https://kosinskilab.github.io/pyTME/quickstart/preprocessing.html.
+  source: cover.png
+description: A napari-based preprocessing tool for pytme
+group: pytme
+license: MIT
+name: preprocess-gui
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- template matching
+timestamp: '2023-10-30T11:25:55.248202'
+title: preprocessing gui for pytme.
+version: 0.0.2
