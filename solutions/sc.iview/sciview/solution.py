@@ -35,7 +35,7 @@ def run():
 setup(
     group="sc.iview",
     name="sciview",
-    version="0.1.0",
+    version="0.1.1",
     title="sciview",
     description="sciview is a 3D/VR/AR visualization tool for large data from the Fiji community",
     authors=["Kyle Harrington"],
@@ -58,7 +58,7 @@ setup(
         "parent": {
             "group": "com.kyleharrington",
             "name": "fiji_parent",
-            "version": "0.1.0",
+            "version": "0.1.1",
         }
     },
 )
