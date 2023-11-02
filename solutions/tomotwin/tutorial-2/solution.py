@@ -28,6 +28,7 @@ dependencies:
   - optuna
   - mysql-connector-python
   - pip
+  - bs4
   - pip:
       - tomotwin-cryoet
 """
