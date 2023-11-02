@@ -62,7 +62,7 @@ def run():
     from cryoet_data_portal import Client, Tomogram
 
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
-    input_mrc = os.path.join(get_data_path(), "TS_030_bin4.mrc")
+    input_mrc = os.path.join(get_data_path(), "TS_030_bin1.mrc")
     rescaled_mrc = os.path.join(get_data_path(), "rescaled.mrc")
 
     # Instantiate a client, using the data portal GraphQL API by default
@@ -85,7 +85,7 @@ def run():
     print(json.dumps(tomo.to_dict(), indent=4))
 
     # Download a 25% size preview image (uncomment to actually download files)
-    tomo.download_mrcfile(binning=4, dest_path=get_data_path())
+    tomo.download_mrcfile(binning=1, dest_path=get_data_path())
     
     # Assuming the `e2proc3d.py` and other tools are available in PATH
     # skip eman2 deps for now
@@ -95,7 +95,7 @@ def run():
     print("Embedding tomogram")
     
     embedding_path = os.path.join(get_data_path(), "out/embed/tomo/")
-    embeddings = os.path.join(embedding_path, "TS_030_bin4_embeddings.temb")
+    embeddings = os.path.join(embedding_path, "TS_030_bin1_embeddings.temb")
     clustering_path = os.path.join(get_data_path(), "out/clustering/")
     
     os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {rescaled_mrc} -b 256 -o {embedding_path} -s 2")
