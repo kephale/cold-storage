@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Update path of downloaded mrc
+changelog: Update more paths
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -19,6 +19,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-02T12:28:43.051953'
+timestamp: '2023-11-02T12:44:14.520367'
 title: TomoTwin demo on cz cryoet data portal
 version: 0.0.1

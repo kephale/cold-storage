@@ -94,9 +94,13 @@ def run():
     rescaled_mrc = input_mrc
     print("Embedding tomogram")
     
-    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {rescaled_mrc} -b 256 -o out/embed/tomo/ -s 2")
+    embedding_path = os.path.join(get_data_path(), "out/embed/tomo/")
+    embeddings = os.path.join(embedding_path, "TS_030_bin4_embeddings.temb")
+    clustering_path = os.path.join(get_data_path(), "out/clustering/")
+    
+    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {rescaled_mrc} -b 256 -o {embedding_path} -s 2")
     print("Estimate UMAP manifold and generate embedding mask")
-    os.system("tomotwin_tools.py umap -i out/embed/tomo/tomo_embeddings.temb -o out/clustering/")
+    os.system(f"tomotwin_tools.py umap -i {embeddings} -o {clustering_path}")
 
 setup(
     group="tomotwin",
