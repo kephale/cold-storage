@@ -88,8 +88,10 @@ def run():
     tomo.download_mrcfile(binning=4, dest_path=get_data_path())
     
     # Assuming the `e2proc3d.py` and other tools are available in PATH
-    print("Downscale tomogram")
-    os.system(f"e2proc3d.py --apix=5.9359 --fouriershrink=1.684 {input_mrc} {rescaled_mrc}")
+    # skip eman2 deps for now
+    # print("Downscale tomogram")    
+    # os.system(f"e2proc3d.py --apix=5.9359 --fouriershrink=1.684 {input_mrc} {rescaled_mrc}")
+    rescaled_mrc = input_mrc
     print("Embedding tomogram")
     
     os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {rescaled_mrc} -b 256 -o out/embed/tomo/ -s 2")

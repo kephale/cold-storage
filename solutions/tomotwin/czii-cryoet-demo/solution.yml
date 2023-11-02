@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Change mrc path to a directory, add cryoet-data-portal
+changelog: Temporarily disable eman2 usage
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -19,6 +19,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-02T12:07:14.627990'
+timestamp: '2023-11-02T12:18:29.011947'
 title: TomoTwin demo on cz cryoet data portal
 version: 0.0.1
