@@ -31,6 +31,7 @@ dependencies:
   - bs4
   - pip:
       - tomotwin-cryoet
+      - cryoet-data-portal
 """
 
 
@@ -84,7 +85,7 @@ def run():
     print(json.dumps(tomo.to_dict(), indent=4))
 
     # Download a 25% size preview image (uncomment to actually download files)
-    tomo.download_mrcfile(binning=4, dest_path=input_mrc)
+    tomo.download_mrcfile(binning=4, dest_path=get_data_path())
     
     # Assuming the `e2proc3d.py` and other tools are available in PATH
     print("Downscale tomogram")
