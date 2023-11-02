@@ -62,7 +62,7 @@ def run():
     from cryoet_data_portal import Client, Tomogram
 
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
-    input_mrc = os.path.join(get_data_path(), "output.mrc")
+    input_mrc = os.path.join(get_data_path(), "TS_030_bin4.mrc")
     rescaled_mrc = os.path.join(get_data_path(), "rescaled.mrc")
 
     # Instantiate a client, using the data portal GraphQL API by default
