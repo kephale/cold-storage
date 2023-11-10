@@ -105,14 +105,17 @@ def run():
 setup(
     group="tomotwin",
     name="czii-cryoet-demo",
-    version="0.0.1",
+    version="0.0.2",
     title="TomoTwin demo on cz cryoet data portal",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
     cite=[{"text": "Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization of macromolecules in cryo-electron tomograms with structural data mining. Nat Methods (2023). https://doi.org/10.1038/s41592-023-01878-z.", "url": "https://tomotwin-cryoet.readthedocs.io/en/stable/index.html"}],
     tags=["imaging", "cryoet", "Python", "particle picking", "machine learning"],
     license="MIT",
-    covers=[],
+    covers=[{
+        "description": "Cover image for TomoTwin tutorial 2 applied to data from cryoet-data-portal TS_030 from doi:10.1038/s41592-022-01746-2. The image shows a highlighted region of embedding space that covers some particles in the tomogram.",
+        "source": "cover.png"
+    }],
     album_api_version="0.5.1",
     args=[],
     run=run,
