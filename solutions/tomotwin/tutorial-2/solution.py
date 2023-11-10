@@ -132,7 +132,10 @@ setup(
     cite=[{"text": "Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization of macromolecules in cryo-electron tomograms with structural data mining. Nat Methods (2023). https://doi.org/10.1038/s41592-023-01878-z.", "url": "https://tomotwin-cryoet.readthedocs.io/en/stable/index.html"}],
     tags=["imaging", "cryoet", "Python", "particle picking", "machine learning"],
     license="MIT",
-    covers=[],
+    covers=[{
+        "description": "Cover image for TomoTwin. The image comes from the TomoTwin documentation: https://tomotwin-cryoet.readthedocs.io.",
+        "source": "cover.png"
+    }],
     album_api_version="0.5.1",
     args=[],
     run=run,
