@@ -1,6 +1,6 @@
 album_api_version: 0.3.1
 args: []
-changelog: null
+changelog: Initial commit in cold-storage
 cite:
 - text: SciJava community.
   url: https://github.com/scijava
@@ -20,6 +20,6 @@ tags:
 - bigdataviewer
 - imagej
 - scijava
-timestamp: '2023-10-30T21:47:06.167713'
+timestamp: '2023-11-10T10:04:34.597736'
 title: Java-based software parent solution
 version: 0.1.1

@@ -3,6 +3,8 @@ from album.runner.api import setup
 # Please import additional modules at the beginning of your method declarations.
 # More information: https://docs.album.solutions/en/latest/solution-development/
 
+###album catalog: cold-storage
+
 env_file = """channels:
   - conda-forge
   - defaults
