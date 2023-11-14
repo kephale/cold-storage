@@ -25,6 +25,18 @@ def local_repository_path():
 def install():
     import os
     import subprocess
+
+    # TODO: convenience hack for Kyle
+    # Check if 'CUDAHOME' is in environment variables
+    if 'CUDAHOME' not in os.environ:
+        # 'CUDAHOME' is not set, now check for 'mod_cuda_prefix'
+        if 'mod_cuda_prefix' in os.environ:
+            # 'mod_cuda_prefix' is set, assign its value to 'CUDAHOME'
+            os.environ['CUDAHOME'] = os.environ['mod_cuda_prefix']
+        else:
+            print("'CUDAHOME' is not set and 'mod_cuda_prefix' is also not available.")
+    else:
+        print(f"'CUDAHOME' is already set to: {os.environ['CUDAHOME']}")
     
     # URL for the AreTomo2 repository
     repo_url = "https://github.com/czimaginginstitute/AreTomo2.git"
