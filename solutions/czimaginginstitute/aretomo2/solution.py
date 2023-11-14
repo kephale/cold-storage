@@ -50,6 +50,17 @@ def install():
     # Change to the cloned repository directory
     os.chdir(clone_path)
 
+    # Modify makefile11 to remove hardcoded CUDAHOME line
+    makefile_path = os.path.join(clone_path, "makefile11")
+    with open(makefile_path, 'r') as file:
+        makefile_contents = file.readlines()
+
+    with open(makefile_path, 'w') as file:
+        for line in makefile_contents:
+            if line.startswith('CUDAHOME ='):
+                continue  # Skip the hardcoded CUDAHOME line
+            file.write(line)
+
     # Use subprocess to compile AreTomo2
     # Replace 'makefile11' with the appropriate makefile based on your GPU's compute capability
     subprocess.check_call(["make", "exe", "-f", "makefile11"], env=os.environ)
