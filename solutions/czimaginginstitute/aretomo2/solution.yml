@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: First draft of aretomo2
+changelog: Remove requests import
 cite:
 - text: 'AreTomo: An integrated software package for automated marker-free, motion-corrected
     cryo-electron tomographic alignment and reconstruction, J. Struct Biology: X Vol
@@ -27,6 +27,6 @@ tags:
 - GPU-acceleration
 - CTF estimation
 - real-time reconstruction
-timestamp: '2023-11-14T10:25:55.543336'
+timestamp: '2023-11-14T10:46:58.722565'
 title: 'AreTomo2: Automated Tomographic Alignment and Reconstruction'
 version: 0.0.1

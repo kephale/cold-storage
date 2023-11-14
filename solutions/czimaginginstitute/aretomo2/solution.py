@@ -1,7 +1,6 @@
 ###album catalog: cold-storage
 
 import os
-import requests
 
 from album.runner.api import setup, get_data_path
 
@@ -22,13 +21,6 @@ def local_repository_path():
         os.makedirs(get_data_path())
     
     return os.path.join(get_data_path(), "git")
-
-def download_file(url, destination):
-    """Download a file from a URL to a destination path."""
-    response = requests.get(url, stream=True)
-    with open(destination, 'wb') as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            f.write(chunk)
             
 def install():
     import os
