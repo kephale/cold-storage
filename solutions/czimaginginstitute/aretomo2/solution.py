@@ -7,12 +7,10 @@ from album.runner.api import setup, get_data_path
 
 env_file = """name: aretomo2
 channels:
-  - nvidia
   - conda-forge
   - defaults
 dependencies:
   - python=3.11
-  - cudatoolkit=11.8
 """
 
 
@@ -31,7 +29,7 @@ def install():
     if 'CUDAHOME' not in os.environ:
         # 'CUDAHOME' is not set, now check for 'mod_cuda_prefix'
         if 'mod_cuda_prefix' in os.environ:
-            # 'mod_cuda_prefix' is set, assign its value to 'CUDAHOME'
+            # This is the value from `module load ...`
             os.environ['CUDAHOME'] = os.environ['mod_cuda_prefix']
         else:
             print("'CUDAHOME' is not set and 'mod_cuda_prefix' is also not available.")
@@ -53,7 +51,7 @@ def install():
 
     # Use subprocess to compile AreTomo2
     # Replace 'makefile11' with the appropriate makefile based on your GPU's compute capability
-    subprocess.check_call(["make", "exe", "-f", "makefile11"])
+    subprocess.check_call(["make", "exe", "-f", "makefile11"], env=os.environ)
 
 def run():
     pass

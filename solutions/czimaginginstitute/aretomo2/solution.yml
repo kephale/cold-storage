@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Manage CUDA environment variables
+changelog: Pass environment variables to make call
 cite:
 - text: 'AreTomo: An integrated software package for automated marker-free, motion-corrected
     cryo-electron tomographic alignment and reconstruction, J. Struct Biology: X Vol
@@ -27,6 +27,6 @@ tags:
 - GPU-acceleration
 - CTF estimation
 - real-time reconstruction
-timestamp: '2023-11-14T10:55:55.738816'
+timestamp: '2023-11-14T11:02:29.074436'
 title: 'AreTomo2: Automated Tomographic Alignment and Reconstruction'
 version: 0.0.1
