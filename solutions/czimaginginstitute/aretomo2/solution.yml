@@ -146,11 +146,12 @@ args:
   name: IntpCor
   required: false
   type: boolean
-changelog: Add first version of run function
+changelog: Update citation
 cite:
-- text: 'AreTomo: An integrated software package for automated marker-free, motion-corrected
-    cryo-electron tomographic alignment and reconstruction, J. Struct Biology: X Vol
-    6, 2022'
+- text: "Zheng, S., Wolff, G., Greenan, G., Chen, Z., Faas, F.G., B\xE1rcena, M.,\
+    \ Koster, A.J., Cheng, Y. and Agard, D.A., 2022. AreTomo: An integrated software\
+    \ package for automated marker-free, motion-corrected cryo-electron tomographic\
+    \ alignment and reconstruction. Journal of Structural Biology: X, 6, p.100068."
   url: https://github.com/czimaginginstitute/AreTomo2
 covers:
 - description: Example of an AreTomo2 reconstructed tomogram, showcasing the capabilities
@@ -173,6 +174,6 @@ tags:
 - GPU-acceleration
 - CTF estimation
 - real-time reconstruction
-timestamp: '2023-11-14T11:57:42.686724'
+timestamp: '2023-11-14T12:03:34.454376'
 title: 'AreTomo2: Automated Tomographic Alignment and Reconstruction'
 version: 0.0.1

@@ -103,7 +103,7 @@ setup(
     solution_creators=["Kyle Harrington"],
     cite=[
         {
-            "text": "AreTomo: An integrated software package for automated marker-free, motion-corrected cryo-electron tomographic alignment and reconstruction, J. Struct Biology: X Vol 6, 2022",
+            "text": "Zheng, S., Wolff, G., Greenan, G., Chen, Z., Faas, F.G., Bárcena, M., Koster, A.J., Cheng, Y. and Agard, D.A., 2022. AreTomo: An integrated software package for automated marker-free, motion-corrected cryo-electron tomographic alignment and reconstruction. Journal of Structural Biology: X, 6, p.100068.",
             "url": "https://github.com/czimaginginstitute/AreTomo2",
         }
     ],
