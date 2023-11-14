@@ -31,6 +31,7 @@ def install():
         if 'mod_cuda_prefix' in os.environ:
             # This is the value from `module load ...`
             os.environ['CUDAHOME'] = os.environ['mod_cuda_prefix']
+            print(f"Setting CUDAHOME to {os.environ['CUDAHOME']}")
         else:
             print("'CUDAHOME' is not set and 'mod_cuda_prefix' is also not available.")
     else:
