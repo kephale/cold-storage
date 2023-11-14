@@ -1,6 +1,152 @@
 album_api_version: 0.5.1
-args: []
-changelog: Remove hardcoded CUDAHOME
+args:
+- description: Input MRC file that stores the tomographic tilt series.
+  name: InMrc
+  required: true
+  type: file
+- description: Output MRC file that stores the aligned tilt series.
+  name: OutMrc
+  required: true
+  type: file
+- description: Alignment file to be loaded and applied to the loaded tilt series.
+  name: AlnFile
+  required: false
+  type: file
+- description: Text file containing tilt angles. Must match the number and order of
+    projection images in the input MRC file.
+  name: AngFile
+  required: false
+  type: file
+- description: Temporary image file for debugging.
+  name: TmpFile
+  required: false
+  type: file
+- description: Log file storing alignment data.
+  name: LogFile
+  required: false
+  type: file
+- description: Min and max tilts. By default, the header values are used.
+  name: TiltRange
+  required: false
+  type: string
+- description: Tilt axis, default header value.
+  name: TiltAxis
+  required: false
+  type: float
+- description: Volume height for alignment, default 256
+  name: AlignZ
+  required: false
+  type: integer
+- description: Volume z height for reconstruction. Must be greater than 0 to reconstruct
+    a volume. Default is 0, only aligned tilt series will be generated.
+  name: VolZ
+  required: false
+  type: integer
+- description: Binning for aligned output tilt series, default 1
+  name: OutBin
+  required: false
+  type: integer
+- description: GPU IDs. Default 0.
+  name: Gpu
+  required: false
+  type: string
+- description: Correct the offset of tilt angle. Can be followed by two values for
+    specifying offset adjustment in alignment and/or reconstruction.
+  name: TiltCor
+  required: false
+  type: string
+- description: Specifies the min and max tilt angles for 3D volume reconstruction.
+    Excludes tilt images outside this range in the reconstruction.
+  name: ReconRange
+  required: false
+  type: string
+- description: Pixel size in Angstrom of the input tilt series, required for dose
+    weighting. If missing, dose weighting is disabled.
+  name: PixSize
+  required: false
+  type: float
+- description: High tension in kV, required for dose weighting and CTF estimation
+  name: Kv
+  required: false
+  type: float
+- description: Dose on sample in each image exposure in e/A2. Not the accumulated
+    dose. If missing, dose weighting is disabled.
+  name: ImgDose
+  required: false
+  type: float
+- description: Spherical aberration in mm, required only for CTF correction
+  name: Cs
+  required: false
+  type: float
+- description: Amplitude contrast, default 0.07
+  name: $-10s
+  required: false
+  type: float
+- description: Guess of phase shift and search range in degree, required for CTF estimation
+    with a phase plate installed.
+  name: -10s
+  required: false
+  type: string
+- description: If non-zero, the reconstructed volume is saved in xyz fashion. Default
+    is xzy.
+  name: FlipVol
+  required: false
+  type: boolean
+- description: Flip the intensity of the volume. Default 0 means no flipping. Non-zero
+    value flips.
+  name: FlipInt
+  required: false
+  type: boolean
+- description: Specify number of SART iterations and number of projections per update.
+    Default values are 15 and 5, respectively.
+  name: Sart
+  required: false
+  type: string
+- description: If specified as 1, enables weighted back projection for volume reconstruction.
+  name: Wbp
+  required: false
+  type: boolean
+- description: Set tolerance for removing dark images. Range is (0, 1), default 0.7.
+    Higher value is more restrictive.
+  name: DarkTol
+  required: false
+  type: float
+- description: 'Determines sequence of tilt image acquisition, needed for accumulated
+    dose determination. Three parameters required: starting angle, tilt step, and
+    collection scheme (1, 2, or 3).'
+  name: TiltScheme
+  required: false
+  type: string
+- description: If set to a non-zero value, generates an IMOD compatible XF file.
+  name: OutXF
+  required: false
+  type: boolean
+- description: Generates Imod files needed by Relion4 or Warp for subtomogram averaging.
+    Saved in a subfolder named after the output MRC file.
+  name: OutImod
+  required: false
+  type: integer
+- description: Skip alignment if set to 0. Used when the input MRC file is an aligned
+    tilt series. Default is 1.
+  name: Align
+  required: false
+  type: boolean
+- description: Crop the reconstructed volume to specified sizes in x and y directions.
+    Enabled only when -RoiFile is enabled.
+  name: CropVol
+  required: false
+  type: string
+- description: B-factors for low-pass filter used in cross correlation. First value
+    for global measurement, second for local measurement.
+  name: Bft
+  required: false
+  type: string
+- description: Enables correction for information loss due to linear interpolation.
+    Default setting value 1 enables the correction.
+  name: IntpCor
+  required: false
+  type: boolean
+changelog: Add first version of run function
 cite:
 - text: 'AreTomo: An integrated software package for automated marker-free, motion-corrected
     cryo-electron tomographic alignment and reconstruction, J. Struct Biology: X Vol
@@ -27,6 +173,6 @@ tags:
 - GPU-acceleration
 - CTF estimation
 - real-time reconstruction
-timestamp: '2023-11-14T11:18:38.062023'
+timestamp: '2023-11-14T11:57:42.686724'
 title: 'AreTomo2: Automated Tomographic Alignment and Reconstruction'
 version: 0.0.1
