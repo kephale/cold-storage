@@ -1,0 +1,27 @@
+album_api_version: 0.5.1
+args: []
+changelog: Initial deploy
+cite:
+- text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
+    Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
+    is a fast and accurate fully automated particle picker for cryo-EM. Communications
+    biology, 2(1), p.218..
+  url: https://cryolo.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for crYOLO from https://cryolo.readthedocs.io/en/stable/index.html.
+  source: cover.png
+description: cryolo on an example from the czii cryoet dataportal.
+group: cryolo
+license: MIT
+name: napari-cryolo
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-14T21:16:23.238511'
+title: cryOLO demo on cz cryoet data portal
+version: 0.0.1
