@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Initial deploy
+changelog: Update caption
 cite:
 - text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
     Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
@@ -23,6 +23,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-14T20:59:41.174140'
+timestamp: '2023-11-14T21:06:19.464688'
 title: cryOLO demo on cz cryoet data portal
 version: 0.0.1
