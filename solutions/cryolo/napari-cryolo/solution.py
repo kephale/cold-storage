@@ -25,7 +25,7 @@ dependencies:
       - nvidia-pyindex
       - cryoet-data-portal
       - 'cryolo[c11]'
-      - napari-box-manager
+      - napari-boxmanager
 """
 
 
