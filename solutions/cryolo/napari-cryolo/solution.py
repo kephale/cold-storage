@@ -12,8 +12,8 @@ channels:
   - defaults
 dependencies:
   - pyqt=5
-  - python=3.1
-  - numpy=1.18.5
+  - python=3.10
+  - 'numpy>=1.18.5'
   - libtiff
   - wxPython=4.1.1
   - adwaita-icon-theme
