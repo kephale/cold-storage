@@ -11,13 +11,15 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - pyqt=5
   - python=3.10
   - 'numpy>=1.18.5'
   - libtiff
   - wxPython=4.1.1
   - adwaita-icon-theme
   - 'setuptools<66'
+  - scipy
+  - mrcfile
+  - h5py
   - pip
   - pip:
       - nvidia-pyindex
