@@ -1,0 +1,79 @@
+album_api_version: 0.5.1
+args:
+- description: Path to configuration file for crYOLO.
+  name: conf
+  required: true
+  type: file
+- description: Number of warmup epochs.
+  name: warmup
+  required: true
+  type: integer
+- description: GPU(s) to be used, separated by whitespace.
+  name: gpu
+  required: false
+  type: string
+- description: Number of CPUs used during training.
+  name: num_cpu
+  required: false
+  type: integer
+- description: Fraction of memory per GPU used during training.
+  name: gpu_fraction
+  required: false
+  type: float
+- description: Early stop patience.
+  name: early
+  required: false
+  type: integer
+- description: Set to true for fine-tuning mode.
+  name: fine_tune
+  required: false
+  type: boolean
+- description: Layers to be trained when using fine tuning.
+  name: layers_fine_tune
+  required: false
+  type: integer
+- description: Delete filtered images after training.
+  name: cleanup
+  required: false
+  type: boolean
+- description: Skip directional learning for filament training data.
+  name: ignore_directions
+  required: false
+  type: boolean
+- description: Seed for random number generator.
+  name: seed
+  required: false
+  type: integer
+- description: Use warm restarts and cosine annealing during training.
+  name: warm_restarts
+  required: false
+  type: boolean
+- description: Deactivate data augmentation during training.
+  name: skip_augmentation
+  required: false
+  type: boolean
+changelog: Initial deploy of cryolo train
+cite:
+- text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
+    Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
+    is a fast and accurate fully automated particle picker for cryo-EM. Communications
+    biology, 2(1), p.218..
+  url: https://cryolo.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for crYOLO from https://cryolo.readthedocs.io/en/stable/index.html.
+  source: cover.png
+description: training command for crYOLO.
+group: cryolo
+license: MIT
+name: train
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-16T09:45:21.218390'
+title: crYOLO train
+version: 0.0.1
