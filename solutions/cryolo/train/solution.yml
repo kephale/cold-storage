@@ -52,7 +52,7 @@ args:
   name: skip_augmentation
   required: false
   type: boolean
-changelog: Initial deploy of cryolo train
+changelog: Update with cover
 cite:
 - text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
     Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
@@ -74,6 +74,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-16T09:45:21.218390'
+timestamp: '2023-11-16T10:01:13.572486'
 title: crYOLO train
 version: 0.0.1
