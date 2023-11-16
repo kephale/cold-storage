@@ -11,7 +11,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.10
+  - python=3.8
   - 'numpy>=1.18.5'
   - libtiff
   - wxPython=4.1.1
