@@ -52,7 +52,8 @@ def run():
     args_dict = get_args()
 
     # Add all the arguments from args_dict to command
-    for arg, value in args_dict.items():
+    for arg in args_dict.keys():
+        value = args_dict[arg]
         if value is not None:
             command.append(f"--{arg}")
             if isinstance(value, list):  # For arguments that accept multiple values
