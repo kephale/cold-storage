@@ -1,0 +1,183 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the crYOLO configuration file.
+  name: conf
+  required: true
+  type: file
+- description: Path to the trained model.
+  name: weights
+  required: true
+  type: file
+- description: Path to one or multiple image folders/images.
+  name: input
+  required: true
+  type: file
+- description: Path to the output folder.
+  name: output
+  required: true
+  type: directory
+- description: Confidence threshold.
+  name: threshold
+  required: false
+  type: float
+- description: Specify which GPU(s) should be used.
+  name: gpu
+  required: false
+  type: string
+- description: Distance for particle removal.
+  name: distance
+  required: false
+  type: integer
+- description: Minimum estimated diameter for particles.
+  name: minsize
+  required: false
+  type: integer
+- description: Maximum estimated diameter for particles.
+  name: maxsize
+  required: false
+  type: integer
+- description: Number of images predicted in one batch.
+  name: prediction_batch_size
+  required: false
+  type: integer
+- description: Fraction of memory per GPU used during prediction.
+  name: gpu_fraction
+  required: false
+  type: float
+- description: Number of CPUs used during filtering/filament tracing.
+  name: num_cpu
+  required: false
+  type: integer
+- description: Relative margin size for normalization.
+  name: norm_margin
+  required: false
+  type: float
+- description: Activate monitoring mode for input folder.
+  name: monitor
+  required: false
+  type: boolean
+- description: On the fly filtering, filtered micrographs will not be written to disk.
+  name: otf
+  required: false
+  type: boolean
+- description: Delete filtered images after prediction is done.
+  name: cleanup
+  required: false
+  type: boolean
+- description: Skip images that were already picked.
+  name: skip
+  required: false
+  type: boolean
+- description: Activate filament mode.
+  name: filament
+  required: false
+  type: boolean
+- description: Distance in pixel between two boxes.
+  name: box_distance
+  required: false
+  type: integer
+- description: Minimum number of boxes per filament.
+  name: minimum_number_boxes
+  required: false
+  type: integer
+- description: Method to measure the straightness of a line.
+  name: straightness_method
+  required: false
+  type: string
+- description: Threshold value for the straightness method.
+  name: straightness_threshold
+  required: false
+  type: float
+- description: The search range for connecting boxes.
+  name: search_range_factor
+  required: false
+  type: float
+- description: Angle delta in degree.
+  name: angle_delta
+  required: false
+  type: integer
+- description: Method for directional filament estimation.
+  name: directional_method
+  required: false
+  type: string
+- description: Filament width in pixel.
+  name: filament_width
+  required: false
+  type: integer
+- description: Mask width in pixel for convolution method.
+  name: mask_width
+  required: false
+  type: integer
+- description: (DEPRECATED) Do not split to curved filaments.
+  name: nosplit
+  required: false
+  type: boolean
+- description: Do not merge filaments.
+  name: nomerging
+  required: false
+  type: boolean
+- description: Activate tomography picking mode.
+  name: tomogram
+  required: false
+  type: boolean
+- description: Search range in pixel for tracing.
+  name: tracing_search_range
+  required: false
+  type: integer
+- description: Tracing memory in frames for particle tracking.
+  name: tracing_memory
+  required: false
+  type: integer
+- description: Minimum number of boxes per filament in 3D mode.
+  name: minimum_number_boxes_3d
+  required: false
+  type: integer
+- description: Minimum number of boxes in one trace for valid particle.
+  name: tracing_min_length
+  required: false
+  type: integer
+- description: Window width when averaging filament positions.
+  name: tracing_window_size
+  required: false
+  type: integer
+- description: Minimum edge weight for filament tracing.
+  name: tracing_min_edge_weight
+  required: false
+  type: float
+- description: Threshold for merging filaments in tracing.
+  name: tracing_merge_thresh
+  required: false
+  type: float
+- description: (DEPRECATED) Number of patches.
+  name: patch
+  required: false
+  type: integer
+- description: Write empty box files when no particle could be found.
+  name: write_empty
+  required: false
+  type: boolean
+changelog: Initial deploy of predict
+cite:
+- text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
+    Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
+    is a fast and accurate fully automated particle picker for cryo-EM. Communications
+    biology, 2(1), p.218..
+  url: https://cryolo.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for crYOLO from https://cryolo.readthedocs.io/en/stable/index.html.
+  source: cover.png
+description: prediction command for crYOLO.
+group: cryolo
+license: MIT
+name: predict
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-16T10:10:21.973467'
+title: crYOLO predict
+version: 0.0.1
