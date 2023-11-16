@@ -108,7 +108,7 @@ args:
   name: log_path
   required: false
   type: directory
-changelog: Adjust args looping
+changelog: Switch to using get_args as a list
 cite:
 - text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
     Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
@@ -130,6 +130,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-16T15:16:17.544507'
+timestamp: '2023-11-16T15:52:40.461550'
 title: crYOLO config
 version: 0.0.1

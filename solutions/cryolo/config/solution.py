@@ -49,11 +49,8 @@ def run():
 
     command = ["cryolo_gui.py", "config"]
 
-    args_dict = get_args()
-
     # Add all the arguments from args_dict to command
-    for arg in args_dict.keys():
-        value = args_dict[arg]
+    for arg, value in get_args():
         if value is not None:
             command.append(f"--{arg}")
             if isinstance(value, list):  # For arguments that accept multiple values
