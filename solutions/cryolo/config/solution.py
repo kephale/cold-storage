@@ -38,7 +38,7 @@ def install():
     import subprocess
     import sys
     
-    ordered_packages = ["nvidia-pyindex", 'cryolo[c11]']
+    ordered_packages = ["nvidia-pyindex", 'cryolo[c11]=1.9.6']
 
     for package in ordered_packages:
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
