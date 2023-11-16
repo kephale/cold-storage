@@ -108,7 +108,7 @@ args:
   name: log_path
   required: false
   type: directory
-changelog: Pin cryolo version to 1.9.6
+changelog: Fix typo
 cite:
 - text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
     Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
@@ -130,6 +130,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-16T15:01:44.740805'
+timestamp: '2023-11-16T15:04:07.912852'
 title: crYOLO config
 version: 0.0.1
