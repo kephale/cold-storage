@@ -22,9 +22,7 @@ dependencies:
   - h5py
   - pip
   - pip:
-      - nvidia-pyindex
       - cryoet-data-portal
-      - 'cryolo[c11]'
 """
 
 
@@ -37,7 +35,13 @@ def download_file(url, destination):
 
 
 def install():
-    pass
+    import subprocess
+    import sys
+    
+    ordered_packages = ["nvidia-pyindex", 'cryolo[c11]']
+
+    for package in packages:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 
 def run():

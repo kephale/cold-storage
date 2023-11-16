@@ -108,7 +108,7 @@ args:
   name: log_path
   required: false
   type: directory
-changelog: Update environment for config
+changelog: Move nvidia-pyindex and cryolo to separate sequential install step
 cite:
 - text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
     Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
@@ -130,6 +130,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2023-11-16T10:49:30.021060'
+timestamp: '2023-11-16T11:09:07.455764'
 title: crYOLO config
 version: 0.0.1
