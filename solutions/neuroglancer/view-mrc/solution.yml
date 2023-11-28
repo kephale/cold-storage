@@ -1,0 +1,28 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the MRC file
+  name: mrcfile
+  required: true
+  type: file
+- description: Use memory-mapped file for MRC file
+  name: mmap
+  required: false
+  type: boolean
+changelog: Initial deploy of Ashley's NG code
+cite:
+- text: Neuroglancer by Google folks.
+  url: https://github.com/google/neuroglancer
+covers: []
+description: Neuroglancer viewer.
+group: neuroglancer
+license: Apache v2
+name: view-mrc
+solution_creators:
+- Ashley Anderson III, Kyle Harrington
+tags:
+- mrc
+- neuroglancer
+- visualization
+timestamp: '2023-11-28T16:31:08.008448'
+title: View a MRC file with neuroglancer
+version: 0.0.1
