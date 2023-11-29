@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Don't run script as a module, open URL automatically.
+changelog: Switch to Kyle's fork to use permissive file opening
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -23,6 +23,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T09:35:16.615840'
+timestamp: '2023-11-29T09:41:19.773427'
 title: View a MRC file with neuroglancer
-version: 0.0.1
+version: 0.0.2

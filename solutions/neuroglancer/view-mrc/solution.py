@@ -28,7 +28,7 @@ def install():
     import subprocess
 
     # URL for the gist repository
-    gist_url = "https://gist.github.com/aganders3/9b35091a0dd8913289e5ce990bc681d7.git"
+    gist_url = "https://gist.github.com/kephale/59a255383e9e1f5f096dedf657a5a091.git"
 
     # Path to clone the gist
     clone_path = local_repository_path()
@@ -81,7 +81,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-mrc",
-    version="0.0.1",
+    version="0.0.2",
     title="View a MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files.",
     solution_creators=["Ashley Anderson III, Kyle Harrington"],
