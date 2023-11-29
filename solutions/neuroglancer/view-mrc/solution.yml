@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Use signal from NG thread for browser launch
+changelog: Use sleep instead of join
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -25,6 +25,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T12:18:08.693103'
+timestamp: '2023-11-29T12:20:44.957469'
 title: View a MRC file with neuroglancer
 version: 0.0.2

@@ -83,7 +83,7 @@ def run():
 
         # Main thread loop
         while thread.is_alive():
-            thread.join(timeout=1)
+            time.sleep(1)
             if url_to_open[0]:
                 print(f"Opening URL: {url_to_open[0]}")
                 webbrowser.open(url_to_open[0])
