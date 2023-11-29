@@ -41,6 +41,7 @@ def install():
 def run():
     import subprocess
     import webbrowser
+    import re
 
     # Get the path to the script
     script_path = os.path.join(local_repository_path(), "mrc_neuroglancer.py")
@@ -64,14 +65,14 @@ def run():
 
         # Extract the URL from the output
         output = result.stdout
-        print("Viewer URL:", output)
+        print("Script output:", output)  # Optional: to print the script output for debugging
 
-        # Assuming the URL is the last line of the output
-        url = output.strip().split('\n')[-1]
-
-        # Open the URL in a default web browser
-        if url.startswith("http"):
-            webbrowser.open(url)
+        # Use a regular expression to find URLs in the output
+        urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', output)
+        
+        if urls:
+            # Open the first URL found in a default web browser
+            webbrowser.open(urls[0])
         else:
             print("No valid URL found in script output.")
 

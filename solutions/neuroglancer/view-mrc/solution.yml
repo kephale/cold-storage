@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Switch to Kyle's fork to use permissive file opening
+changelog: Update the way URLs are detected to handle mrc opening warnings
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -23,6 +23,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T09:41:19.773427'
+timestamp: '2023-11-29T09:50:26.653168'
 title: View a MRC file with neuroglancer
 version: 0.0.2
