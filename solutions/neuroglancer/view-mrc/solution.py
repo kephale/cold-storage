@@ -71,6 +71,7 @@ def run():
         urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', output)
         
         if urls:
+            print(f"Opening URL: {urls[0]}")
             # Open the first URL found in a default web browser
             webbrowser.open(urls[0])
         else:
@@ -99,10 +100,10 @@ setup(
     ],
     license="Apache v2",
     covers=[
-        # {
-        #     "description": "Example of an AreTomo2 reconstructed tomogram, showcasing the capabilities of this automated alignment and reconstruction software.",
-        #     "source": "cover.png",
-        # }
+        {
+            "description": "Example of Neuroglancer visualizing EMPIAR-10548 dataset.",
+            "source": "cover.png",
+        }
     ],
     album_api_version="0.5.1",
     args=[

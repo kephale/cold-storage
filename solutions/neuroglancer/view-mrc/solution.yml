@@ -8,11 +8,13 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Update the way URLs are detected to handle mrc opening warnings
+changelog: Display URL that is opened
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
-covers: []
+covers:
+- description: Example of Neuroglancer visualizing EMPIAR-10548 dataset.
+  source: cover.png
 description: Neuroglancer viewer for MRC files.
 group: neuroglancer
 license: Apache v2
@@ -23,6 +25,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T09:50:26.653168'
+timestamp: '2023-11-29T11:41:38.403827'
 title: View a MRC file with neuroglancer
 version: 0.0.2
