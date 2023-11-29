@@ -1,0 +1,135 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the image folder containing the images to train on.
+  name: train_image_folder
+  required: false
+  type: directory
+- description: Path to folder containing the your annotation files.
+  name: train_annot_folder
+  required: false
+  type: directory
+- description: Path for saving final weights.
+  name: saved_weights_name
+  required: false
+  type: file
+- description: Backend network architecture.
+  name: architecture
+  required: false
+  type: string
+- description: Input size for the network.
+  name: input_size
+  required: false
+  type: integer
+- description: Normalization method applied to the images.
+  name: norm
+  required: false
+  type: string
+- description: (DEPRECATED) Number of patches if patch mode is used.
+  name: num_patches
+  required: false
+  type: integer
+- description: (DEPRECATED) Overlap of patches.
+  name: overlap_patches
+  required: false
+  type: integer
+- description: Output folder for filtered images.
+  name: filtered_output
+  required: false
+  type: directory
+- description: Noise filter applied before training/picking.
+  name: filter
+  required: false
+  type: string
+- description: Low pass filter cutoff frequency.
+  name: low_pass_cutoff
+  required: false
+  type: float
+- description: Path to JANNI model.
+  name: janni_model
+  required: false
+  type: file
+- description: Overlap of patches in pixels for JANNI.
+  name: janni_overlap
+  required: false
+  type: integer
+- description: Number of batches for JANNI.
+  name: janni_batches
+  required: false
+  type: integer
+- description: Path to h5 file for initialization for fine-tuning.
+  name: pretrained_weights
+  required: false
+  type: file
+- description: How often each image is presented during one epoch.
+  name: train_times
+  required: false
+  type: integer
+- description: Number of images processed in parallel during training.
+  name: batch_size
+  required: false
+  type: integer
+- description: Step size during training.
+  name: learning_rate
+  required: false
+  type: float
+- description: Maximum number of epochs for training.
+  name: nb_epoch
+  required: false
+  type: integer
+- description: Penalty scaling factor for missing picking particles.
+  name: object_scale
+  required: false
+  type: float
+- description: Penalty scaling factor for picking background.
+  name: no_object_scale
+  required: false
+  type: float
+- description: Penalty scaling factor for errors in estimating position.
+  name: coord_scale
+  required: false
+  type: float
+- description: Penalty scaling factor for class estimation errors.
+  name: class_scale
+  required: false
+  type: float
+- description: Provide statistics during training if true.
+  name: debug
+  required: false
+  type: boolean
+- description: Path to folder containing validation image files.
+  name: valid_image_folder
+  required: false
+  type: directory
+- description: Path to folder containing validation box files.
+  name: valid_annot_folder
+  required: false
+  type: directory
+- description: Path for log saving.
+  name: log_path
+  required: false
+  type: directory
+changelog: Switch to using get_args as a list
+cite:
+- text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
+    Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
+    is a fast and accurate fully automated particle picker for cryo-EM. Communications
+    biology, 2(1), p.218..
+  url: https://cryolo.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for crYOLO from https://cryolo.readthedocs.io/en/stable/index.html.
+  source: cover.png
+description: config command for crYOLO.
+group: cryolo
+license: MIT
+name: config
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-16T15:52:40.461550'
+title: crYOLO config
+version: 0.0.1

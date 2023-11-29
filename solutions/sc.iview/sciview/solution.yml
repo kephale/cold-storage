@@ -1,6 +1,6 @@
 album_api_version: 0.3.1
 args: []
-changelog: Removing
+changelog: Use git/gradle for launching sciview
 cite:
 - text: sciview team.
   url: https://github.com/scenerygraphics/sciview
@@ -23,6 +23,6 @@ tags:
 - 3d
 - vr
 - ar
-timestamp: '2023-10-29T17:45:34.909728'
+timestamp: '2023-11-10T10:05:11.889538'
 title: sciview
-version: 0.1.0
+version: 0.1.3

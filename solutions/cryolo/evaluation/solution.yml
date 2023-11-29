@@ -1,0 +1,55 @@
+album_api_version: 0.5.1
+args:
+- description: Path to configuration file (.json).
+  name: config
+  required: true
+  type: file
+- description: Path to trained model (.h5 file).
+  name: weights
+  required: true
+  type: file
+- description: Path to runfile (.json) for model evaluation.
+  name: runfile
+  required: false
+  type: file
+- description: Path to file where the results are written as .html.
+  name: output
+  required: false
+  type: file
+- description: Path to folder with test images (ground truth).
+  name: images
+  required: false
+  type: directory
+- description: Path to folder with box files (ground truth).
+  name: boxfiles
+  required: false
+  type: directory
+- description: Specify which GPU should be used.
+  name: gpu
+  required: false
+  type: string
+changelog: Initial deploy of evaluation
+cite:
+- text: Wagner, T., Merino, F., Stabrin, M., Moriya, T., Antoni, C., Apelbaum, A.,
+    Hagel, P., Sitsel, O., Raisch, T., Prumbaum, D. and Quentin, D., 2019. SPHIRE-crYOLO
+    is a fast and accurate fully automated particle picker for cryo-EM. Communications
+    biology, 2(1), p.218..
+  url: https://cryolo.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for crYOLO from https://cryolo.readthedocs.io/en/stable/index.html.
+  source: cover.png
+description: evaluation command for crYOLO.
+group: cryolo
+license: MIT
+name: evaluation
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-16T10:39:37.055859'
+title: crYOLO evaluation
+version: 0.0.1

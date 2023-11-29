@@ -1,0 +1,30 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the MRC file
+  name: mrcfile
+  required: true
+  type: file
+- description: Use memory-mapped file for MRC file
+  name: mmap
+  required: false
+  type: boolean
+changelog: Correctly runs and launches browser
+cite:
+- text: Neuroglancer by Google folks.
+  url: https://github.com/google/neuroglancer
+covers:
+- description: Example of Neuroglancer visualizing EMPIAR-10548 dataset.
+  source: cover.png
+description: Neuroglancer viewer for MRC files.
+group: neuroglancer
+license: Apache v2
+name: view-mrc
+solution_creators:
+- Ashley Anderson III, Kyle Harrington
+tags:
+- mrc
+- neuroglancer
+- visualization
+timestamp: '2023-11-29T12:44:29.032720'
+title: View a MRC file with neuroglancer
+version: 0.0.3

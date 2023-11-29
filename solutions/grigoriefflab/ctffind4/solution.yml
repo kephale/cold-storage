@@ -1,0 +1,26 @@
+album_api_version: 0.5.1
+args: []
+changelog: Initial deploy
+cite:
+- text: 'Rohou, A., & Grigorieff, N. (2015). CTFFIND4: Fast and accurate defocus estimation
+    from electron micrographs. Journal of Structural Biology, 192(2), 216-221.'
+  url: https://grigoriefflab.umassmed.edu/ctffind4
+covers:
+- description: Image from https://grigoriefflab.umassmed.edu/ctffind4.
+  source: cover.png
+description: CTFFIND4 is a software package for accurate and fast estimation of defocus
+  and astigmatism in electron micrographs. It is widely used in cryo-electron microscopy
+  for preprocessing images before further analysis.
+group: grigoriefflab
+license: ' Janelia Research Campus Software Copyright 1.1, http://license.janelia.org/license/'
+name: ctffind4
+solution_creators:
+- Kyle Harrington
+tags:
+- cryo-electron microscopy
+- defocus estimation
+- astigmatism
+- image processing
+timestamp: '2023-11-14T21:52:10.959280'
+title: 'CTFFIND4: Fast and Accurate Defocus Estimation'
+version: 0.0.1

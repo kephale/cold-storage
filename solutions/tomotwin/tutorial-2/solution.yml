@@ -1,0 +1,27 @@
+album_api_version: 0.5.1
+args: []
+changelog: Add cover image
+cite:
+- text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
+    of macromolecules in cryo-electron tomograms with structural data mining. Nat
+    Methods (2023). https://doi.org/10.1038/s41592-023-01878-z.'
+  url: https://tomotwin-cryoet.readthedocs.io/en/stable/index.html
+covers:
+- description: 'Cover image for TomoTwin. The image comes from the TomoTwin documentation:
+    https://tomotwin-cryoet.readthedocs.io.'
+  source: cover.png
+description: A tutorial for TomoTwin
+group: tomotwin
+license: MIT
+name: tutorial-2
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2023-11-10T11:14:40.610628'
+title: TomoTwin tutorial 2.
+version: 0.0.1
