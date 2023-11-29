@@ -1,0 +1,38 @@
+album_api_version: 0.5.1
+args:
+- description: Remote host address
+  name: remote_host
+  required: true
+  type: string
+- description: Username for the remote host
+  name: remote_user
+  required: true
+  type: string
+- description: Path to the MRC file on the remote machine
+  name: mrcfile
+  required: true
+  type: file
+- description: Use memory-mapped file for MRC file
+  name: mmap
+  required: false
+  type: boolean
+changelog: Initial version of remote view
+cite:
+- text: Neuroglancer by Google folks.
+  url: https://github.com/google/neuroglancer
+covers:
+- description: Example of Neuroglancer visualizing EMPIAR-10548 dataset.
+  source: cover.png
+description: Neuroglancer viewer for MRC files that runs on a remote system.
+group: neuroglancer
+license: Apache v2
+name: view-remote-mrc
+solution_creators:
+- Ashley Anderson III, Kyle Harrington
+tags:
+- mrc
+- neuroglancer
+- visualization
+timestamp: '2023-11-29T14:51:29.242280'
+title: View a remote MRC file with neuroglancer
+version: 0.0.1
