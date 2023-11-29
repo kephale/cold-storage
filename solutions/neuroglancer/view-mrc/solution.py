@@ -77,18 +77,27 @@ def run():
         capture_thread.start()
 
         # Main thread loop for processing the captured output
-        while capture_thread.is_alive():
-            capture_thread.join(timeout=1)
+        while True:
+            # Check if the thread is still alive, and join with timeout
+            if capture_thread.is_alive():
+                capture_thread.join(timeout=1)
+            else:
+                # If the thread is not alive, break the loop as the server might have stopped
+                break
+
             for line in output_lines:
-                urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line)
-                if urls:
+                urls = re.findall(r'http[s]?://...', line)
+                if urls and not url_found:
+                    url_found = True
+                    print("URL:", urls[0])
                     if open_browser:
-                        print("Opening URL:", urls[0])
                         webbrowser.open(urls[0])
-                    else:
-                        print("URL:", urls[0])
-                    return
+
             output_lines.clear()  # Clear the list after processing
+
+            # If URL is found but browser is not to be opened, continue running
+            if url_found and not open_browser:
+                continue
 
     except Exception as e:
         print("Error running script:", e)

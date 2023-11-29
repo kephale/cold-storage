@@ -13,7 +13,7 @@ args:
   name: open_browser
   required: false
   type: boolean
-changelog: Remove extra webbrowser open call
+changelog: Do not terminate solution once URL is discovered.
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -30,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T15:18:35.007283'
+timestamp: '2023-11-29T15:23:18.917117'
 title: View a MRC file with neuroglancer
 version: 0.0.4
