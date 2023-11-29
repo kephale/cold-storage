@@ -34,43 +34,45 @@ def run():
     # SSH command for running the Album solution remotely
     ssh_command = f"ssh {remote_user}@{remote_host} '{remote_album_command}'"
 
+    # Shared list to store potential URLs
+    potential_urls = []
+
     try:
         # Start the SSH command and capture its output
         process = subprocess.Popen(ssh_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        url = None
-        
         # Define a function to capture the output
         def capture_output():
             for line in process.stdout:
-                print(line.strip())  # Debug: Print the output line
-                urls = re.findall(r'http[s]?://[^/]+/', line.strip())
-                if urls:
-                    url = urls[0]
-                    break
-            return url
+                print("Debug: Captured line:", line.strip())  # Debugging
+                potential_urls.append(line.strip())
 
         # Start the thread to capture the output
         capture_thread = threading.Thread(target=capture_output)
         capture_thread.start()
 
-        # Wait for the thread to capture the URL
-        capture_thread.join()
+        # Check for URL in the shared list
+        url = None
+        while url is None:
+            time.sleep(1)  # Wait a bit before checking again
+            while potential_urls:
+                line = potential_urls.pop(0)
+                urls = re.findall(r'http[s]?://[^/]+/', line)
+                if urls:
+                    url = urls[0]
+                    break
 
-        if url:
-            # Extract the port number from the URL
-            port = int(url.split(':')[-1].rstrip('/'))
-            print(f"Port extracted: {port}")
+        # Extract the port number from the URL
+        port = int(url.split(':')[-1].rstrip('/'))
+        print(f"Port extracted: {port}")
 
-            # SSH command for port forwarding
-            ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
-            
-            # Start the SSH port forwarding
-            subprocess.Popen(ssh_port_forwarding_command, shell=True)
+        # SSH command for port forwarding
+        ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
 
-            print(f"Access Neuroglancer at: http://localhost:{port}/")
-        else:
-            print("Error: URL not found in remote output.")
+        # Start the SSH port forwarding
+        subprocess.Popen(ssh_port_forwarding_command, shell=True)
+
+        print(f"Access Neuroglancer at: http://localhost:{port}/")
 
     except Exception as e:
         print(f"Error: {e}")

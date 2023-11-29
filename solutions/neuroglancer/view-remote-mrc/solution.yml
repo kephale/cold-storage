@@ -16,7 +16,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Initial version of remote view
+changelog: Async remote thread
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -33,6 +33,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T14:51:29.242280'
+timestamp: '2023-11-29T15:08:32.030812'
 title: View a remote MRC file with neuroglancer
 version: 0.0.1
