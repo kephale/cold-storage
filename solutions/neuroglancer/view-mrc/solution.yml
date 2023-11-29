@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: More verbose
+changelog: Use popen for NG process
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -25,6 +25,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T11:46:41.441283'
+timestamp: '2023-11-29T11:54:27.985675'
 title: View a MRC file with neuroglancer
 version: 0.0.2

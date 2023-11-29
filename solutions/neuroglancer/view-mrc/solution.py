@@ -42,16 +42,15 @@ def run():
     import subprocess
     import webbrowser
     import re
+    import threading
 
     # Get the path to the script
     script_path = os.path.join(local_repository_path(), "mrc_neuroglancer.py")
 
-    # Ensure that the script exists
     if not os.path.exists(script_path):
         print(f"Script not found at {script_path}")
         return
 
-    # Construct the command with arguments
     command = ["python", script_path]
     for arg in vars(get_args()):
         value = getattr(get_args(), arg)
@@ -60,26 +59,29 @@ def run():
             command.append(str(value))
 
     print(f"Running {command}")
-            
+
     try:
-        # Run the script and capture its output
-        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        # Start the script without waiting for it to complete
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        # Extract the URL from the output
-        output = result.stdout
-        print("Script output:", output)  # Optional: to print the script output for debugging
+        # Use a thread to read and process the output
+        def process_output():
+            while True:
+                output = process.stdout.readline()
+                if output == '' and process.poll() is not None:
+                    break
+                if output:
+                    print(output.strip())
+                    urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', output.strip())
+                    if urls:
+                        print(f"Opening URL: {urls[0]}")
+                        webbrowser.open(urls[0])
+                        break
 
-        # Use a regular expression to find URLs in the output
-        urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', output)
-        
-        if urls:
-            print(f"Opening URL: {urls[0]}")
-            # Open the first URL found in a default web browser
-            webbrowser.open(urls[0])
-        else:
-            print("No valid URL found in script output.")
+        thread = threading.Thread(target=process_output)
+        thread.start()
 
-    except subprocess.CalledProcessError as e:
+    except Exception as e:
         print(f"Error running script: {e}")
         
 setup(
