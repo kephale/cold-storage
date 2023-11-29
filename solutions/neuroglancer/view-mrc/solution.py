@@ -84,7 +84,7 @@ def run():
 
         # Wait for the thread to finish
         while thread.is_alive():
-            time.sleep(1)  # Sleep for a short time to avoid busy waiting
+            thread.join(timeout=1)
 
     except Exception as e:
         print(f"Error running script: {e}")
