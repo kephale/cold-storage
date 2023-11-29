@@ -88,6 +88,7 @@ def run():
                 break
 
             for line in output_lines:
+                print(f"Debug: output {line}")
                 urls = re.findall(r'http[s]?://...', line)
                 if urls and not url_found:
                     url_found = True
