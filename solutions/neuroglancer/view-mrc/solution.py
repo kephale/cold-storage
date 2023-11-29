@@ -59,6 +59,8 @@ def run():
         if value is not None:
             command.append(str(value))
 
+    print(f"Running {command}")
+            
     try:
         # Run the script and capture its output
         result = subprocess.run(command, check=True, capture_output=True, text=True)
