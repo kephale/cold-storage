@@ -61,34 +61,37 @@ def run():
 
     print(f"Running {command}")
 
+    # Variable to hold the URL when found
+    url_to_open = [None]
+
     try:
         # Start the script without waiting for it to complete
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-        # Use a thread to read and process the output
+        # Define a function to process the output
         def process_output():
-            while True:
-                output = process.stdout.readline()
-                if output == '' and process.poll() is not None:
-                    break
-                if output:
-                    print(output.strip())
-                    urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', output.strip())
-                    if urls:
-                        print(f"Opening URL: {urls[0]}")
-                        webbrowser.open(urls[0])
-                        break
+            for line in process.stdout:
+                print(line.strip())
+                urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line.strip())
+                if urls:
+                    url_to_open[0] = urls[0]
+                    return
 
+        # Start the thread to process the output
         thread = threading.Thread(target=process_output)
         thread.start()
 
-        # Wait for the thread to finish
+        # Main thread loop
         while thread.is_alive():
             thread.join(timeout=1)
+            if url_to_open[0]:
+                print(f"Opening URL: {url_to_open[0]}")
+                webbrowser.open(url_to_open[0])
+                break
 
     except Exception as e:
         print(f"Error running script: {e}")
-        
+    
 setup(
     group="neuroglancer",
     name="view-mrc",
