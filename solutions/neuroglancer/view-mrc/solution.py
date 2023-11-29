@@ -61,43 +61,42 @@ def run():
 
     print("Debug: Running command:", command)
 
-    # Variable to hold the URL when found
-    url_to_open = [None]
+    # Shared list to store output from the subprocess
+    output_lines = []
 
     try:
         # Start the script without waiting for it to complete
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         print("Debug: Subprocess started")
 
-        # Define a function to process the output
-        def process_output():
+        # Define a function to capture the output
+        def capture_output():
             for line in process.stdout:
-                print("Debug: Subprocess output:", line.strip())
-                urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line.strip())
+                print("Debug: Capturing line:", line.strip())
+                output_lines.append(line.strip())
+
+        # Start the thread to capture the output
+        capture_thread = threading.Thread(target=capture_output)
+        capture_thread.start()
+        print("Debug: Capture thread started")
+
+        # Main thread loop for processing the captured output
+        while capture_thread.is_alive():
+            capture_thread.join(timeout=1)
+            print("Debug: Main thread loop, processing captured output")
+            for line in output_lines:
+                print("Debug: Processing line:", line)
+                urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line)
                 if urls:
-                    print("Debug: URL found:", urls[0])
-                    url_to_open[0] = urls[0]
+                    print("Debug: Opening URL:", urls[0])
+                    webbrowser.open(urls[0])
                     return
-
-        # Start the thread to process the output
-        thread = threading.Thread(target=process_output)
-        thread.start()
-        print("Debug: Thread started")
-
-        # Main thread loop
-        while thread.is_alive():
-            thread.join(timeout=1)
-            print("Debug: Main thread loop, checking for URL")
-            if url_to_open[0]:
-                print("Debug: Opening URL:", url_to_open[0])
-                webbrowser.open(url_to_open[0])
-                break
+            output_lines.clear()  # Clear the list after processing
 
     except Exception as e:
         print("Debug: Error running script:", e)
 
     print("Debug: run function completed")
-
     
 setup(
     group="neuroglancer",

@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: More debugging info
+changelog: Save output from thread and parse in main thread's loop
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -25,6 +25,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T12:28:39.672871'
+timestamp: '2023-11-29T12:38:15.926280'
 title: View a MRC file with neuroglancer
 version: 0.0.2
