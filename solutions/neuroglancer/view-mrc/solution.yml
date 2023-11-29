@@ -8,12 +8,12 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Initial deploy of Ashley's NG code
+changelog: Improvement for iterating over args
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
 covers: []
-description: Neuroglancer viewer.
+description: Neuroglancer viewer for MRC files.
 group: neuroglancer
 license: Apache v2
 name: view-mrc
@@ -23,6 +23,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-28T16:31:08.008448'
+timestamp: '2023-11-29T09:25:51.539558'
 title: View a MRC file with neuroglancer
 version: 0.0.1

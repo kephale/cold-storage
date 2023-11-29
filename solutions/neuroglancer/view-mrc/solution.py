@@ -49,12 +49,10 @@ def run():
         print(f"Script not found at {script_path}")
         return
 
-    # Get arguments from get_args()
-    args_dict = get_args()
-
     # Construct the command with arguments
     command = ["python", "-m", script_path]
-    for arg, value in args_dict.items():
+    for arg in vars(get_args()):
+        value = getattr(get_args(), arg)
         command.append(f"--{arg}")
         if value is not None:
             command.append(str(value))
@@ -70,7 +68,7 @@ setup(
     name="view-mrc",
     version="0.0.1",
     title="View a MRC file with neuroglancer",
-    description="Neuroglancer viewer.",
+    description="Neuroglancer viewer for MRC files.",
     solution_creators=["Ashley Anderson III, Kyle Harrington"],
     cite=[
         {
