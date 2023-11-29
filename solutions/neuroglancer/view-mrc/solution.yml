@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Improvement for iterating over args
+changelog: Don't run script as a module, open URL automatically.
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -23,6 +23,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T09:25:51.539558'
+timestamp: '2023-11-29T09:35:16.615840'
 title: View a MRC file with neuroglancer
 version: 0.0.1

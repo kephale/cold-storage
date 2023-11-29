@@ -40,6 +40,7 @@ def install():
 # Modify the run function to run the script from the gist
 def run():
     import subprocess
+    import webbrowser
 
     # Get the path to the script
     script_path = os.path.join(local_repository_path(), "mrc_neuroglancer.py")
@@ -50,16 +51,30 @@ def run():
         return
 
     # Construct the command with arguments
-    command = ["python", "-m", script_path]
+    command = ["python", script_path]
     for arg in vars(get_args()):
         value = getattr(get_args(), arg)
         command.append(f"--{arg}")
         if value is not None:
             command.append(str(value))
 
-    # Execute the command
     try:
-        subprocess.run(command, check=True)
+        # Run the script and capture its output
+        result = subprocess.run(command, check=True, capture_output=True, text=True)
+
+        # Extract the URL from the output
+        output = result.stdout
+        print("Viewer URL:", output)
+
+        # Assuming the URL is the last line of the output
+        url = output.strip().split('\n')[-1]
+
+        # Open the URL in a default web browser
+        if url.startswith("http"):
+            webbrowser.open(url)
+        else:
+            print("No valid URL found in script output.")
+
     except subprocess.CalledProcessError as e:
         print(f"Error running script: {e}")
         
