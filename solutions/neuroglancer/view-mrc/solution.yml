@@ -13,7 +13,7 @@ args:
   name: open_browser
   required: false
   type: boolean
-changelog: Add an argument to control whether the browser is automatically opened
+changelog: Remove extra webbrowser open call
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -30,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T14:34:09.514901'
+timestamp: '2023-11-29T15:18:35.007283'
 title: View a MRC file with neuroglancer
 version: 0.0.4

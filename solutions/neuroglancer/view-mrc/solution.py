@@ -87,7 +87,6 @@ def run():
                         webbrowser.open(urls[0])
                     else:
                         print("URL:", urls[0])
-                    webbrowser.open(urls[0])
                     return
             output_lines.clear()  # Clear the list after processing
 
