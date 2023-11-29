@@ -8,7 +8,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Run python in unbuffered mode
+changelog: Correctly runs and launches browser
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -25,6 +25,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T12:41:57.187322'
+timestamp: '2023-11-29T12:44:29.032720'
 title: View a MRC file with neuroglancer
-version: 0.0.2
+version: 0.0.3
