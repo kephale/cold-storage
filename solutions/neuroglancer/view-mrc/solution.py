@@ -52,7 +52,7 @@ def run():
         print("Debug: Script not found at", script_path)
         return
 
-    command = ["python", script_path]
+    command = ["python", "-u", script_path]
     for arg in vars(get_args()):
         value = getattr(get_args(), arg)
         command.append(f"--{arg}")
