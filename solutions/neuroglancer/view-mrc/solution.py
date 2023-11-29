@@ -62,6 +62,8 @@ def run():
     # Shared list to store output from the subprocess
     output_lines = []
 
+    open_browser = get_args().open_browser
+
     try:
         # Start the script without waiting for it to complete
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -80,7 +82,11 @@ def run():
             for line in output_lines:
                 urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line)
                 if urls:
-                    print("Opening URL:", urls[0])
+                    if open_browser:
+                        print("Opening URL:", urls[0])
+                        webbrowser.open(urls[0])
+                    else:
+                        print("URL:", urls[0])
                     webbrowser.open(urls[0])
                     return
             output_lines.clear()  # Clear the list after processing
@@ -91,7 +97,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-mrc",
-    version="0.0.3",
+    version="0.0.4",
     title="View a MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files.",
     solution_creators=["Ashley Anderson III, Kyle Harrington"],
@@ -117,6 +123,7 @@ setup(
     args=[
         {"name": "mrcfile", "type": "file", "required": True, "description": "Path to the MRC file"},
         {"name": "mmap", "type": "boolean", "required": False, "description": "Use memory-mapped file for MRC file"},
+        {"name": "open_browser", "type": "boolean", "required": False, "default": True, "description": "Automatically open the browser with the URL"},
     ],
     run=run,
     install=install,

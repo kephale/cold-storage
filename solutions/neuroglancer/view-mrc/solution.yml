@@ -8,7 +8,12 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Correctly runs and launches browser
+- default: true
+  description: Automatically open the browser with the URL
+  name: open_browser
+  required: false
+  type: boolean
+changelog: Add an argument to control whether the browser is automatically opened
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -25,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T12:44:29.032720'
+timestamp: '2023-11-29T14:34:09.514901'
 title: View a MRC file with neuroglancer
-version: 0.0.3
+version: 0.0.4
