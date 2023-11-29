@@ -49,7 +49,7 @@ def run():
     script_path = os.path.join(local_repository_path(), "mrc_neuroglancer.py")
 
     if not os.path.exists(script_path):
-        print(f"Script not found at {script_path}")
+        print("Debug: Script not found at", script_path)
         return
 
     command = ["python", script_path]
@@ -59,7 +59,7 @@ def run():
         if value is not None:
             command.append(str(value))
 
-    print(f"Running {command}")
+    print("Debug: Running command:", command)
 
     # Variable to hold the URL when found
     url_to_open = [None]
@@ -67,30 +67,37 @@ def run():
     try:
         # Start the script without waiting for it to complete
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        print("Debug: Subprocess started")
 
         # Define a function to process the output
         def process_output():
             for line in process.stdout:
-                print(line.strip())
+                print("Debug: Subprocess output:", line.strip())
                 urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line.strip())
                 if urls:
+                    print("Debug: URL found:", urls[0])
                     url_to_open[0] = urls[0]
                     return
 
         # Start the thread to process the output
         thread = threading.Thread(target=process_output)
         thread.start()
+        print("Debug: Thread started")
 
         # Main thread loop
         while thread.is_alive():
-            time.sleep(1)
+            thread.join(timeout=1)
+            print("Debug: Main thread loop, checking for URL")
             if url_to_open[0]:
-                print(f"Opening URL: {url_to_open[0]}")
+                print("Debug: Opening URL:", url_to_open[0])
                 webbrowser.open(url_to_open[0])
                 break
 
     except Exception as e:
-        print(f"Error running script: {e}")
+        print("Debug: Error running script:", e)
+
+    print("Debug: run function completed")
+
     
 setup(
     group="neuroglancer",
