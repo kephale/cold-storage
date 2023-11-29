@@ -43,6 +43,7 @@ def run():
     import webbrowser
     import re
     import threading
+    import time
 
     # Get the path to the script
     script_path = os.path.join(local_repository_path(), "mrc_neuroglancer.py")
@@ -80,6 +81,10 @@ def run():
 
         thread = threading.Thread(target=process_output)
         thread.start()
+
+        # Wait for the thread to finish
+        while thread.is_alive():
+            time.sleep(1)  # Sleep for a short time to avoid busy waiting
 
     except Exception as e:
         print(f"Error running script: {e}")
