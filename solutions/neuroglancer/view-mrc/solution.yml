@@ -13,7 +13,7 @@ args:
   name: open_browser
   required: false
   type: boolean
-changelog: Do not terminate solution once URL is discovered.
+changelog: Add missing variable
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -30,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T15:23:18.917117'
+timestamp: '2023-11-29T15:25:10.795797'
 title: View a MRC file with neuroglancer
 version: 0.0.4

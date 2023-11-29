@@ -76,6 +76,8 @@ def run():
         capture_thread = threading.Thread(target=capture_output)
         capture_thread.start()
 
+        url_found = False
+
         # Main thread loop for processing the captured output
         while True:
             # Check if the thread is still alive, and join with timeout
