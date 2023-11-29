@@ -18,6 +18,7 @@ def run():
     import subprocess
     import re
     import threading
+    import time
     
     args = get_args()
 
@@ -34,6 +35,9 @@ def run():
     # SSH command for running the Album solution remotely
     ssh_command = f"ssh {remote_user}@{remote_host} '{remote_album_command}'"
 
+    print(f"Remote command: {remote_album_command}")
+    print(f"SSH command: {ssh_command}")
+    
     # Shared list to store potential URLs
     potential_urls = []
 
@@ -84,7 +88,7 @@ setup(
     version="0.0.1",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
-    solution_creators=["Ashley Anderson III, Kyle Harrington"],
+    solution_creators=["Kyle Harrington"],
     cite=[
         {
             "text": "Neuroglancer by Google folks.",
