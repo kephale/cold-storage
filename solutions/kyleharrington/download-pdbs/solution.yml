@@ -9,7 +9,11 @@ args:
   name: output_dir
   required: false
   type: string
-changelog: Add optional output directory
+changelog: Add cover image.
+covers:
+- description: Visualization of PDB:6zqj with Lorenzo Gaifas' napari-molecule-reader
+    plugin.
+  source: cover.png
 description: A utility to download PDB files from a list of PDB IDs.
 group: kyleharrington
 license: MIT
@@ -21,6 +25,6 @@ tags:
 - PDB
 - protein structures
 - data download
-timestamp: '2023-12-05T14:53:57.170530'
+timestamp: '2023-12-05T15:01:02.655058'
 title: PDB File Downloader
-version: 0.0.3
+version: 0.0.4

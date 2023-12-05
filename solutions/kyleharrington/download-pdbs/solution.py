@@ -40,7 +40,7 @@ def run():
 setup(
     group="kyleharrington",
     name="download-pdbs",
-    version="0.0.3",
+    version="0.0.4",
     title="PDB File Downloader",
     description="A utility to download PDB files from a list of PDB IDs.",
     solution_creators=["Your Name"],
@@ -59,6 +59,12 @@ setup(
             "description": "Optional: Directory to save the downloaded PDB files (default is current directory)",
             "default": "",
             "required": False,
+        }
+    ],
+    covers=[
+        {
+            "description": "Visualization of PDB:6zqj with Lorenzo Gaifas' napari-molecule-reader plugin.",
+            "source": "cover.png"
         }
     ],
     run=run,
