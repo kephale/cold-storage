@@ -9,7 +9,7 @@ args:
   name: output_dir
   required: false
   type: string
-changelog: Add cover image.
+changelog: Add missing solution author name
 covers:
 - description: Visualization of PDB:6zqj with Lorenzo Gaifas' napari-molecule-reader
     plugin.
@@ -19,12 +19,12 @@ group: kyleharrington
 license: MIT
 name: download-pdbs
 solution_creators:
-- Your Name
+- Kyle Harrington
 tags:
 - bioinformatics
 - PDB
 - protein structures
 - data download
-timestamp: '2023-12-05T15:01:02.655058'
+timestamp: '2023-12-05T15:01:30.132017'
 title: PDB File Downloader
 version: 0.0.4

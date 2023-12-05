@@ -43,7 +43,7 @@ setup(
     version="0.0.4",
     title="PDB File Downloader",
     description="A utility to download PDB files from a list of PDB IDs.",
-    solution_creators=["Your Name"],
+    solution_creators=["Kyle Harrington"],
     tags=["bioinformatics", "PDB", "protein structures", "data download"],
     license="MIT",
     album_api_version="0.5.1",
