@@ -3,7 +3,13 @@ args:
 - description: Comma-separated list of PDB IDs to download
   name: pdbs
   type: string
-changelog: Add missing environment file
+- default: ''
+  description: 'Optional: Directory to save the downloaded PDB files (default is current
+    directory)'
+  name: output_dir
+  required: false
+  type: string
+changelog: Add optional output directory
 description: A utility to download PDB files from a list of PDB IDs.
 group: kyleharrington
 license: MIT
@@ -15,6 +21,6 @@ tags:
 - PDB
 - protein structures
 - data download
-timestamp: '2023-12-04T21:11:54.262579'
+timestamp: '2023-12-05T14:53:57.170530'
 title: PDB File Downloader
-version: 0.0.2
+version: 0.0.3

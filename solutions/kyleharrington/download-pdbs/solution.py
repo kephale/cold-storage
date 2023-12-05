@@ -10,37 +10,37 @@ dependencies:
   - requests
 """
 
-# Define the function to download PDB files
-def download_pdbs(pdb_ids):
-    import os
+def download_pdbs(pdb_ids, output_dir):
     import requests
+    import os
 
     base_url = "https://files.rcsb.org/download/"
     for pdb_id in pdb_ids:
         pdb_url = f"{base_url}{pdb_id}.pdb"
         response = requests.get(pdb_url)
         if response.status_code == 200:
-            with open(f"{pdb_id}.pdb", "wb") as file:
+            output_path = os.path.join(output_dir, f"{pdb_id}.pdb")
+            with open(output_path, "wb") as file:
                 file.write(response.content)
-            print(f"Downloaded {pdb_id}")
+            print(f"Downloaded {pdb_id} to {output_dir}")
         else:
-            print(
-                f"Failed to download {pdb_id}: HTTP Status Code {response.status_code}"
-            )
+            print(f"Failed to download {pdb_id}: HTTP Status Code {response.status_code}")
 
 
 def run():
-    pdb_list = get_args().pdbs.split(
-        ","
-    )  # Assume the PDB IDs are passed as a comma-separated list
-    download_pdbs(pdb_list)
+    import os
+    
+    args = get_args()
+    pdb_list = args.pdbs.split(",")
+    output_dir = args.output_dir if args.output_dir else os.getcwd()
+    download_pdbs(pdb_list, output_dir)
 
 
 # Set up the Album catalog entry
 setup(
     group="kyleharrington",
     name="download-pdbs",
-    version="0.0.2",
+    version="0.0.3",
     title="PDB File Downloader",
     description="A utility to download PDB files from a list of PDB IDs.",
     solution_creators=["Your Name"],
@@ -52,6 +52,13 @@ setup(
             "name": "pdbs",
             "type": "string",
             "description": "Comma-separated list of PDB IDs to download",
+        },
+        {
+            "name": "output_dir",
+            "type": "string",
+            "description": "Optional: Directory to save the downloaded PDB files (default is current directory)",
+            "default": "",
+            "required": False,
         }
     ],
     run=run,
