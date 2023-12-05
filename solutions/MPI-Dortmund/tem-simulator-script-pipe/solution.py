@@ -31,9 +31,10 @@ def install():
 
 def run():
     import os
+    import subprocess
     
     args = get_args()
-    pdb_path = getattr(args, 'pdbs', 'pdbs/*.pdb')  # Get the path to PDB files
+    pdb_path = getattr(args, 'pdbs', 'pdbs/*.pdb')
 
     # Count the number of PDB files in the specified directory
     pdb_directory = os.path.dirname(pdb_path)
@@ -41,18 +42,26 @@ def run():
     npdbs = len(pdb_files)  # Number of PDB files
 
     script_path = "tsimscripts_pipe.sh"
-    command = [script_path, f"--npdbs={npdbs}"]  # Include npdbs in the command
+    command = [script_path, f"--npdbs={npdbs}"]
 
     # Add the rest of the arguments to the command
     for arg in vars(args):
         value = getattr(args, arg)
         command.append(f"--{arg}={value}")
 
+    # Run the subprocess and capture the output
     try:
-        subprocess.run(command, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error running tem-simulator-script: {e}")
+        # Use Popen to execute the script and capture the output
+        with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, universal_newlines=True) as proc:
+            for line in proc.stdout:  # You can also use proc.stderr here to capture errors
+                print(line, end='')  # Print the output in real-time
 
+        # Wait for the subprocess to finish and get the exit code
+        proc.communicate()
+        if proc.returncode != 0:
+            print(f"Script ended with return code: {proc.returncode}")
+    except Exception as e:
+        print(f"Error running tem-simulator-script: {e}")
 
 
 setup(

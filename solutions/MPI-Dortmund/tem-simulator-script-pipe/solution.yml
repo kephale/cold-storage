@@ -28,7 +28,7 @@ args:
   description: Dose
   name: dose
   type: integer
-changelog: Count number of pdbs instead of using an argument
+changelog: Improve output sharing from the script
 cite:
 - text: "H. Rullg\xE5rd, L.-G. \xD6fverstedt, S. Masich, B. Daneholt, and O. \xD6\
     ktem, Simulation of transmission electron microscope images of biological specimens,\
@@ -47,6 +47,6 @@ tags:
 - simulator
 - tem
 - image processing
-timestamp: '2023-12-04T21:24:59.864449'
+timestamp: '2023-12-04T21:53:27.706723'
 title: tem-simulator-script
 version: 0.0.1
