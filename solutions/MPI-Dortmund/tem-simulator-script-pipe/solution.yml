@@ -28,7 +28,32 @@ args:
   description: Dose
   name: dose
   type: integer
-changelog: Add cover image
+- description: Size of fiducials
+  name: fiducialsize
+  type: integer
+- description: Size of vesicles
+  name: vesiclesize
+  type: integer
+- description: Number of vesicles
+  name: nvesicle
+  type: integer
+- description: Number of fiducials
+  name: nfiducial
+  type: integer
+- description: Lower limit of defocus
+  name: defocus_lower
+  type: integer
+- description: Upper limit of defocus
+  name: defocus_upper
+  type: integer
+- description: Thickness
+  name: thickness
+  type: integer
+- default: false
+  description: Early abort flag
+  name: s1
+  type: boolean
+changelog: Add more arguments for TEM-simulator
 cite:
 - text: "H. Rullg\xE5rd, L.-G. \xD6fverstedt, S. Masich, B. Daneholt, and O. \xD6\
     ktem, Simulation of transmission electron microscope images of biological specimens,\
@@ -50,6 +75,6 @@ tags:
 - simulator
 - tem
 - image processing
-timestamp: '2023-12-05T12:17:10.044687'
+timestamp: '2023-12-05T15:27:26.898135'
 title: tem-simulator-script
-version: 0.0.2
+version: 0.0.3
