@@ -28,14 +28,17 @@ args:
   description: Dose
   name: dose
   type: integer
-changelog: Improve output
+changelog: Add cover image
 cite:
 - text: "H. Rullg\xE5rd, L.-G. \xD6fverstedt, S. Masich, B. Daneholt, and O. \xD6\
     ktem, Simulation of transmission electron microscope images of biological specimens,\
     \ Journal of Microscopy, 242 (2011). Provided by https://github.com/MPI-Dortmund/tem-simulator-scripts\
     \ which is part of TomoTwin"
   url: https://tem-simulator.sourceforge.net/
-covers: []
+covers:
+- description: Screenshot of the volume render of a reconstruction created with this
+    solution. Visualized in napari.
+  source: cover.png
 description: tem simulator script.
 group: MPI-Dortmund
 license: MIT
@@ -47,6 +50,6 @@ tags:
 - simulator
 - tem
 - image processing
-timestamp: '2023-12-04T21:53:51.880245'
+timestamp: '2023-12-05T12:17:10.044687'
 title: tem-simulator-script
-version: 0.0.1
+version: 0.0.2
