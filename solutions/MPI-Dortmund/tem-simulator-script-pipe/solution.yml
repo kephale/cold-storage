@@ -1,0 +1,52 @@
+album_api_version: 0.5.1
+args:
+- default: /Users/kharrington/git/MPI-Dortmund/tem-simulator-scripts/pdbs/*.pdb
+  description: Path to PDB files
+  name: pdbs
+  type: string
+- default: out_sim_tomo_1
+  description: Output directory
+  name: output
+  type: string
+- default: 10
+  description: Random seed
+  name: random_seed
+  type: integer
+- default: /Users/kharrington/git/MPI-Dortmund/tem-simulator-scripts/resources/filament_files/*.pdb
+  description: Path to filament PDB files
+  name: pdbs_fil
+  type: string
+- default: /Users/kharrington/git/MPI-Dortmund/tem-simulator-scripts/resources/filament_files/*.json
+  description: Path to settings file
+  name: settings_fil
+  type: string
+- default: 100
+  description: Number of substitutions
+  name: nsubs
+  type: integer
+- default: 15000
+  description: Dose
+  name: dose
+  type: integer
+changelog: Count number of pdbs instead of using an argument
+cite:
+- text: "H. Rullg\xE5rd, L.-G. \xD6fverstedt, S. Masich, B. Daneholt, and O. \xD6\
+    ktem, Simulation of transmission electron microscope images of biological specimens,\
+    \ Journal of Microscopy, 242 (2011). Provided by https://github.com/MPI-Dortmund/tem-simulator-scripts\
+    \ which is part of TomoTwin"
+  url: https://tem-simulator.sourceforge.net/
+covers: []
+description: tem simulator script.
+group: MPI-Dortmund
+license: MIT
+name: tem-simulator-script-pipe
+solution_creators:
+- Kyle Harrington
+tags:
+- cryo-electron microscopy
+- simulator
+- tem
+- image processing
+timestamp: '2023-12-04T21:24:59.864449'
+title: tem-simulator-script
+version: 0.0.1
