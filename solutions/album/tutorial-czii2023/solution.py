@@ -7,7 +7,7 @@ env_file = """channels:
   - conda-forge
   - defaults
 dependencies:
-  - "notebook<6.0.0"
+  - "notebook<7"
   - rise
 """
 
