@@ -1,5 +1,5 @@
 album_api_version: 0.5.1
-changelog: Switch to notebook due to rise incompatibility
+changelog: Fix version constraint
 description: This solution runs a Jupyter-based album tutorial presentation.
 group: album
 license: MIT
@@ -10,6 +10,6 @@ tags:
 - jupyter
 - presentation
 - album
-timestamp: '2023-12-07T11:26:17.877501'
+timestamp: '2023-12-07T11:30:33.870373'
 title: album tutorial for czii in 2023
 version: 0.1.0
