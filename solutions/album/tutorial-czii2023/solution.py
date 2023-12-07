@@ -2,20 +2,21 @@ from album.runner.api import setup, get_args
 
 ###album catalog: cold-storage
 
-# Environment file for Jupyter Lab with RISE
+# Environment file for Jupyter Notebook with RISE
 env_file = """channels:
   - conda-forge
   - defaults
 dependencies:
-  - jupyterlab
+  - "notebook<6.0.0"
   - rise
 """
 
 
 def run():
+    # Launch Jupyter Notebook
     import subprocess
 
-    subprocess.run(["jupyter", "lab"])
+    subprocess.run(["jupyter", "notebook"])
 
 
 # Set up the Album catalog entry

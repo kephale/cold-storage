@@ -1,5 +1,5 @@
 album_api_version: 0.5.1
-changelog: Initial deployment that just launched jupyter lab
+changelog: Switch to notebook due to rise incompatibility
 description: This solution runs a Jupyter-based album tutorial presentation.
 group: album
 license: MIT
@@ -10,6 +10,6 @@ tags:
 - jupyter
 - presentation
 - album
-timestamp: '2023-12-07T11:06:47.504455'
+timestamp: '2023-12-07T11:26:17.877501'
 title: album tutorial for czii in 2023
 version: 0.1.0
