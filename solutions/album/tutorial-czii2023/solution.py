@@ -24,12 +24,20 @@ def local_repository_path():
         os.makedirs(path)
     return path
 
-def inject_javascript_into_notebook(notebook_path):
-    import json
-    
-    # JavaScript snippet to be injected
-    js_code = """
-    <script>
+
+def create_custom_html_template():
+    import notebook
+    import os
+
+    notebook_dir = os.path.dirname(notebook.__file__)
+    template_dir = os.path.join(notebook_dir, "templates")
+    custom_template_dir = os.path.join(local_repository_path(), "custom_templates")
+    os.makedirs(custom_template_dir, exist_ok=True)
+
+    template_path = os.path.join(template_dir, "notebook.html")
+    custom_template_path = os.path.join(custom_template_dir, "notebook.html")
+
+    js_code = """<script>
     require(["base/js/namespace", "base/js/events"], function(Jupyter, events) {
         events.on("notebook_loaded.Notebook", function() {
             Jupyter.notebook.execute_all_cells();
@@ -38,32 +46,36 @@ def inject_javascript_into_notebook(notebook_path):
             }, 5000); // Adjust the timeout as needed
         });
     });
-    </script>
-    """
+    </script>"""
 
-    # Read the notebook
-    with open(notebook_path, 'r') as file:
-        notebook = json.load(file)
+    with open(template_path, 'r') as original:
+        with open(custom_template_path, 'w') as custom:
+            for line in original:
+                custom.write(line)
+                if '</body>' in line:
+                    custom.write(js_code + '\n')
 
-    # Check if the notebook already has a cell for the JS snippet
-    js_cell_exists = any(cell['cell_type'] == 'code' and js_code in cell['source']
-                         for cell in notebook['cells'])
+    return custom_template_dir
 
-    # Add the JS snippet if it doesn't exist
-    if not js_cell_exists:
-        js_cell = {
-            "cell_type": "code",
-            "execution_count": None,
-            "metadata": {},
-            "outputs": [],
-            "source": f"%%html\n{js_code}"
-        }
-        notebook['cells'].insert(0, js_cell)
+def configure_jupyter_to_use_custom_template(custom_template_dir):
+    from notebook import notebookapp
+    import json
 
-    # Save the notebook
-    with open(notebook_path, 'w') as file:
-        json.dump(notebook, file, indent=2)
+    config_dir = notebookapp.jupyter_config_dir()
+    config_file_path = os.path.join(config_dir, 'jupyter_notebook_config.json')
 
+    if os.path.exists(config_file_path):
+        with open(config_file_path, 'r') as file:
+            config = json.load(file)
+    else:
+        config = {}
+
+    config['NotebookApp'] = {'extra_template_paths': [custom_template_dir]}
+
+    with open(config_file_path, 'w') as file:
+        json.dump(config, file, indent=2)
+
+        
 def install():
     import subprocess
 
@@ -74,9 +86,9 @@ def install():
     if not os.path.exists(os.path.join(clone_path, ".git")):
         subprocess.check_call(["git", "clone", repo_url, clone_path])
 
-        # Inject JavaScript into the tutorial notebook
-        tutorial_notebook_path = os.path.join(local_repository_path(), "tutorial.ipynb")
-        inject_javascript_into_notebook(tutorial_notebook_path)
+    # Create custom HTML template and configure Jupyter
+    custom_template_dir = create_custom_html_template()
+    configure_jupyter_to_use_custom_template(custom_template_dir)
     
     def run_command(command):
         try:
