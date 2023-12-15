@@ -112,13 +112,21 @@ def run():
 
     # Launch Jupyter Notebook on the available port
     url = f"http://localhost:{port}/notebooks/{notebook_path}"
-    subprocess.Popen(["jupyter", "notebook", f"--port={port}", "--NotebookApp.token=''"])
+    jupyter_process = subprocess.Popen(["jupyter", "notebook", f"--port={port}", "--NotebookApp.token=''"])
     
     # Allow time for the Jupyter server to start
     time.sleep(5)
 
     # Open the notebook in the default web browser
     webbrowser.open_new(url)
+
+    # Wait for the Jupyter server process to terminate
+    try:
+        jupyter_process.wait()
+    except KeyboardInterrupt:
+        # Handle manual interruption (Ctrl+C)
+        print("\nShutting down Jupyter server...")
+        jupyter_process.terminate()
 
 
 # Set up the Album catalog entry
