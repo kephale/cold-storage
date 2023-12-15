@@ -88,6 +88,12 @@ def install():
     run_command("jupyter nbextension install --py hide_code --sys-prefix")
     run_command("jupyter nbextension enable --py hide_code --sys-prefix")
     run_command("jupyter serverextension enable --py hide_code")
+
+def find_available_port():
+    import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('', 0))
+        return s.getsockname()[1]    
     
 
 def run():
@@ -98,12 +104,15 @@ def run():
 
     os.chdir(local_repository_path())
     
-    # Path to the tutorial notebook
-    notebook_path = os.path.join(local_repository_path(), "tutorial.ipynb")
+    # Find an available port for the Jupyter server
+    port = find_available_port()
 
-    # Launch Jupyter Notebook
-    url = "http://localhost:8888/notebooks/" + notebook_path
-    subprocess.Popen(["jupyter", "notebook", "--NotebookApp.token=''"])
+    # Path to the tutorial notebook
+    notebook_path = "tutorial.ipynb"
+
+    # Launch Jupyter Notebook on the available port
+    url = f"http://localhost:{port}/notebooks/{notebook_path}"
+    subprocess.Popen(["jupyter", "notebook", f"--port={port}", "--NotebookApp.token=''"])
     
     # Allow time for the Jupyter server to start
     time.sleep(5)

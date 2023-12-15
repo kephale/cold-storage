@@ -1,5 +1,5 @@
 album_api_version: 0.5.1
-changelog: Fix URL for fetch and launch of tutorial
+changelog: Update port and path for fetch and launch of notebook.
 description: This solution runs a Jupyter-based album tutorial presentation.
 group: album
 license: MIT
@@ -10,6 +10,6 @@ tags:
 - jupyter
 - presentation
 - album
-timestamp: '2023-12-15T10:56:09.624078'
+timestamp: '2023-12-15T11:10:56.014604'
 title: album tutorial for czii in 2023
 version: 0.1.2
