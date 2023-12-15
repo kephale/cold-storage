@@ -67,7 +67,7 @@ def inject_javascript_into_notebook(notebook_path):
 def install():
     import subprocess
 
-    repo_url = "https://github.com/kephale/cold-storage.git"
+    repo_url = "https://github.com/kephale/album-tutorial-czii2023"
     clone_path = local_repository_path()
 
     # Clone the repository if it doesn't exist
