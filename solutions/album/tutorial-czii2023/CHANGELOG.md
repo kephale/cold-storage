@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.2] - 2023-12-15
 Fetch and launc notebook
 
+
 ## [0.1.1] - 2023-12-14
 Introduce hide_code notebook extension
 
