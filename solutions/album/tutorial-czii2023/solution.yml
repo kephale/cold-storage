@@ -1,7 +1,5 @@
 album_api_version: 0.5.1
-changelog: 'Fetch and launc notebook
-
-  '
+changelog: Fetch and launch notebook
 description: This solution runs a Jupyter-based album tutorial presentation.
 group: album
 license: MIT
@@ -12,6 +10,6 @@ tags:
 - jupyter
 - presentation
 - album
-timestamp: '2023-12-15T12:07:19.103717'
+timestamp: '2023-12-15T12:10:20.488601'
 title: album tutorial for czii in 2023
 version: 0.1.2

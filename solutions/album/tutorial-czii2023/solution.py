@@ -61,7 +61,7 @@ def configure_jupyter_to_use_custom_template(custom_template_dir):
     from notebook import notebookapp
     import json
 
-    config_dir = notebookapp.jupyter_config_dir()
+    config_dir = notebookapp.jupyter_config_path()[0]
     config_file_path = os.path.join(config_dir, 'jupyter_notebook_config.json')
 
     if os.path.exists(config_file_path):
