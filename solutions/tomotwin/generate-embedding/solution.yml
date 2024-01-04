@@ -8,7 +8,7 @@ args:
   name: embeddingfile
   required: true
   type: file
-changelog: Use a median mask
+changelog: Fix name of embeddings path
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -31,6 +31,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-01-03T22:23:28.280301'
+timestamp: '2024-01-04T07:54:15.290731'
 title: Generate an embedding with TomoTwin for a mrc
-version: 0.0.3
+version: 0.0.4

@@ -73,7 +73,7 @@ def run():
     print("Embedding tomogram")
 
     embedding_path = os.path.join(get_cache_path(), "out/embed/tomo/")
-    embeddings = os.path.join(embedding_path, "embeddings.temb")
+    embeddings = os.path.join(embedding_path, f"{os.path.splitext(os.path.basename(mrc_path))[0]}_embeddings.temb")
     clustering_path = os.path.join(get_cache_path(), "out/clustering/")
     mask_path = os.path.join(get_cache_path(), "out/mask/")
 
@@ -97,7 +97,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.3",
+    version="0.0.4",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
