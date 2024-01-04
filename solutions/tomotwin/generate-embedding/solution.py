@@ -75,12 +75,19 @@ def run():
     embedding_path = os.path.join(get_cache_path(), "out/embed/tomo/")
     embeddings = os.path.join(embedding_path, "embeddings.temb")
     clustering_path = os.path.join(get_cache_path(), "out/clustering/")
+    mask_path = os.path.join(get_cache_path(), "out/mask/")
 
     # Ensure that embedding_path and clustering_path exist
     os.makedirs(embedding_path, exist_ok=True)
     os.makedirs(clustering_path, exist_ok=True)
 
-    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {mrc_path} -b 256 -o {embedding_path} -s 2")
+    # Generate mask
+    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_tools.py embedding_mask median -i {mrc_path} -m {model_path} -o {mask_path}")
+    
+    # Calculate embedding
+    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {mrc_path} -b 256 -o {embedding_path} -s 2 --mask {mask_path}/{os.path.splitext(os.path.basename(mrc_path))[0]}_mask.mrc")
+
+    # Calculate umap
     print("Estimate UMAP manifold and generate embedding mask")
     os.system(f"tomotwin_tools.py umap -i {embeddings} -o {clustering_path}")
 
@@ -90,7 +97,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.2",
+    version="0.0.3",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
