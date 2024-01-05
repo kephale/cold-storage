@@ -81,11 +81,17 @@ def run():
     os.makedirs(embedding_path, exist_ok=True)
     os.makedirs(clustering_path, exist_ok=True)
 
-    # Generate mask
-    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_tools.py embedding_mask median -i {mrc_path} -m {model_path} -o {mask_path}")
+    if get_args().use_median_mask:
+        print("Using median mask to filter points for embedding.")
+        # Generate mask
+        os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_tools.py embedding_mask median -i {mrc_path} -m {model_path} -o {mask_path}")
     
-    # Calculate embedding
-    os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {mrc_path} -b 256 -o {embedding_path} -s 2 --mask {mask_path}/{os.path.splitext(os.path.basename(mrc_path))[0]}_mask.mrc")
+        # Calculate embedding
+        os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {mrc_path} -b 256 -o {embedding_path} -s 1 --mask {mask_path}/{os.path.splitext(os.path.basename(mrc_path))[0]}_mask.mrc")
+    else:
+        print("Not using a median mask, this may take longer than embedding with a mask.")
+        # Calculate embedding
+        os.system(f"CUDA_VISIBLE_DEVICES=0,1 tomotwin_embed.py tomogram -m {model_path} -v {mrc_path} -b 256 -o {embedding_path} -s 1")
 
     # Calculate umap
     print("Estimate UMAP manifold and generate embedding mask")
@@ -97,7 +103,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.4",
+    version="0.0.5",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -112,6 +118,7 @@ setup(
     args=[
         {"name": "mrcfile", "type": "file", "required": True, "description": "Path to the MRC file"},
         {"name": "embeddingfile", "type": "file", "required": True, "description": "Path for the output embedding file"},
+        {"name": "use_median_mask", "type": "boolean", "required": False, "default": True,  "description": "Path for the output embedding file"},
     ],
     run=run,
     install=install,
