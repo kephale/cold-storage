@@ -88,7 +88,7 @@ setup(
         {
             "name": "mrc_file",
             "type": "file",
-            "description": "Input MRC file that stores the tomographic tilt series.",
+            "description": "Input MRC file that stores the tomogram.",
             "required": True,
         },
         {
