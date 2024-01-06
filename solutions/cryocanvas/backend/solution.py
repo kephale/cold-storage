@@ -38,7 +38,7 @@ dependencies:
 def install():
     import subprocess
     # Clone the repository
-    repo_url = "https://github.com/kephale/cryocanvas.git"
+    repo_url = "git@github.com:kephale/cryocanvas.git"
     clone_path = os.path.join(get_data_path(), "cryocanvas")
     if not os.path.exists(clone_path):
         subprocess.check_call(["git", "clone", repo_url, clone_path])
@@ -81,7 +81,7 @@ setup(
     license="MIT",
     covers=[
         {
-            "description": "Example of an AreTomo2 reconstructed tomogram, showcasing the capabilities of this automated alignment and reconstruction software.",
+            "description": "TBD.",
             "source": "cover.png",
         }
     ],

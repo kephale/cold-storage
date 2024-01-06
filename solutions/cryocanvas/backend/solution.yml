@@ -12,13 +12,12 @@ args:
   name: flask_port
   required: false
   type: integer
-changelog: Initial deployment of cryocanvas backend
+changelog: Initial commit
 cite:
 - text: TBD.
   url: https://github.com/kephale/cryocanvas
 covers:
-- description: Example of an AreTomo2 reconstructed tomogram, showcasing the capabilities
-    of this automated alignment and reconstruction software.
+- description: TBD.
   source: cover.png
 description: TBD.
 group: cryocanvas
@@ -32,6 +31,6 @@ tags:
 - interactive
 - segmentation
 - napari
-timestamp: '2024-01-06T15:01:05.674320'
+timestamp: '2024-01-06T15:10:03.435953'
 title: CryoCanvas backend
 version: 0.0.1
