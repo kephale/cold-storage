@@ -45,15 +45,14 @@ def install():
 
 def run():
     import subprocess
-    args = get_args()
 
     # Construct the command
     flask_app_path = os.path.join(get_data_path(), "cryocanvas", "backend", "main.py")
-    command = ["python", flask_app_path, args['model_file'], args['mrc_file']]
+    command = ["python", flask_app_path, get_args().model_file, get_args().mrc_file]
     
     # Add Flask port if provided
     if 'flask_port' in args:
-        command.extend(["--port", str(args['flask_port'])])
+        command.extend(["--port", str(get_args().flask_port)])
 
     # Start the Flask server
     subprocess.run(command, check=True)
