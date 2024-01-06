@@ -51,8 +51,7 @@ def run():
     command = ["python", flask_app_path, get_args().model_file, get_args().mrc_file]
     
     # Add Flask port if provided
-    if 'flask_port' in args:
-        command.extend(["--port", str(get_args().flask_port)])
+    command.extend(["--port", str(get_args().flask_port)])
 
     # Start the Flask server
     subprocess.run(command, check=True)
@@ -95,14 +94,14 @@ setup(
         {
             "name": "model_file",
             "type": "file",
-            "description": "TOmotwin model file",
+            "description": "TomoTwin model file",
             "required": True,
         },
         {
             "name": "flask_port",
             "type": "integer",
             "description": "port for the flask server",
-            "required": False,
+            "required": True,
         },
     ],
     run=run,

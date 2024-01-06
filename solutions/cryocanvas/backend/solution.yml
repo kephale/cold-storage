@@ -4,13 +4,13 @@ args:
   name: mrc_file
   required: true
   type: file
-- description: TOmotwin model file
+- description: TomoTwin model file
   name: model_file
   required: true
   type: file
 - description: port for the flask server
   name: flask_port
-  required: false
+  required: true
   type: integer
 changelog: Initial commit
 cite:
@@ -31,6 +31,6 @@ tags:
 - interactive
 - segmentation
 - napari
-timestamp: '2024-01-06T15:21:51.083180'
+timestamp: '2024-01-06T15:27:29.162461'
 title: CryoCanvas backend
 version: 0.0.1
