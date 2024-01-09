@@ -61,6 +61,7 @@ dependencies:
   - fftw
   - napari-segment-blobs-and-things-with-membranes
   - s3fs
+  - fsspec
   - pooch
   - qtpy
   - superqt
@@ -97,9 +98,9 @@ dependencies:
   - pythran
   - gql
   - boto3
+  - album
   - pip:
     - idr-py
-    - album
     - omero-rois
     - imageio-ffmpeg
     - transformers
@@ -130,7 +131,6 @@ dependencies:
     - pylsp-rope
     - python-lsp-ruff
     - snakeviz
-    - pyaudio
     - Mastodon.py
     - qrcode
     - napari-process-points-and-surfaces
@@ -150,20 +150,18 @@ dependencies:
     - segment-anything
     - ndjson
     - requests_toolbelt
-    - PartSeg
     - networkx
-    - btrack[napari]>=0.6.1
     - cytosim
     - xgboost
-    - cryoet-data-portal
-    - "napari-cryoet-data-portal --no-deps"
+    - cryoet-data-portal>=2
+    - napari-cryoet-data-portal
     - mrcfile
 #    - bpy
     - ipython
 #    - black
 #    - pre-commit
     - mrcfile
-    - starfile
+    - "starfile>=0.5.0"
     - imodmodel
     - cryotypes
     - "git+https://github.com/KosinskiLab/pyTME.git"
@@ -177,6 +175,10 @@ dependencies:
     - napari-workshop-browser
     - napari-skimage-regionprops
     - "git+https://github.com/kevinyamauchi/morphometrics.git"
+    - blik
+    - napari-properties-plotter
+    - napari-properties-viewer
+    - napari-label-interpolator
 """
 )
 
