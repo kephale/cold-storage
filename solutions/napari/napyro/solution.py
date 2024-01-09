@@ -157,26 +157,26 @@ dependencies:
     - xgboost
     - cryoet-data-portal
     - napari-cryoet-data-portal
-     - mrcfile
-     - bpy
-     - ipython
-     - black
-     - pre-commit
-     - mrcfile
-     - starfile
-     - imodmodel
-     - cryotypes
-     - "git+https://github.com/KosinskiLab/pyTME.git"
-     - napari-omero
-     - napari-stable-diffusion
-     - tyssue
-     - napari-tyssue
-     - napari-metadata
-     - napari-graph
-     - napari-conference
-     - napari-workshop-browser
-     - napari-skimage-regionprops
-     - "git+https://github.com/kevinyamauchi/morphometrics.git"
+    - mrcfile
+    - bpy
+    - ipython
+    - black
+    - pre-commit
+    - mrcfile
+    - starfile
+    - imodmodel
+    - cryotypes
+    - "git+https://github.com/KosinskiLab/pyTME.git"
+    - napari-omero
+    - napari-stable-diffusion
+    - tyssue
+    - napari-tyssue
+    - napari-metadata
+    - napari-graph
+    - napari-conference
+    - napari-workshop-browser
+    - napari-skimage-regionprops
+    - "git+https://github.com/kevinyamauchi/morphometrics.git"
 """
 )
 
@@ -184,6 +184,8 @@ dependencies:
 def run():
     import napari
 
+    viewer = napari.Viewer()
+    
     napari.run()
 
 
