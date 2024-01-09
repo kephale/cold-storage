@@ -169,8 +169,8 @@ dependencies:
     - "git+https://github.com/KosinskiLab/pyTME.git"
     - napari-omero
     - napari-stable-diffusion
-    - tyssue
-    - napari-tyssue
+#    - tyssue
+#    - napari-tyssue
     - napari-metadata
     - napari-graph
     - napari-conference
