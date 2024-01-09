@@ -1,0 +1,21 @@
+album_api_version: 0.5.1
+args: []
+changelog: Initial deploy
+cite:
+- text: Kyle. Also check out TeamTomo
+  url: ''
+covers: []
+description: A parent environment for a big napari environment for cryoET
+group: napari
+license: MIT
+name: napyro
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- napari
+timestamp: '2024-01-09T09:41:51.027938'
+title: Parent environment for a big napari environment for cryoET.
+version: 0.0.1
