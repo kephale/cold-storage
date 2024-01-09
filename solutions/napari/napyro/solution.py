@@ -99,6 +99,7 @@ dependencies:
   - gql
   - boto3
   - album
+  - opencv-python-headless    
   - pip:
     - idr-py
     - omero-rois
@@ -133,7 +134,6 @@ dependencies:
     - Mastodon.py
     - qrcode
     - napari-process-points-and-surfaces
-    - opencv-python-headless
     - pygeodesic
 #    - skan
 #    - napari-boids
