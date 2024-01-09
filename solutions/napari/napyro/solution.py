@@ -106,7 +106,6 @@ dependencies:
     - omero-rois
     - imageio-ffmpeg
     - transformers
-    - "gradio>=4.5"
     - imaris-ims-file-reader
     - scanpy
     - pyarrow
