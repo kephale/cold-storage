@@ -171,8 +171,8 @@ dependencies:
     - napari-stable-diffusion
 #    - tyssue
 #    - napari-tyssue
-    - napari-metadata
-    - napari-graph
+#    - napari-metadata
+#    - napari-graph
     - napari-conference
     - napari-workshop-browser
     - napari-skimage-regionprops
