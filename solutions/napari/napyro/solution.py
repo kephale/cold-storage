@@ -106,7 +106,7 @@ dependencies:
     - omero-rois
     - imageio-ffmpeg
     - transformers
-    - gradio
+    - "gradio>=4.5"
     - imaris-ims-file-reader
     - scanpy
     - pyarrow
@@ -133,17 +133,17 @@ dependencies:
     - python-lsp-ruff
     - snakeviz
     - Mastodon.py
-    - qrcode
-    - napari-process-points-and-surfaces
+    - "qrcode>=7.4.1"
+    - "napari-process-points-and-surfaces>=0.4.2"
     - pygeodesic
 #    - skan
 #    - napari-boids
-    - napari-matplotlib
-    - cellpose-napari
+    - "napari-matplotlib>=1"
+    - "cellpose-napari>=0.1.4"
     - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
     - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
-    - python-dotenv
+    - "python-dotenv>=0.21"
     - validate-pyproject[all]
     - segment-anything
     - ndjson
