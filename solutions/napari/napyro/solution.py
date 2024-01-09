@@ -136,8 +136,8 @@ dependencies:
     - napari-process-points-and-surfaces
     - opencv-python-headless
     - pygeodesic
-    - skan
-    - napari-boids
+#    - skan
+#    - napari-boids
     - napari-matplotlib
     - stardist-napari
     - cellpose-napari
@@ -156,12 +156,12 @@ dependencies:
     - cytosim
     - xgboost
     - cryoet-data-portal
-    - napari-cryoet-data-portal
+    - "napari-cryoet-data-portal --no-deps"
     - mrcfile
-    - bpy
+#    - bpy
     - ipython
-    - black
-    - pre-commit
+#    - black
+#    - pre-commit
     - mrcfile
     - starfile
     - imodmodel
