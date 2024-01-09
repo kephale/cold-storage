@@ -111,10 +111,9 @@ dependencies:
     - pyarrow
     - hypothesis
     - tensorstore
-    - alabaster
     - compressed-segmentation
     - pyspng-seunglab
-    - tabulous
+    - "tabulous>=0.5.4"
     - imglyb
     - imglyb-bdv
     - pyheif
