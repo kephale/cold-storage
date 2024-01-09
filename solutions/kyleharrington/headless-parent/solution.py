@@ -83,7 +83,6 @@ dependencies:
   - labeling >= 0.1.12
   - lazy_loader
   - lxml
-  - ocl_icd_wrapper_apple
   - ninja
   - pythran
   - gql
