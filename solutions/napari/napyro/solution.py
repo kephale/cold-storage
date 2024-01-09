@@ -109,7 +109,6 @@ dependencies:
     - imaris-ims-file-reader
     - scanpy
     - pyarrow
-    - invagination
     - hypothesis
     - tensorstore
     - alabaster
@@ -120,17 +119,7 @@ dependencies:
     - imglyb-bdv
     - pyheif
     - "ome-zarr>=0.8.0"
-    - importmagic
-    - epc
-    - ruff
-    - python-lsp-server[all]
-    - pylsp-mypy
-    - pyls-isort
-    - python-lsp-black
-    - pyls-memestra
-    - pylsp-rope
-    - python-lsp-ruff
-    - snakeviz
+    - tootapari
     - Mastodon.py
     - "qrcode>=7.4.1"
     - "napari-process-points-and-surfaces>=0.4.2"
