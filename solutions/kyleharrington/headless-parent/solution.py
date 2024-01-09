@@ -126,7 +126,7 @@ dependencies:
     - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
     - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
-    - python-dotenv
+    - "python-dotenv>=0.21"
     - validate-pyproject[all]
     - segment-anything
     - ndjson
