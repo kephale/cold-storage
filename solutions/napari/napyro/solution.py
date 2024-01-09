@@ -7,6 +7,7 @@ from album.runner.api import setup
 env_file = StringIO(
     """channels:
   - pytorch-nightly
+  - fastai
   - conda-forge
   - defaults
 dependencies:
@@ -99,7 +100,7 @@ dependencies:
   - gql
   - boto3
   - album
-  - opencv-python-headless    
+  - "opencv-python-headless>=0.4.8"
   - pip:
     - idr-py
     - omero-rois
