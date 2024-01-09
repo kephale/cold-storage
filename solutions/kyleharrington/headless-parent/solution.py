@@ -100,7 +100,7 @@ dependencies:
     - pyarrow
     - invagination
     - hypothesis
-    - tensorstore
+    - "tensorstore>=0.1.51"
     - compressed-segmentation
     - pyspng-seunglab
     - "tabulous>=0.5.4"
