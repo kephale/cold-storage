@@ -7,8 +7,9 @@ from album.runner.api import setup
 env_file = StringIO(
     """channels:
   - pytorch-nightly
+  - fastai
   - conda-forge
-  - defaults
+  - defaults    
 dependencies:
   - python>=3.10
   - pybind11
@@ -87,6 +88,7 @@ dependencies:
   - pythran
   - gql
   - boto3
+  - "opencv-python-headless>=0.4.8"
   - pip:
     - idr-py
     - album
@@ -119,10 +121,8 @@ dependencies:
     - pylsp-rope
     - python-lsp-ruff
     - snakeviz
-    - opencv-python-headless
     - pygeodesic
     - skan
-    - stardist
     - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
     - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
