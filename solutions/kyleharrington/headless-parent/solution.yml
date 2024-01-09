@@ -1,0 +1,20 @@
+album_api_version: 0.5.1
+args: []
+changelog: Initial deploy
+cite:
+- text: Kyle. Also check out TeamTomo
+  url: ''
+covers: []
+description: A parent environment for a big python environment for cryoET
+group: kyleharrington
+license: MIT
+name: headless-parent
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+timestamp: '2024-01-09T10:42:11.469944'
+title: Parent environment for a big python environment for cryoET.
+version: 0.0.1
