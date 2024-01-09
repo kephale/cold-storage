@@ -110,13 +110,13 @@ dependencies:
     - scanpy
     - pyarrow
     - hypothesis
-    - tensorstore
+    - "tensorstore>=0.1.51"
     - compressed-segmentation
     - pyspng-seunglab
     - "tabulous>=0.5.4"
     - imglyb
     - imglyb-bdv
-    - pyheif
+    - "pyheif>=0.7"
     - "ome-zarr>=0.8.0"
     - tootapari
     - Mastodon.py
@@ -151,7 +151,7 @@ dependencies:
     - cryotypes
     - "git+https://github.com/KosinskiLab/pyTME.git"
     - napari-omero
-    - napari-stable-diffusion
+    - napari-stabtensle-diffusion
 #    - tyssue
 #    - napari-tyssue
 #    - napari-metadata
