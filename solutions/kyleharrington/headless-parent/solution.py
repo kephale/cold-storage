@@ -101,13 +101,12 @@ dependencies:
     - invagination
     - hypothesis
     - tensorstore
-    - alabaster
     - compressed-segmentation
     - pyspng-seunglab
-    - tabulous
+    - "tabulous>=0.5.4"
     - imglyb
     - imglyb-bdv
-    - pyheif
+    - "pyheif>=0.7"
     - "ome-zarr>=0.8.0"
     - epc
     - pygeodesic
