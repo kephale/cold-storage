@@ -138,9 +138,7 @@ dependencies:
 #    - skan
 #    - napari-boids
     - napari-matplotlib
-    - stardist-napari
     - cellpose-napari
-    - stardist
     - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
     - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
