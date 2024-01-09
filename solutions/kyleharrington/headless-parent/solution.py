@@ -106,9 +106,8 @@ dependencies:
     - tabulous
     - imglyb
     - imglyb-bdv
-    - fibsem_tools
     - pyheif
-    - "ome-zarr>=0.3.0"
+    - "ome-zarr>=0.8.0"
     - importmagic
     - epc
     - ruff
@@ -120,16 +119,13 @@ dependencies:
     - pylsp-rope
     - python-lsp-ruff
     - snakeviz
-    - pyaudio
-    - Mastodon.py
-    - qrcode
     - opencv-python-headless
     - pygeodesic
     - skan
     - stardist
     - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
     - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
-    - pydantic-ome-ngff
+    - "pydantic-ome-ngff>=0.2.3"
     - python-dotenv
     - validate-pyproject[all]
     - segment-anything
@@ -137,15 +133,15 @@ dependencies:
     - requests_toolbelt
     - networkx
     - cytosim
-    - xgboost
-    - cryoet-data-portal
+    - "xgboost>=2"
+    - cryoet-data-portal>=2
     - mrcfile
     - ipython
     - black
     - pre-commit
     - mrcfile
-    - starfile
-    - imodmodel
+    - "starfile>=0.5.0"
+    - "imodmodel>=0.0.7"
     - cryotypes
     - "git+https://github.com/KosinskiLab/pyTME.git"
 """
