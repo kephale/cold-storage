@@ -15,10 +15,8 @@ dependencies:
   - pybind11
   - pip
   - boost-cpp
-  - mpfr
-  - gmp
   - cgal
-  - numpy
+  - numpy >= 1.26
   - scyjava >= 1.8.1
   - scipy
   - scikit-image
@@ -30,7 +28,6 @@ dependencies:
   - jupytext
   - quantities
   - ipywidgets
-  - ipyvolume
   - meshio
   - zarr
   - xarray
@@ -61,9 +58,9 @@ dependencies:
   - pooch
   - yappi
   - ftfy
-  - tqdm
+  - tqdm >= 4.38
   - imageio
-  - pyarrow
+  - pyarrow >= 13
   - squidpy
   - h5py
   - tifffile
@@ -74,7 +71,7 @@ dependencies:
   - pint
   - pytest-cov
   - mypy
-  - opencv
+#  - opencv
   - flask
   - vtk
   - libnetcdf
@@ -100,7 +97,6 @@ dependencies:
     - omero-rois
     - imaris-ims-file-reader
     - scanpy
-    - pyarrow
 #    - invagination
 #    - hypothesis
     - "tensorstore>=0.1.51"
@@ -114,8 +110,6 @@ dependencies:
     - epc
     - pygeodesic
     - skan
-    - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
-    - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
     - "python-dotenv>=0.21"
     - validate-pyproject[all]
