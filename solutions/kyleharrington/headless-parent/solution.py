@@ -38,7 +38,7 @@ dependencies:
   - mpfr
   - gmp
   - pyvista
-  - omero-py
+#  - omero-py
   - pyimagej >= 1.4.0
   - pyopencl
   - reikna
