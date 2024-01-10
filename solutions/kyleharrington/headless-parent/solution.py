@@ -117,7 +117,7 @@ dependencies:
     - ndjson
     - requests_toolbelt
     - networkx
-    - cytosim
+#    - cytosim
     - "xgboost>=2"
     - cryoet-data-portal>=2
     - mrcfile
