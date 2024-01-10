@@ -130,11 +130,9 @@ dependencies:
 
 
 def run():
-    import napari
+    import IPython
 
-    viewer = napari.Viewer()
-    
-    napari.run()
+    IPython.start_ipython()
 
 
 setup(
