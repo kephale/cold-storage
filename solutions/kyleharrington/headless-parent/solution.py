@@ -88,22 +88,25 @@ dependencies:
   - pythran
   - gql
   - boto3
+  - album
   - "opencv-python-headless>=0.4.8"
+  - "transformers>=4.36.1"
+  - "imageio-ffmpeg>=0.4.8"
+  - segment-anything
+  - networkx
+  - ipython      
   - pip:
     - idr-py
-    - album
     - omero-rois
-    - imageio-ffmpeg
-    - transformers
     - imaris-ims-file-reader
     - scanpy
     - pyarrow
-    - invagination
-    - hypothesis
+#    - invagination
+#    - hypothesis
     - "tensorstore>=0.1.51"
     - compressed-segmentation
     - pyspng-seunglab
-    - "tabulous>=0.5.4"
+#    - "tabulous>=0.5.4"
     - imglyb
     - imglyb-bdv
     - "pyheif>=0.7"
@@ -124,12 +127,10 @@ dependencies:
     - "xgboost>=2"
     - cryoet-data-portal>=2
     - mrcfile
-    - ipython
-    - mrcfile
     - "starfile>=0.5.0"
     - "imodmodel>=0.0.7"
     - cryotypes
-    - "git+https://github.com/KosinskiLab/pyTME.git"
+#    - "git+https://github.com/KosinskiLab/pyTME.git"
 """
 )
 
