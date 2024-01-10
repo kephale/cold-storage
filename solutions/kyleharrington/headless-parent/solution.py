@@ -11,7 +11,7 @@ env_file = StringIO(
   - conda-forge
   - defaults    
 dependencies:
-  - python>=3.10
+  - python>=3.8
   - pybind11
   - pip
   - boost-cpp
