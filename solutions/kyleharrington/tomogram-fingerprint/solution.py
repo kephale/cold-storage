@@ -70,6 +70,13 @@ def compute_fingerprint(path_to_mrc):
             'center_slice_base64': base64_image
         }
 
+def append_html_fingerprint(f, fingerprint, filename, index):
+    f.write(f"<h2>Tomogram {index+1} - {filename}</h2>")
+    f.write(f"<p>Original Size: {fingerprint['original_size']}<br>Cropped Size: {fingerprint['cropped_size']}</p>")
+    f.write(f"<p>Statistics:<br>Mean: {fingerprint['statistics']['mean']}<br>Standard Deviation: {fingerprint['statistics']['std_dev']}<br>0.5 Percentile: {fingerprint['statistics']['percentile_0.5']}<br>99.5 Percentile: {fingerprint['statistics']['percentile_99.5']}<br>Min: {fingerprint['statistics']['min']}<br>Max: {fingerprint['statistics']['max']}</p>")
+    f.write(f"<img src='data:image/png;base64,{fingerprint['center_slice_base64']}'>")
+    f.write("<hr>")   
+
 def generate_html(fingerprints):
     html_content = "<html><body><h1>Dataset Fingerprints</h1>"
     for i, fp in enumerate(fingerprints):
@@ -87,20 +94,23 @@ def run():
     mrc_list_path = get_args().mrcindexfile
     html_output = get_args().outputfile
 
-    with open(mrc_list_path, 'r') as file:
-        mrc_paths = file.read().splitlines()
-
-    fingerprints = [compute_fingerprint(path) for path in mrc_paths]
-
-    html_content = generate_html(fingerprints)
-
     with open(html_output, 'w') as f:
-        f.write(html_content)
+        f.write("<html><body><h1>Dataset Fingerprints</h1>")
+
+        with open(mrc_list_path, 'r') as file:
+            mrc_paths = file.read().splitlines()
+
+        for i, path in enumerate(mrc_paths):
+            fingerprint = compute_fingerprint(path)
+            filename = os.path.basename(path)
+            append_html_fingerprint(f, fingerprint, filename, i)
+
+        f.write("</body></html>")
 
 setup(
     group="kyleharrington",
     name="tomogram-fingerprint",
-    version="0.0.1",
+    version="0.0.2",
     title="Tomogram fingerprint",
     description="Compute the dataset fingerprints of a cryoET tomogram.",
     solution_creators=["Kyle Harrington"],
