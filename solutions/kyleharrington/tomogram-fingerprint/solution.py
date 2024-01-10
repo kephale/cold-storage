@@ -85,7 +85,7 @@ def generate_html(fingerprints):
 
 def run():
     mrc_list_path = get_args().mrcindexfile
-    html_output = 'output.html'
+    html_output = get_args().outputfile
 
     with open(mrc_list_path, 'r') as file:
         mrc_paths = file.read().splitlines()
@@ -124,6 +124,7 @@ setup(
     album_api_version="0.5.1",
     args=[
         {"name": "mrcindexfile", "type": "file", "required": True, "description": "Path to the file containing list of MRC files"},
+        {"name": "outputfile", "type": "file", "required": True, "description": "Path to the output HTML file"},
     ],
     run=run,
     dependencies={"environment_file": env_file},
