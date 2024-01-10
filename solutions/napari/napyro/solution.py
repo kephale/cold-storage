@@ -131,8 +131,8 @@ dependencies:
 #    - napari-boids
 #    - "napari-matplotlib>=1" # has a requirement of <0.4.18
     - "cellpose-napari>=0.1.4"
-    - "tensorflow-macos;  platform_system==\"Darwin\" and platform_machine==\"arm64\""
-    - "tensorflow-metal;  platform_system==\"Darwin\" and platform_machine==\"arm64\""    
+    - "tensorflow-macos;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""
+    - "tensorflow-metal;  platform_system==\\\"Darwin\\\" and platform_machine==\\\"arm64\\\""    
     - "pydantic-ome-ngff>=0.2.3"
     - "python-dotenv>=0.21"
     - validate-pyproject[all]
