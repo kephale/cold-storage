@@ -1,0 +1,25 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the file containing list of MRC files
+  name: mrcindexfile
+  required: true
+  type: file
+changelog: Initial deploy
+cite:
+- text: Kyle. Also check out team tomo
+  url: ''
+covers:
+- description: Example of a dataset.
+  source: cover.png
+description: Compute the dataset fingerprints of a cryoET tomogram.
+group: kyleharrington
+license: MIT
+name: tomogram-fingerprint
+solution_creators:
+- Kyle Harrington
+tags:
+- cryoet
+- dataset
+timestamp: '2024-01-10T10:00:24.772683'
+title: Tomogram fingerprint
+version: 0.0.1
