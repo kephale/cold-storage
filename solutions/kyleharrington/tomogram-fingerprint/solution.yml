@@ -8,7 +8,7 @@ args:
   name: outputfile
   required: true
   type: file
-changelog: Append fingerprints as they are computed
+changelog: Output more fingerprint stats in HTML
 cite:
 - text: Kyle. Also check out team tomo
   url: ''
@@ -24,6 +24,6 @@ solution_creators:
 tags:
 - cryoet
 - dataset
-timestamp: '2024-01-10T11:01:37.829856'
+timestamp: '2024-01-10T11:25:35.592094'
 title: Tomogram fingerprint
-version: 0.0.2
+version: 0.0.3

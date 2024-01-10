@@ -74,21 +74,10 @@ def append_html_fingerprint(f, fingerprint, filename, index):
     f.write(f"<h2>Tomogram {index+1} - {filename}</h2>")
     f.write(f"<p>Original Size: {fingerprint['original_size']}<br>Cropped Size: {fingerprint['cropped_size']}</p>")
     f.write(f"<p>Statistics:<br>Mean: {fingerprint['statistics']['mean']}<br>Standard Deviation: {fingerprint['statistics']['std_dev']}<br>0.5 Percentile: {fingerprint['statistics']['percentile_0.5']}<br>99.5 Percentile: {fingerprint['statistics']['percentile_99.5']}<br>Min: {fingerprint['statistics']['min']}<br>Max: {fingerprint['statistics']['max']}</p>")
+    histogram_html = "<p>Histogram:<br>Bins: {}<br>Counts: {}</p>".format(fingerprint['histogram']['bins'], fingerprint['histogram']['counts'])
+    f.write(histogram_html)
     f.write(f"<img src='data:image/png;base64,{fingerprint['center_slice_base64']}'>")
-    f.write("<hr>")   
-
-def generate_html(fingerprints):
-    html_content = "<html><body><h1>Dataset Fingerprints</h1>"
-    for i, fp in enumerate(fingerprints):
-        html_content += f"<h2>Tomogram {i+1}</h2>"
-        html_content += "<p>Original Size: {}<br>Cropped Size: {}</p>".format(fp['original_size'], fp['cropped_size'])
-        html_content += "<p>Statistics:<br>Mean: {}<br>Standard Deviation: {}<br>0.5 Percentile: {}<br>99.5 Percentile: {}<br>Min: {}<br>Max: {}</p>".format(
-            fp['statistics']['mean'], fp['statistics']['std_dev'], fp['statistics']['percentile_0.5'], 
-            fp['statistics']['percentile_99.5'], fp['statistics']['min'], fp['statistics']['max'])
-        html_content += "<img src='data:image/png;base64,{}'>".format(fp['center_slice_base64'])
-        html_content += "<hr>"
-    html_content += "</body></html>"
-    return html_content
+    f.write("<hr>")
 
 def run():
     mrc_list_path = get_args().mrcindexfile
@@ -110,7 +99,7 @@ def run():
 setup(
     group="kyleharrington",
     name="tomogram-fingerprint",
-    version="0.0.2",
+    version="0.0.3",
     title="Tomogram fingerprint",
     description="Compute the dataset fingerprints of a cryoET tomogram.",
     solution_creators=["Kyle Harrington"],
