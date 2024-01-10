@@ -179,14 +179,19 @@ def run():
 setup(
     group="napari",
     name="napyro",
-    version="0.0.1",
+    version="0.0.2",
     title="Parent environment for a big napari environment for cryoET.",
     description="A parent environment for a big napari environment for cryoET",
     solution_creators=["Kyle Harrington"],
     cite=[{"text": "Kyle. Also check out TeamTomo", "url": ""}],
     tags=["imaging", "cryoet", "Python", "napari"],
     license="MIT",
-    covers=[],
+    covers=[
+        {
+            "description": "Screenshot of napari showing the napari-cryoet-data-portal and blik plugins.",
+            "source": "cover.png",
+        }
+    ],
     album_api_version="0.5.1",
     args=[],
     run=run,
