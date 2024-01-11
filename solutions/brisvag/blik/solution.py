@@ -19,7 +19,7 @@ setup(
     group="brisvag",
     name="blik",
     version="0.0.1",
-    title="Python tool for visualising and interacting with cryo-ET and subtomogram averaging data. .",
+    title="blik: a Python tool for visualising and interacting with cryo-ET and subtomogram averaging data. .",
     description="A command-line preprocessing tool for pytme",
     solution_creators=["Kyle Harrington"],
     cite=[{"text": "Gaifas, L., Timmins, J. and Gutsche, I., 2023. blik: an extensible napari plugin for cryo-ET data visualisation, annotation and analysis. bioRxiv, pp.2023-12..", "url": "https://brisvag.github.io/blik/"}],
