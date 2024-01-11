@@ -1,0 +1,25 @@
+album_api_version: 0.5.1
+args: []
+changelog: Initial deploy
+cite:
+- text: 'Gaifas, L., Timmins, J. and Gutsche, I., 2023. blik: an extensible napari
+    plugin for cryo-ET data visualisation, annotation and analysis. bioRxiv, pp.2023-12..'
+  url: https://brisvag.github.io/blik/
+covers:
+- description: Screenshot of blik.
+  source: cover.png
+description: A command-line preprocessing tool for pytme
+group: brisvag
+license: GPL v3.0
+name: blik
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- napari
+timestamp: '2024-01-10T21:06:01.790396'
+title: Python tool for visualising and interacting with cryo-ET and subtomogram averaging
+  data. .
+version: 0.0.1
