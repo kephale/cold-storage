@@ -13,7 +13,7 @@ def run():
     widget = MainBlikWidget()
     viewer.window.add_dock_widget(widget)
 
-    viewer.run()
+    napari.run()
 
 setup(
     group="brisvag",
