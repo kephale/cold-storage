@@ -8,7 +8,8 @@ cite:
 covers:
 - description: Screenshot of blik.
   source: cover.png
-description: A command-line preprocessing tool for pytme
+description: blik is a Python tool for visualising and interacting with cryo-ET and
+  subtomogram averaging data.
 group: brisvag
 license: GPL v3.0
 name: blik
@@ -19,7 +20,7 @@ tags:
 - cryoet
 - Python
 - napari
-timestamp: '2024-01-10T21:21:02.768283'
+timestamp: '2024-01-11T10:02:50.525181'
 title: 'blik: a Python tool for visualising and interacting with cryo-ET and subtomogram
-  averaging data. .'
+  averaging data.'
 version: 0.0.1
