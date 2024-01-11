@@ -38,7 +38,7 @@ setup(
     dependencies={
         "parent": {
             "group": "napari",
-            "name": "napryo",
+            "name": "napyro",
             "version": "0.0.2",
         }
     },
