@@ -1,0 +1,28 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the DataFrame file
+  name: dataframe
+  required: true
+  type: file
+- description: Path for the output Zarr file
+  name: zarr_output
+  required: true
+  type: file
+changelog: Initial deploy
+covers:
+- description: Cover image.
+  source: cover.png
+description: Converts a given DataFrame to a Zarr file format.
+group: cryocanvas
+license: MIT
+name: embedding_df_to_zarr
+solution_creators:
+- Kyle Harrington
+tags:
+- data conversion
+- DataFrame
+- Zarr
+- Python
+timestamp: '2024-01-17T15:58:20.787836'
+title: Convert a TomoTwin embedding DataFrame to Zarr Format
+version: 0.0.1
