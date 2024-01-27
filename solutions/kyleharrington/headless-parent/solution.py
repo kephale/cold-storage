@@ -93,8 +93,8 @@ dependencies:
   - networkx
   - ipython      
   - pip:
-    - idr-py
-    - omero-rois
+#    - idr-py
+#    - omero-rois
     - imaris-ims-file-reader
     - scanpy
 #    - invagination
@@ -138,7 +138,7 @@ def run():
 setup(
     group="kyleharrington",
     name="headless-parent",
-    version="0.0.1",
+    version="0.0.2",
     title="Parent environment for a big python environment for cryoET.",
     description="A parent environment for a big python environment for cryoET",
     solution_creators=["Kyle Harrington"],
