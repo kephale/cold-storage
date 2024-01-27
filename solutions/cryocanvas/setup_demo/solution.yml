@@ -1,30 +1,36 @@
 album_api_version: 0.5.1
 args:
-- description: Start coordinate for cropping on Z axis
+- default: 0
+  description: Start coordinate for cropping on Z axis
   name: crop_z_start
   required: true
   type: integer
-- description: End coordinate for cropping on Z axis
+- default: 100
+  description: End coordinate for cropping on Z axis
   name: crop_z_end
   required: true
   type: integer
-- description: Start coordinate for cropping on Y axis
+- default: 0
+  description: Start coordinate for cropping on Y axis
   name: crop_y_start
   required: true
   type: integer
-- description: End coordinate for cropping on Y axis
+- default: 100
+  description: End coordinate for cropping on Y axis
   name: crop_y_end
   required: true
   type: integer
-- description: Start coordinate for cropping on X axis
+- default: 0
+  description: Start coordinate for cropping on X axis
   name: crop_x_start
   required: true
   type: integer
-- description: End coordinate for cropping on X axis
+- default: 100
+  description: End coordinate for cropping on X axis
   name: crop_x_end
   required: true
   type: integer
-changelog: Initial deploy that downloads a zarr crop
+changelog: Initial deploy for downloading crop of zarr
 covers:
 - description: Cover image.
   source: cover.png
@@ -38,6 +44,6 @@ tags:
 - particle picking
 - CryoET
 - Python
-timestamp: '2024-01-27T14:53:01.142518'
+timestamp: '2024-01-27T15:24:32.342533'
 title: Setup a demo environment for CryoCanvas
 version: 0.0.1
