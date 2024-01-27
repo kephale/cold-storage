@@ -18,6 +18,7 @@ def download_and_prepare_dataset(client, crop_coords):
     
     # Select the first tomogram
     tomos = Tomogram.find(client, [Tomogram.tomogram_voxel_spacing.run.dataset.organism_name == "Schizosaccharomyces pombe"])
+    tomos = list(tomos)
     first_tomo = tomos[0] if tomos else None
 
     if not first_tomo:
