@@ -30,7 +30,7 @@ args:
   name: crop_x_end
   required: true
   type: integer
-changelog: Initial deploy for downloading crop of zarr
+changelog: Initial deploy for downloading zarr crop
 covers:
 - description: Cover image.
   source: cover.png
@@ -44,6 +44,6 @@ tags:
 - particle picking
 - CryoET
 - Python
-timestamp: '2024-01-27T15:24:32.342533'
+timestamp: '2024-01-27T15:28:49.591723'
 title: Setup a demo environment for CryoCanvas
 version: 0.0.1

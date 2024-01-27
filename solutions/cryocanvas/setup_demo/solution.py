@@ -52,9 +52,9 @@ def run():
     from album.runner.api import get_args
     
     # Get cropping coordinates from arguments
-    # args = get_args()
-    # crop_coords = [args.crop_z_start, args.crop_z_end, args.crop_y_start, args.crop_y_end, args.crop_x_start, args.crop_x_end]
-    crop_coords = [0, 100, 0, 100, 0, 100]
+    args = get_args()
+    crop_coords = [args.crop_z_start, args.crop_z_end, args.crop_y_start, args.crop_y_end, args.crop_x_start, args.crop_x_end]
+    # crop_coords = [0, 100, 0, 100, 0, 100]
 
     from cryoet_data_portal import Client
     # In your main function or where appropriate
