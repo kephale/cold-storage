@@ -90,7 +90,7 @@ setup(
         "parent": {
             "group": "kyleharrington",
             "name": "headless-parent",
-            "version": "0.0.1",
+            "version": "0.0.2",
         }
     },
 )
