@@ -1,0 +1,43 @@
+album_api_version: 0.5.1
+args:
+- description: Start coordinate for cropping on Z axis
+  name: crop_z_start
+  required: true
+  type: integer
+- description: End coordinate for cropping on Z axis
+  name: crop_z_end
+  required: true
+  type: integer
+- description: Start coordinate for cropping on Y axis
+  name: crop_y_start
+  required: true
+  type: integer
+- description: End coordinate for cropping on Y axis
+  name: crop_y_end
+  required: true
+  type: integer
+- description: Start coordinate for cropping on X axis
+  name: crop_x_start
+  required: true
+  type: integer
+- description: End coordinate for cropping on X axis
+  name: crop_x_end
+  required: true
+  type: integer
+changelog: Initial deploy for downloading zarr crop
+covers:
+- description: Cover image.
+  source: cover.png
+description: Setup a demo environment for CryoCanvas using the CZ Cryo ET Data Portal.
+group: cryocanvas
+license: MIT
+name: setup_demo
+solution_creators:
+- Kyle Harrington
+tags:
+- particle picking
+- CryoET
+- Python
+timestamp: '2024-01-27T14:36:46.767023'
+title: Setup a demo environment for CryoCanvas
+version: 0.0.1
