@@ -1,0 +1,31 @@
+album_api_version: 0.5.1
+args:
+- description: Dataset ID for the MRC file
+  name: dataset_id
+  required: true
+  type: integer
+- description: Run ID for the MRC file
+  name: run_id
+  required: true
+  type: string
+- description: Directory for saving the output
+  name: output_directory
+  required: true
+  type: file
+changelog: Initial deploy, but this downloads everything
+covers:
+- description: Cover image description
+  source: cover.png
+description: Download a MRC from the CZ CryoET Data Portal.
+group: cryoetdataportal
+license: MIT
+name: download-mrc
+solution_creators:
+- Kyle Harrington
+tags:
+- cryoet
+- data
+- download
+timestamp: '2024-01-31T09:59:40.842454'
+title: Download a MRC from the CZ CryoET Data Portal
+version: 0.0.1
