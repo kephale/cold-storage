@@ -23,10 +23,17 @@ def run():
         with mrcfile.new(output_mrc_path, overwrite=True) as new_mrc:
             new_mrc.set_data(cropped_data)
 
-            # Copy metadata from the original MRC file
+            # Copy necessary header information
             new_mrc.voxel_size = mrc.voxel_size
-            new_mrc.header = mrc.header
-            new_mrc.extended_header = mrc.extended_header
+
+            # Update header fields related to dimensions
+            new_mrc.header.nz = end_z - start_z
+            new_mrc.header.mz = end_z - start_z
+
+            # Copy extended header if present
+            if mrc.extended_header is not None:
+                new_mrc.set_extended_header(mrc.extended_header)
+
 
     print(f"Cropped MRC file saved to {output_mrc_path}")
 
@@ -35,7 +42,7 @@ def run():
 setup(
     group="cryoetdataportal",
     name="crop-mrc",
-    version="0.0.1",
+    version="0.0.2",
     title="Crop a MRC from the CZ CryoET Data Portal",
     description="Crop a MRC from the CZ CryoET Data Portal.",
     solution_creators=["Kyle Harrington"],
