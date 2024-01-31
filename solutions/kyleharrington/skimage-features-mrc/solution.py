@@ -48,8 +48,12 @@ def run():
         zarr_file = zarr.open(zarr_path, mode='a')
         group = zarr_file.require_group(group_name)
 
+        # Compute an initial chunk to determine the number of features
+        initial_chunk = process_chunk(data[0:1, 0:1, 0:1], sigma_max)
+        num_features = initial_chunk.shape[-1]
+
         # Define the dataset shape and data type
-        features_shape = (data.shape[0], data.shape[1], data.shape[2])  # Adjust as needed
+        features_shape = (data.shape[0], data.shape[1], data.shape[2], num_features)
         features_dtype = np.float32  # Adjust as needed
 
         # Create or append to the dataset
@@ -70,8 +74,8 @@ def run():
                     chunk = data[z_start:z_end, y_start:y_end, x_start:x_end]
                     chunk_features = process_chunk(chunk, sigma_max)
 
-                    # Place processed chunk back into the dataset, without overlaps
-                    features_dataset[z_start:z_end, y_start:y_end, x_start:x_end] = chunk_features
+                    # Update the corresponding part of the dataset
+                    features_dataset[z_start:z_end, y_start:y_end, x_start:x_end, :] = chunk_features
 
         print(f"Feature data saved in group '{group_name}' in Zarr file: {zarr_path}")
     except Exception as e:
@@ -81,7 +85,7 @@ def run():
 setup(
     group="kyleharrington",
     name="skimage-features-mrc",
-    version="0.0.7",
+    version="0.0.8",
     title="Compute basic fixed features for CryoET Data",
     description="Computes a feature group for cryoET data using skimage.feature.multiscale_basic_features and saves to a Zarr file.",
     solution_creators=["Kyle Harrington"],
