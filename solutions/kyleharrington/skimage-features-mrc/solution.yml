@@ -1,0 +1,33 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the MRC file
+  name: mrcfile
+  required: true
+  type: file
+- description: Path for the Zarr file
+  name: zarr_path
+  required: true
+  type: string
+- description: Name of the group in the Zarr file to store the features
+  name: group_name
+  required: true
+  type: string
+changelog: Initial deploy
+covers:
+- description: Cover image description
+  source: cover.png
+description: Computes a feature group for cryoET data using skimage.feature.multiscale_basic_features
+  and saves to a Zarr file.
+group: kyleharrington
+license: MIT
+name: skimage-features-mrc
+solution_creators:
+- Kyle Harrington
+tags:
+- cryoet
+- features
+- zarr
+- Python
+timestamp: '2024-01-31T13:09:32.062075'
+title: Compute basic fixed features for CryoET Data
+version: 0.0.1
