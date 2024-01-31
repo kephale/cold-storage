@@ -32,7 +32,7 @@ def run():
     mrc_file = args.mrcfile
     zarr_path = args.zarr_path
     group_name = args.group_name
-    sigma_max = 16  # Example sigma_max, adjust as needed
+    sigma_max = 16  # Adjust sigma_max as needed
 
     try:
         # Ensure directory for Zarr file exists
@@ -46,8 +46,16 @@ def run():
         # Open or create Zarr file
         zarr_file = zarr.open(zarr_path, mode='a')
         group = zarr_file.require_group(group_name)
-        features_shape = (data.shape[0], data.shape[1], data.shape[2])  # Adjust as needed for feature dimensions
-        features_dataset = group.create_dataset('features', shape=features_shape, chunks=True, dtype=np.float32)
+
+        # Define the dataset shape and data type
+        features_shape = (data.shape[0], data.shape[1], data.shape[2])  # Adjust as needed
+        features_dtype = np.float32  # Adjust as needed
+
+        # Create or append to the dataset
+        if group_name in group.array_keys():
+            features_dataset = group[group_name]
+        else:
+            features_dataset = group.create_dataset(group_name, shape=features_shape, chunks=True, dtype=features_dtype)
 
         # Chunk-wise processing
         chunk_size = 100  # Adjust based on memory capacity
@@ -57,10 +65,9 @@ def run():
             chunk_features = process_chunk(chunk, sigma_max)
             features_dataset[start:end] = chunk_features
 
-        print(f"Feature group '{group_name}' saved to Zarr file: {zarr_path}")
+        print(f"Feature data saved in group '{group_name}' in Zarr file: {zarr_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 
 setup(

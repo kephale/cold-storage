@@ -12,7 +12,7 @@ args:
   name: group_name
   required: true
   type: string
-changelog: Process mrc in chunks
+changelog: Fix features dataset creation
 covers:
 - description: Cover image description
   source: cover.png
@@ -28,6 +28,6 @@ tags:
 - features
 - zarr
 - Python
-timestamp: '2024-01-31T14:32:34.135756'
+timestamp: '2024-01-31T14:55:18.328299'
 title: Compute basic fixed features for CryoET Data
 version: 0.0.5
