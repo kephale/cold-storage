@@ -1,0 +1,35 @@
+album_api_version: 0.5.1
+args:
+- description: Input mrc file
+  name: input_mrc
+  required: true
+  type: file
+- description: Output mrc file
+  name: output_mrc
+  required: true
+  type: file
+- description: Start Z for cropping
+  name: start_z
+  required: true
+  type: integer
+- description: End Z for cropping
+  name: end_z
+  required: true
+  type: integer
+changelog: Initial deploy for cropping a mrc
+covers:
+- description: Cover image description
+  source: cover.png
+description: Crop a MRC from the CZ CryoET Data Portal.
+group: cryoetdataportal
+license: MIT
+name: crop-mrc
+solution_creators:
+- Kyle Harrington
+tags:
+- cryoet
+- data
+- crop
+timestamp: '2024-01-31T10:35:41.087384'
+title: Crop a MRC from the CZ CryoET Data Portal
+version: 0.0.1
