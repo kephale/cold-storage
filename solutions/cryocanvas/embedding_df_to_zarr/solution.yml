@@ -1,14 +1,22 @@
 album_api_version: 0.5.1
 args:
-- description: Path to the DataFrame file
-  name: dataframe
+- description: Path to the MRC file
+  name: mrcfile
   required: true
   type: file
-- description: Path for the output Zarr file
-  name: zarr_output
+- description: Path to the embedding DataFrame file
+  name: embeddingfile
   required: true
   type: file
-changelog: Initial deploy
+- description: Path for the Zarr file
+  name: zarr_path
+  required: true
+  type: string
+- description: Name of the group in the Zarr file to store the data
+  name: zarr_group
+  required: true
+  type: string
+changelog: Take zarr_group as an additional argument
 covers:
 - description: Cover image.
   source: cover.png
@@ -23,6 +31,6 @@ tags:
 - DataFrame
 - Zarr
 - Python
-timestamp: '2024-01-17T15:58:20.787836'
+timestamp: '2024-01-31T15:22:49.093770'
 title: Convert a TomoTwin embedding DataFrame to Zarr Format
-version: 0.0.1
+version: 0.0.2
