@@ -23,7 +23,7 @@ def run():
 setup(
     group="cryoetdataportal",
     name="download-mrc",
-    version="0.0.1",
+    version="0.0.2",
     title="Download a MRC from the CZ CryoET Data Portal",
     description="Download a MRC from the CZ CryoET Data Portal.",
     solution_creators=["Kyle Harrington"],
@@ -41,7 +41,7 @@ setup(
         "parent": {
             "group": "kyleharrington",
             "name": "headless-parent",
-            "version": "0.0.1",
+            "version": "0.0.2",
         }
     },
 )

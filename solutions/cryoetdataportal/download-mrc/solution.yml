@@ -12,7 +12,7 @@ args:
   name: output_directory
   required: true
   type: file
-changelog: Initial deploy, but this downloads everything
+changelog: Update to use improved parent environment
 covers:
 - description: Cover image description
   source: cover.png
@@ -26,6 +26,6 @@ tags:
 - cryoet
 - data
 - download
-timestamp: '2024-01-31T09:59:40.842454'
+timestamp: '2024-01-31T10:03:58.583088'
 title: Download a MRC from the CZ CryoET Data Portal
-version: 0.0.1
+version: 0.0.2
