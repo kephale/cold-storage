@@ -12,7 +12,7 @@ args:
   name: group_name
   required: true
   type: string
-changelog: Initial deploy
+changelog: Make zarr directory if it doesn't exist
 covers:
 - description: Cover image description
   source: cover.png
@@ -28,6 +28,6 @@ tags:
 - features
 - zarr
 - Python
-timestamp: '2024-01-31T13:09:32.062075'
+timestamp: '2024-01-31T13:22:31.703383'
 title: Compute basic fixed features for CryoET Data
-version: 0.0.1
+version: 0.0.2

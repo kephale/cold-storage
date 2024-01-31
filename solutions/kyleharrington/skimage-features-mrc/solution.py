@@ -6,7 +6,6 @@ from album.runner.api import setup, get_args
 def run():
     import os
     import zarr
-    import numpy as np
     import mrcfile
     from skimage.feature import multiscale_basic_features
     
@@ -16,38 +15,45 @@ def run():
     zarr_path = args.zarr_path
     group_name = args.group_name
 
-    # Load the MRC file
-    with mrcfile.open(mrc_file, permissive=True) as mrc:
-        data = mrc.data
+    try:
+        # Ensure the directory for the Zarr file exists
+        zarr_dir = os.path.dirname(zarr_path)
+        os.makedirs(zarr_dir, exist_ok=True)
 
-    # Compute features using multiscale_basic_features
-    features = multiscale_basic_features(
-        image=data,
-        intensity=True,
-        edges=True,
-        texture=True,
-        sigma_min=0.5,
-        sigma_max=16,
-        num_sigma=10,
-        channel_axis=None
-    )
+        # Load the MRC file
+        with mrcfile.open(mrc_file, permissive=True) as mrc:
+            data = mrc.data
 
-    # Check if the Zarr file exists and open it, otherwise create a new Zarr file
-    if os.path.exists(zarr_path):
+        # Compute features using multiscale_basic_features
+        features = multiscale_basic_features(
+            image=data,
+            intensity=True,
+            edges=True,
+            texture=True,
+            sigma_min=0.5,
+            sigma_max=16,
+            num_sigma=10,
+            channel_axis=None
+        )
+
+        # Open or create the Zarr file
         zarr_file = zarr.open(zarr_path, mode='a')
-    else:
-        zarr_file = zarr.open(zarr_path, mode='w')
 
-    # Save the features to a Zarr group
-    zarr_file.create_group(group_name, overwrite=True)
-    zarr_file[group_name][:] = features
+        # Create or overwrite the group
+        group = zarr_file.require_group(group_name)
 
-    print(f"Feature group '{group_name}' saved to Zarr file: {zarr_path}")
+        # Create a dataset in the group for the features
+        dataset = group.create_dataset('features', shape=features.shape, chunks=True, dtype=features.dtype)
+        dataset[:] = features
+
+        print(f"Feature group '{group_name}' saved to Zarr file: {zarr_path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 setup(
     group="kyleharrington",
     name="skimage-features-mrc",
-    version="0.0.1",
+    version="0.0.2",
     title="Compute basic fixed features for CryoET Data",
     description="Computes a feature group for cryoET data using skimage.feature.multiscale_basic_features and saves to a Zarr file.",
     solution_creators=["Kyle Harrington"],
