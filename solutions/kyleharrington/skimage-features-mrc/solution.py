@@ -66,7 +66,7 @@ def run():
 setup(
     group="kyleharrington",
     name="skimage-features-mrc",
-    version="0.0.3",
+    version="0.0.4",
     title="Compute basic fixed features for CryoET Data",
     description="Computes a feature group for cryoET data using skimage.feature.multiscale_basic_features and saves to a Zarr file.",
     solution_creators=["Kyle Harrington"],
@@ -79,6 +79,7 @@ setup(
         {"name": "zarr_path", "type": "string", "required": True, "description": "Path for the Zarr file"},
         {"name": "group_name", "type": "string", "required": True, "description": "Name of the group in the Zarr file to store the features"}
     ],
+    run=run,
     dependencies={
         "parent": {
             "group": "kyleharrington",

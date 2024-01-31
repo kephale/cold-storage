@@ -12,7 +12,7 @@ args:
   name: group_name
   required: true
   type: string
-changelog: Add additional logging
+changelog: Add missing run function link
 covers:
 - description: Cover image description
   source: cover.png
@@ -28,6 +28,6 @@ tags:
 - features
 - zarr
 - Python
-timestamp: '2024-01-31T13:31:43.862397'
+timestamp: '2024-01-31T13:43:47.532585'
 title: Compute basic fixed features for CryoET Data
-version: 0.0.3
+version: 0.0.4
