@@ -3,6 +3,7 @@
 
 from album.runner.api import setup
 
+
 def run():
     import os
     import zarr
@@ -57,13 +58,20 @@ def run():
         else:
             features_dataset = group.create_dataset(group_name, shape=features_shape, chunks=True, dtype=features_dtype)
 
-        # Chunk-wise processing
+        # 3D Chunk-wise processing
         chunk_size = 100  # Adjust based on memory capacity
-        for start in range(0, data.shape[0], chunk_size):
-            end = min(start + chunk_size, data.shape[0])
-            chunk = data[start:end]
-            chunk_features = process_chunk(chunk, sigma_max)
-            features_dataset[start:end] = chunk_features
+        for z_start in range(0, data.shape[0], chunk_size):
+            z_end = min(z_start + chunk_size, data.shape[0])
+            for y_start in range(0, data.shape[1], chunk_size):
+                y_end = min(y_start + chunk_size, data.shape[1])
+                for x_start in range(0, data.shape[2], chunk_size):
+                    x_end = min(x_start + chunk_size, data.shape[2])
+
+                    chunk = data[z_start:z_end, y_start:y_end, x_start:x_end]
+                    chunk_features = process_chunk(chunk, sigma_max)
+
+                    # Place processed chunk back into the dataset, without overlaps
+                    features_dataset[z_start:z_end, y_start:y_end, x_start:x_end] = chunk_features
 
         print(f"Feature data saved in group '{group_name}' in Zarr file: {zarr_path}")
     except Exception as e:
@@ -73,7 +81,7 @@ def run():
 setup(
     group="kyleharrington",
     name="skimage-features-mrc",
-    version="0.0.6",
+    version="0.0.7",
     title="Compute basic fixed features for CryoET Data",
     description="Computes a feature group for cryoET data using skimage.feature.multiscale_basic_features and saves to a Zarr file.",
     solution_creators=["Kyle Harrington"],

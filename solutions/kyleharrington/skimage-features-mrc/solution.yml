@@ -12,7 +12,7 @@ args:
   name: group_name
   required: true
   type: string
-changelog: Fix features dataset
+changelog: Chunking in 3D
 covers:
 - description: Cover image description
   source: cover.png
@@ -28,6 +28,6 @@ tags:
 - features
 - zarr
 - Python
-timestamp: '2024-01-31T14:56:26.243901'
+timestamp: '2024-01-31T15:11:01.650918'
 title: Compute basic fixed features for CryoET Data
-version: 0.0.6
+version: 0.0.7
