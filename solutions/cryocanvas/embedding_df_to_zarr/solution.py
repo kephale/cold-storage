@@ -10,6 +10,7 @@ def run():
     import pandas as pd
     import zarr
     import mrcfile
+    from concurrent.futures import ThreadPoolExecutor, as_completed
     from album.runner.api import get_args
     
     args = get_args()
@@ -53,21 +54,34 @@ def run():
                                              chunks=(10, 200, 200, embedding_dims),
                                              dtype='float32')
 
-    print("Populating the embedding dataset")
-    for index, row in embedding_df.iterrows():
-        z, y, x = int(row['Z']), int(row['Y']), int(row['X'])
+    def populate_embedding(z, y, x, values):
+        """Function to populate embedding dataset. Ensures thread-safe write to Zarr dataset."""
         if z >= mrc_data.shape[0] or y >= mrc_data.shape[1] or x >= mrc_data.shape[2]:
             print(f"Index out of bounds: Z={z}, Y={y}, X={x}")
-            continue
-        embedding_dataset[z, y, x, :] = row.values[3:]
+            return
+        embedding_dataset[z, y, x, :] = values
+
+    # Create a ThreadPoolExecutor to manage concurrency
+    with ThreadPoolExecutor() as executor:
+        # Submit tasks to the executor
+        futures = [executor.submit(populate_embedding, int(row['Z']), int(row['Y']), int(row['X']), row.values[3:])
+                   for index, row in embedding_df.iterrows()]
+
+        # Wait for all submitted tasks to complete
+        for future in as_completed(futures):
+            try:
+                future.result()  # You can handle results or exceptions here
+            except Exception as exc:
+                print(f"Generated an exception: {exc}")
 
     print(f"Data and embeddings have been successfully saved to Zarr group '{zarr_group}' in file '{zarr_path}'")
+
 
 
 setup(
     group="cryocanvas",
     name="embedding_df_to_zarr",
-    version="0.0.5",
+    version="0.0.6",
     title="Convert a TomoTwin embedding DataFrame to Zarr Format",
     description="Converts a given DataFrame to a Zarr file format.",
     solution_creators=["Kyle Harrington"],

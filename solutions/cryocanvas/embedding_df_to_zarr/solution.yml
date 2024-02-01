@@ -16,7 +16,7 @@ args:
   name: zarr_group
   required: true
   type: string
-changelog: Fix other zarr group for existence deletion
+changelog: Multithreaded writing of dataframes
 covers:
 - description: Cover image.
   source: cover.png
@@ -31,6 +31,6 @@ tags:
 - DataFrame
 - Zarr
 - Python
-timestamp: '2024-02-01T09:56:05.402121'
+timestamp: '2024-02-01T12:30:45.070331'
 title: Convert a TomoTwin embedding DataFrame to Zarr Format
-version: 0.0.5
+version: 0.0.6
