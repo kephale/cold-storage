@@ -36,7 +36,7 @@ args:
   name: x_end
   required: true
   type: integer
-changelog: Parallelize dataframe processing
+changelog: Use multiprocessing
 description: Processes a crop of the input MRC data and embeddings, computes skimage
   features, and writes to Zarr.
 group: cryocanvas
@@ -51,6 +51,6 @@ tags:
 - features
 - Zarr
 - Python
-timestamp: '2024-02-01T15:20:40.013532'
+timestamp: '2024-02-01T15:30:37.251238'
 title: Process Cropped Data with skimage Features
-version: 0.0.4
+version: 0.0.5

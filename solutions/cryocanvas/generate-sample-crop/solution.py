@@ -12,7 +12,7 @@ def run():
     import zarr
     import mrcfile
     from skimage.feature import multiscale_basic_features
-    import concurrent.futures
+    import multiprocessing
 
     def process_chunk(data_chunk, sigma_max):
         overlap = int(sigma_max * 3)
@@ -28,6 +28,17 @@ def run():
             channel_axis=None
         )
         return chunk_features[overlap:-overlap, overlap:-overlap, overlap:-overlap]
+
+    def worker_task(args):
+        partition_df, crop_coords, vector_size, max_shape = args
+        subarray = np.zeros(max_shape, dtype=np.float32)  # Use maximal array size
+
+        for _, row in partition_df.iterrows():
+            z, y, x = int(row['Z']) - crop_coords[0], int(row['Y']) - crop_coords[2], int(row['X']) - crop_coords[4]
+            embedding_vector = row.drop(['Z', 'Y', 'X']).values
+            subarray[z, y, x, :] = embedding_vector
+
+        return subarray
 
     args = get_args()
 
@@ -47,39 +58,18 @@ def run():
                                         (embedding_df['X'] >= crop_coords[4]) & (embedding_df['X'] < crop_coords[5])]
 
     # Determine the size of the embedding vector
-    vector_size = cropped_embedding_df.shape[1] - 3  # Exclude the Z, Y, X columns
+    vector_size = cropped_embedding_df.shape[1] - 3
+    max_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
 
-    def create_subarray(partition_df, crop_coords, vector_size):
-        z_start, z_end, y_start, y_end, x_start, x_end = crop_coords
-        subarray_shape = (z_end - z_start, y_end - y_start, x_end - x_start, vector_size)
-        subarray = np.zeros(subarray_shape, dtype=np.float32)
+    # Partition the DataFrame for parallel processing
+    partitioned_dfs = np.array_split(cropped_embedding_df, 24)
 
-        for _, row in partition_df.iterrows():
-            z, y, x = int(row['Z']) - z_start, int(row['Y']) - y_start, int(row['X']) - x_start
-            embedding_vector = row.drop(['Z', 'Y', 'X']).values
-            subarray[z, y, x, :] = embedding_vector
-
-        return subarray, (z_start, y_start, x_start)
-
-    
-    # Partition the DataFrame for parallel processing (example method, should be customized)
-    partitioned_dfs = np.array_split(cropped_embedding_df, 24)  # Example partitioning, adjust based on your data
-
-    # Parallel processing to create subarrays
-    with concurrent.futures.ProcessPoolExecutor(max_workers=24) as executor:
-        futures = [executor.submit(create_subarray, df, crop_coords, vector_size) for df in partitioned_dfs]
-        subarrays = [future.result() for future in concurrent.futures.as_completed(futures)]
-
-    # Initialize the final 4D array for embeddings
-    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
-    final_embedding_array = np.zeros(embedding_array_shape, dtype=np.float32)
+    # Setup multiprocessing
+    with multiprocessing.Pool(processes=24) as pool:
+        results = pool.map(worker_task, [(df, crop_coords, vector_size, max_shape) for df in partitioned_dfs])
 
     # Combine subarrays into the final embedding array
-    for subarray, start_coords in subarrays:
-        z_start, y_start, x_start = start_coords
-        z_end, y_end, x_end = z_start + subarray.shape[0], y_start + subarray.shape[1], x_start + subarray.shape[2]
-        # We combine with addition because subarrays may overlap, but each pixel is still unique in the dataframe
-        final_embedding_array[z_start:z_end, y_start:y_end, x_start:x_end, :] += subarray
+    final_embedding_array = np.sum(np.array(results), axis=0)
 
     # Compute skimage features for the crop
     sigma_max = 16
@@ -101,10 +91,11 @@ def run():
     print("Data processing completed and saved to Zarr.")
 
 
+
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.4",
+    version="0.0.5",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],
