@@ -36,7 +36,7 @@ args:
   name: x_end
   required: true
   type: integer
-changelog: For list
+changelog: Switch to joblib
 description: Processes a crop of the input MRC data and embeddings, computes skimage
   features, and writes to Zarr.
 group: cryocanvas
@@ -51,6 +51,6 @@ tags:
 - features
 - Zarr
 - Python
-timestamp: '2024-02-01T16:29:28.202897'
+timestamp: '2024-02-01T16:34:20.512824'
 title: Process Cropped Data with skimage Features
-version: 0.0.9
+version: 0.0.10

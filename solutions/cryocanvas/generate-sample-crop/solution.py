@@ -12,15 +12,14 @@ def run():
     import zarr
     import mrcfile
     from skimage.feature import multiscale_basic_features
-    from numba import njit, prange
+    from joblib import Parallel, delayed
 
-    @njit(parallel=True)
     def process_embedding_vectors(partition_df, crop_coords, vector_size, max_shape):
-        subarray = np.zeros(max_shape, dtype=np.float32)  # Use maximal array size
-        for i in prange(len(partition_df)):
-            row = partition_df[i]
-            z, y, x = int(row[0]) - crop_coords[0], int(row[1]) - crop_coords[2], int(row[2]) - crop_coords[4]
-            embedding_vector = row[3:]  # Assuming the first three columns are Z, Y, X and the rest are embedding vector
+        subarray = np.zeros(max_shape, dtype=np.float32)  # Maximal array size for all partitions
+        z_start, z_end, y_start, y_end, x_start, x_end = crop_coords
+        for index, row in partition_df.iterrows():
+            z, y, x = int(row['Z']) - z_start, int(row['Y']) - y_start, int(row['X']) - x_start
+            embedding_vector = row.values[3:]  # Adjust as necessary based on DataFrame structure
             subarray[z, y, x, :] = embedding_vector
         return subarray
 
@@ -45,7 +44,6 @@ def run():
     embeddings_path = args.embeddingfile
     zarr_path = args.zarr_path
     crop_coords = [args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end]
-    crop_coords_array = np.array([args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end], dtype=np.int64)
 
     # Read and crop the MRC data
     with mrcfile.open(mrc_path, permissive=True) as mrc:
@@ -65,14 +63,13 @@ def run():
     partitioned_dfs = np.array_split(cropped_embedding_df, 24)
 
     # Convert DataFrame to NumPy array for numba processing
-    cropped_embedding_np = cropped_embedding_df.to_numpy()
+    partitioned_dfs = np.array_split(cropped_embedding_df, 24)  # Example partitioning
 
-    # Determine the size of the embedding vector and the maximal shape
-    vector_size = cropped_embedding_np.shape[1] - 3  # Adjust based on your DataFrame's structure
-    max_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
+    # Using joblib for parallel processing
+    results = Parallel(n_jobs=24)(delayed(process_embedding_vectors)(df, crop_coords, vector_size, max_shape) for df in partitioned_dfs)
 
-    # Directly call the numba-optimized function without multiprocessing
-    final_embedding_array = process_embedding_vectors(cropped_embedding_np, crop_coords, vector_size, max_shape)
+    # Combine results
+    final_embedding_array = np.sum(np.array(results), axis=0)
 
     # Compute skimage features for the crop
     sigma_max = 16
@@ -97,7 +94,7 @@ def run():
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.9",
+    version="0.0.10",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],

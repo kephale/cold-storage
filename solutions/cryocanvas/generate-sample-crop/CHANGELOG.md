@@ -25,5 +25,8 @@ Fix extraction of embedding vector
 ## [0.0.2] - 2024-02-01
 Fix creating of tomotwin group to create a proper 3d array
 
+## [0.0.10] - 2024-02-01
+Switch to joblib
+
 ## [0.0.1] - 2024-02-01
 Inital deploy
