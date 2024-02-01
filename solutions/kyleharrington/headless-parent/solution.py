@@ -19,6 +19,7 @@ dependencies:
   - numpy >= 1.26
   - scyjava >= 1.8.1
   - scipy
+  - numba
   - scikit-image
   - matplotlib
   - pandas
@@ -139,7 +140,7 @@ def run():
 setup(
     group="kyleharrington",
     name="headless-parent",
-    version="0.0.3",
+    version="0.0.4",
     title="Parent environment for a big python environment for cryoET.",
     description="A parent environment for a big python environment for cryoET",
     solution_creators=["Kyle Harrington"],
