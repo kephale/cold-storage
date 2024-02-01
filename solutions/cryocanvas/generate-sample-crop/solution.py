@@ -6,6 +6,7 @@ from album.runner.api import setup
 
 def run():
     from album.runner.api import get_args
+    import os
     import numpy as np
     import pandas as pd
     import zarr
@@ -44,19 +45,28 @@ def run():
                                         (embedding_df['Y'] >= crop_coords[2]) & (embedding_df['Y'] < crop_coords[3]) &
                                         (embedding_df['X'] >= crop_coords[4]) & (embedding_df['X'] < crop_coords[5])]
 
-    # Initialize an empty 3D array for embeddings
-    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4])
+    # Determine the size of the embedding vector
+    vector_size = cropped_embedding_df.shape[1] - 3  # Exclude the Z, Y, X columns
+
+    # Initialize an empty 4D array for embeddings
+    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
     embedding_array = np.zeros(embedding_array_shape, dtype=np.float32)
 
     # Populate the embedding array
     for _, row in cropped_embedding_df.iterrows():
         z, y, x = int(row['Z']) - crop_coords[0], int(row['Y']) - crop_coords[2], int(row['X']) - crop_coords[4]
-        embedding_array[z, y, x] = row['embedding_value']  # Assuming 'embedding_value' is the column to use
+        embedding_vector = row.drop(['Z', 'Y', 'X']).values  # Extract embedding vector excluding the spatial columns
+        embedding_array[z, y, x, :] = embedding_vector
 
     # Compute skimage features for the crop
     sigma_max = 16
     features = process_chunk(crop, sigma_max=sigma_max)
 
+    # Ensure the directory for the Zarr file exists
+    zarr_dir = os.path.dirname(zarr_path)
+    if not os.path.exists(zarr_dir):
+        os.makedirs(zarr_dir, exist_ok=True)
+    
     # Write outputs to Zarr
     zarr_file = zarr.open(zarr_path, mode='a')
     zarr_file.create_group('crop', overwrite=True)
@@ -71,7 +81,7 @@ def run():
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.2",
+    version="0.0.3",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],

@@ -36,7 +36,7 @@ args:
   name: x_end
   required: true
   type: integer
-changelog: Fix creating of tomotwin group to create a proper 3d array
+changelog: Fix extraction of embedding vector
 description: Processes a crop of the input MRC data and embeddings, computes skimage
   features, and writes to Zarr.
 group: cryocanvas
@@ -51,6 +51,6 @@ tags:
 - features
 - Zarr
 - Python
-timestamp: '2024-02-01T14:58:27.808592'
+timestamp: '2024-02-01T15:04:11.671254'
 title: Process Cropped Data with skimage Features
-version: 0.0.2
+version: 0.0.3
