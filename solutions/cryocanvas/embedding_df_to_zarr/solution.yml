@@ -8,6 +8,11 @@ args:
   name: embeddingfile
   required: true
   type: file
+- default: 1
+  description: Number of workers for processing the dataframe
+  name: num_workers
+  required: true
+  type: integer
 - description: Path for the Zarr file
   name: zarr_path
   required: true
@@ -16,7 +21,7 @@ args:
   name: zarr_group
   required: true
   type: string
-changelog: Try hard coded max workers
+changelog: Parallelize by partitioning dataframe
 covers:
 - description: Cover image.
   source: cover.png
@@ -31,6 +36,6 @@ tags:
 - DataFrame
 - Zarr
 - Python
-timestamp: '2024-02-01T12:37:13.043701'
+timestamp: '2024-02-01T12:49:19.225583'
 title: Convert a TomoTwin embedding DataFrame to Zarr Format
-version: 0.0.7
+version: 0.0.8
