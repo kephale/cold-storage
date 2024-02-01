@@ -12,6 +12,7 @@ def run():
     import zarr
     import mrcfile
     from skimage.feature import multiscale_basic_features
+    import concurrent.futures
 
     def process_chunk(data_chunk, sigma_max):
         overlap = int(sigma_max * 3)
@@ -48,15 +49,37 @@ def run():
     # Determine the size of the embedding vector
     vector_size = cropped_embedding_df.shape[1] - 3  # Exclude the Z, Y, X columns
 
-    # Initialize an empty 4D array for embeddings
-    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
-    embedding_array = np.zeros(embedding_array_shape, dtype=np.float32)
+    def create_subarray(partition_df, crop_coords, vector_size):
+        z_start, z_end, y_start, y_end, x_start, x_end = crop_coords
+        subarray_shape = (z_end - z_start, y_end - y_start, x_end - x_start, vector_size)
+        subarray = np.zeros(subarray_shape, dtype=np.float32)
 
-    # Populate the embedding array
-    for _, row in cropped_embedding_df.iterrows():
-        z, y, x = int(row['Z']) - crop_coords[0], int(row['Y']) - crop_coords[2], int(row['X']) - crop_coords[4]
-        embedding_vector = row.drop(['Z', 'Y', 'X']).values  # Extract embedding vector excluding the spatial columns
-        embedding_array[z, y, x, :] = embedding_vector
+        for _, row in partition_df.iterrows():
+            z, y, x = int(row['Z']) - z_start, int(row['Y']) - y_start, int(row['X']) - x_start
+            embedding_vector = row.drop(['Z', 'Y', 'X']).values
+            subarray[z, y, x, :] = embedding_vector
+
+        return subarray, (z_start, y_start, x_start)
+
+    
+    # Partition the DataFrame for parallel processing (example method, should be customized)
+    partitioned_dfs = np.array_split(cropped_embedding_df, 24)  # Example partitioning, adjust based on your data
+
+    # Parallel processing to create subarrays
+    with concurrent.futures.ProcessPoolExecutor(max_workers=24) as executor:
+        futures = [executor.submit(create_subarray, df, crop_coords, vector_size) for df in partitioned_dfs]
+        subarrays = [future.result() for future in concurrent.futures.as_completed(futures)]
+
+    # Initialize the final 4D array for embeddings
+    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
+    final_embedding_array = np.zeros(embedding_array_shape, dtype=np.float32)
+
+    # Combine subarrays into the final embedding array
+    for subarray, start_coords in subarrays:
+        z_start, y_start, x_start = start_coords
+        z_end, y_end, x_end = z_start + subarray.shape[0], y_start + subarray.shape[1], x_start + subarray.shape[2]
+        # We combine with addition because subarrays may overlap, but each pixel is still unique in the dataframe
+        final_embedding_array[z_start:z_end, y_start:y_end, x_start:x_end, :] += subarray
 
     # Compute skimage features for the crop
     sigma_max = 16
@@ -66,13 +89,13 @@ def run():
     zarr_dir = os.path.dirname(zarr_path)
     if not os.path.exists(zarr_dir):
         os.makedirs(zarr_dir, exist_ok=True)
-    
+
     # Write outputs to Zarr
     zarr_file = zarr.open(zarr_path, mode='a')
     zarr_file.create_group('crop', overwrite=True)
     zarr_file['crop/original_data'] = crop
     zarr_file.create_group('features', overwrite=True)
-    zarr_file['features/tomotwin'] = embedding_array    
+    zarr_file['features/tomotwin'] = final_embedding_array    
     zarr_file['features/skimage'] = features
 
     print("Data processing completed and saved to Zarr.")
@@ -81,7 +104,7 @@ def run():
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.3",
+    version="0.0.4",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],
