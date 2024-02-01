@@ -81,5 +81,12 @@ setup(
         {"name": "x_start", "type": "integer", "required": True, "description": "Start coordinate in X dimension"},
         {"name": "x_end", "type": "integer", "required": True, "description": "End coordinate in X dimension"}
     ],
-    run=run
+    run=run,
+    dependencies={
+        "parent": {
+            "group": "kyleharrington",
+            "name": "headless-parent",
+            "version": "0.0.2",
+        }        
+    },        
 )
