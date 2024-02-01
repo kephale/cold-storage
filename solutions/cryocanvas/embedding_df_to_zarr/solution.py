@@ -39,10 +39,13 @@ def run():
     group = zarr_file.require_group(zarr_group)
 
     print("Creating datasets in Zarr group")
+    if 'data' in group:
+        print("Dataset already existed, Deleting.")
+        del group['data']
     mrc_dataset = group.create_dataset('data', shape=mrc_data.shape, chunks=(10, 200, 200), dtype=mrc_data.dtype)
     mrc_dataset[:] = mrc_data
 
-    embedding_dataset = group.create_dataset(zarr_group, 
+    embedding_dataset = group.create_dataset(zarr_group,
                                              shape=(mrc_data.shape[0], mrc_data.shape[1], mrc_data.shape[2], embedding_dims),
                                              chunks=(10, 200, 200, embedding_dims),
                                              dtype='float32')
@@ -61,7 +64,7 @@ def run():
 setup(
     group="cryocanvas",
     name="embedding_df_to_zarr",
-    version="0.0.3",
+    version="0.0.4",
     title="Convert a TomoTwin embedding DataFrame to Zarr Format",
     description="Converts a given DataFrame to a Zarr file format.",
     solution_creators=["Kyle Harrington"],
