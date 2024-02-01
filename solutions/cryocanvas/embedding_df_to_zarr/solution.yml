@@ -16,7 +16,7 @@ args:
   name: zarr_group
   required: true
   type: string
-changelog: Take zarr_group as an additional argument
+changelog: Add extra output to catch out of bounds
 covers:
 - description: Cover image.
   source: cover.png
@@ -31,6 +31,6 @@ tags:
 - DataFrame
 - Zarr
 - Python
-timestamp: '2024-01-31T15:22:49.093770'
+timestamp: '2024-01-31T20:45:52.595410'
 title: Convert a TomoTwin embedding DataFrame to Zarr Format
-version: 0.0.2
+version: 0.0.3
