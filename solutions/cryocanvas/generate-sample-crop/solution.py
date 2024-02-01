@@ -13,7 +13,6 @@ def run():
     from skimage.feature import multiscale_basic_features
 
     def process_chunk(data_chunk, sigma_max):
-        # Provided in the request, compute features for a given chunk of data
         overlap = int(sigma_max * 3)
         padded_chunk = np.pad(data_chunk, ((overlap, overlap), (overlap, overlap), (overlap, overlap)), mode='reflect')
         chunk_features = multiscale_basic_features(
@@ -28,7 +27,6 @@ def run():
         )
         return chunk_features[overlap:-overlap, overlap:-overlap, overlap:-overlap]
 
-    
     args = get_args()
 
     mrc_path = args.mrcfile
@@ -46,6 +44,15 @@ def run():
                                         (embedding_df['Y'] >= crop_coords[2]) & (embedding_df['Y'] < crop_coords[3]) &
                                         (embedding_df['X'] >= crop_coords[4]) & (embedding_df['X'] < crop_coords[5])]
 
+    # Initialize an empty 3D array for embeddings
+    embedding_array_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4])
+    embedding_array = np.zeros(embedding_array_shape, dtype=np.float32)
+
+    # Populate the embedding array
+    for _, row in cropped_embedding_df.iterrows():
+        z, y, x = int(row['Z']) - crop_coords[0], int(row['Y']) - crop_coords[2], int(row['X']) - crop_coords[4]
+        embedding_array[z, y, x] = row['embedding_value']  # Assuming 'embedding_value' is the column to use
+
     # Compute skimage features for the crop
     sigma_max = 16
     features = process_chunk(crop, sigma_max=sigma_max)
@@ -55,15 +62,16 @@ def run():
     zarr_file.create_group('crop', overwrite=True)
     zarr_file['crop/original_data'] = crop
     zarr_file.create_group('features', overwrite=True)
-    zarr_file['features/tomotwin'] = cropped_embedding_df.to_numpy()    
+    zarr_file['features/tomotwin'] = embedding_array    
     zarr_file['features/skimage'] = features
 
     print("Data processing completed and saved to Zarr.")
 
+
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.1",
+    version="0.0.2",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],
