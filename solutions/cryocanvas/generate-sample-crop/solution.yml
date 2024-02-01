@@ -36,7 +36,7 @@ args:
   name: x_end
   required: true
   type: integer
-changelog: Use multiprocessing
+changelog: Use dill and new parent environment
 description: Processes a crop of the input MRC data and embeddings, computes skimage
   features, and writes to Zarr.
 group: cryocanvas
@@ -51,6 +51,6 @@ tags:
 - features
 - Zarr
 - Python
-timestamp: '2024-02-01T15:30:37.251238'
+timestamp: '2024-02-01T15:38:49.848947'
 title: Process Cropped Data with skimage Features
 version: 0.0.5

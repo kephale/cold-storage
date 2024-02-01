@@ -13,6 +13,7 @@ def run():
     import mrcfile
     from skimage.feature import multiscale_basic_features
     import multiprocessing
+    import dill
 
     def process_chunk(data_chunk, sigma_max):
         overlap = int(sigma_max * 3)
@@ -29,6 +30,10 @@ def run():
         )
         return chunk_features[overlap:-overlap, overlap:-overlap, overlap:-overlap]
 
+    def worker_init(q):
+        global queue
+        queue = q
+    
     def worker_task(args):
         partition_df, crop_coords, vector_size, max_shape = args
         subarray = np.zeros(max_shape, dtype=np.float32)  # Use maximal array size
@@ -64,8 +69,11 @@ def run():
     # Partition the DataFrame for parallel processing
     partitioned_dfs = np.array_split(cropped_embedding_df, 24)
 
+    ctx = multiprocessing.get_context()
+    ctx.reducer = dill
+    
     # Setup multiprocessing
-    with multiprocessing.Pool(processes=24) as pool:
+    with ctx.Pool(processes=24) as pool:
         results = pool.map(worker_task, [(df, crop_coords, vector_size, max_shape) for df in partitioned_dfs])
 
     # Combine subarrays into the final embedding array
@@ -89,7 +97,6 @@ def run():
     zarr_file['features/skimage'] = features
 
     print("Data processing completed and saved to Zarr.")
-
 
 
 setup(
@@ -118,7 +125,7 @@ setup(
         "parent": {
             "group": "kyleharrington",
             "name": "headless-parent",
-            "version": "0.0.2",
+            "version": "0.0.3",
         }        
     },        
 )
