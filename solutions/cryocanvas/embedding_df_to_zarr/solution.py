@@ -61,13 +61,24 @@ def run():
     # Partitioning DataFrame for parallel processing
     partitions = np.array_split(embedding_df, num_workers)
 
-    def process_partition(partition):
-        """Process a partition of the DataFrame and write to Zarr dataset."""
+    def process_partition(partition, batch_size=1000):
+        """Process a partition of the DataFrame and batch write to Zarr dataset."""
+        buffer = []  # Initialize buffer to hold batch data
         for index, row in partition.iterrows():
             z, y, x = int(row['Z']), int(row['Y']), int(row['X'])
             values = row.values[3:]
             if z < mrc_data.shape[0] and y < mrc_data.shape[1] and x < mrc_data.shape[2]:
-                embedding_dataset[z, y, x, :] = values
+                buffer.append(((z, y, x), values))
+                if len(buffer) >= batch_size:
+                    write_batch(buffer)  # Write batch to Zarr and reset buffer
+                    buffer = []
+        if buffer:  # Check if there's any data left in the buffer
+            write_batch(buffer)
+
+    def write_batch(buffer):
+        """Write a batch of updates to the Zarr dataset."""
+        for (z, y, x), values in buffer:
+            embedding_dataset[z, y, x, :] = values
 
     # Create a ThreadPoolExecutor to manage concurrency
     with ThreadPoolExecutor(max_workers=num_workers) as executor:
@@ -89,7 +100,7 @@ def run():
 setup(
     group="cryocanvas",
     name="embedding_df_to_zarr",
-    version="0.0.8",
+    version="0.0.9",
     title="Convert a TomoTwin embedding DataFrame to Zarr Format",
     description="Converts a given DataFrame to a Zarr file format.",
     solution_creators=["Kyle Harrington"],
