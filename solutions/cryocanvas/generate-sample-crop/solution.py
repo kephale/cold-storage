@@ -44,7 +44,7 @@ def run():
     mrc_path = args.mrcfile
     embeddings_path = args.embeddingfile
     zarr_path = args.zarr_path
-    crop_coords = [args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end]
+    crop_coords_array = np.array([args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end], dtype=np.int64)
 
     # Read and crop the MRC data
     with mrcfile.open(mrc_path, permissive=True) as mrc:
@@ -59,7 +59,7 @@ def run():
     # Determine the size of the embedding vector
     vector_size = cropped_embedding_df.shape[1] - 3
     max_shape = (crop_coords[1] - crop_coords[0], crop_coords[3] - crop_coords[2], crop_coords[5] - crop_coords[4], vector_size)
-
+    
     # Partition the DataFrame for parallel processing
     partitioned_dfs = np.array_split(cropped_embedding_df, 24)
 
@@ -96,7 +96,7 @@ def run():
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.7",
+    version="0.0.8",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],
