@@ -62,7 +62,7 @@ def run():
         embedding_dataset[z, y, x, :] = values
 
     # Create a ThreadPoolExecutor to manage concurrency
-    with ThreadPoolExecutor() as executor:
+    with ThreadPoolExecutor(max_workers=24) as executor:
         # Submit tasks to the executor
         futures = [executor.submit(populate_embedding, int(row['Z']), int(row['Y']), int(row['X']), row.values[3:])
                    for index, row in embedding_df.iterrows()]
@@ -81,7 +81,7 @@ def run():
 setup(
     group="cryocanvas",
     name="embedding_df_to_zarr",
-    version="0.0.6",
+    version="0.0.7",
     title="Convert a TomoTwin embedding DataFrame to Zarr Format",
     description="Converts a given DataFrame to a Zarr file format.",
     solution_creators=["Kyle Harrington"],

@@ -16,7 +16,7 @@ args:
   name: zarr_group
   required: true
   type: string
-changelog: Multithreaded writing of dataframes
+changelog: Try hard coded max workers
 covers:
 - description: Cover image.
   source: cover.png
@@ -31,6 +31,6 @@ tags:
 - DataFrame
 - Zarr
 - Python
-timestamp: '2024-02-01T12:30:45.070331'
+timestamp: '2024-02-01T12:37:13.043701'
 title: Convert a TomoTwin embedding DataFrame to Zarr Format
-version: 0.0.6
+version: 0.0.7
