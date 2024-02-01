@@ -36,7 +36,7 @@ args:
   name: x_end
   required: true
   type: integer
-changelog: Convert lists to numpy for numba
+changelog: Oops still need the list
 description: Processes a crop of the input MRC data and embeddings, computes skimage
   features, and writes to Zarr.
 group: cryocanvas
@@ -51,6 +51,6 @@ tags:
 - features
 - Zarr
 - Python
-timestamp: '2024-02-01T16:24:33.658573'
+timestamp: '2024-02-01T16:26:07.393281'
 title: Process Cropped Data with skimage Features
 version: 0.0.8

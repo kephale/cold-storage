@@ -44,6 +44,7 @@ def run():
     mrc_path = args.mrcfile
     embeddings_path = args.embeddingfile
     zarr_path = args.zarr_path
+    crop_coords = [args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end]
     crop_coords_array = np.array([args.z_start, args.z_end, args.y_start, args.y_end, args.x_start, args.x_end], dtype=np.int64)
 
     # Read and crop the MRC data
