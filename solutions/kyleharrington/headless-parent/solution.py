@@ -44,6 +44,7 @@ dependencies:
   - pytorch
   - torchvision
   - diffusers
+  - dill    
   - einops
   - fire
   - maven
@@ -138,7 +139,7 @@ def run():
 setup(
     group="kyleharrington",
     name="headless-parent",
-    version="0.0.2",
+    version="0.0.3",
     title="Parent environment for a big python environment for cryoET.",
     description="A parent environment for a big python environment for cryoET",
     solution_creators=["Kyle Harrington"],
