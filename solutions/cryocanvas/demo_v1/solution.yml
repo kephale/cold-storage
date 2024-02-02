@@ -1,0 +1,28 @@
+album_api_version: 0.5.1
+args:
+- description: Path for the output Zarr file
+  name: zarr_path
+  required: true
+  type: string
+changelog: Initial deploy
+cite:
+- text: Kyle Harrington.
+  url: https://kyleharrington.com
+covers:
+- description: CryoCanvas.
+  source: cover.png
+description: First portable CryoCanvas demo
+group: cryocanvas
+license: MIT
+name: demo_v1
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- napari
+- cryocanvas
+timestamp: '2024-02-01T22:05:13.121358'
+title: First portable CryoCanvas demo.
+version: 0.0.1
