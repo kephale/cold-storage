@@ -116,7 +116,7 @@ dependencies:
     - napari-properties-plotter
     - napari-properties-viewer
     - napari-label-interpolator
-    - cryocanvas
+    - git+https://github.com/kephale/cryocanvas
 """
 )
 
@@ -134,7 +134,7 @@ def run():
 setup(
     group="cryocanvas",
     name="demo_v1",
-    version="0.0.2",
+    version="0.0.3",
     title="First portable CryoCanvas demo.",
     description="First portable CryoCanvas demo",
     solution_creators=["Kyle Harrington"],
