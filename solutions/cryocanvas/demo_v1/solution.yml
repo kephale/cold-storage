@@ -4,12 +4,12 @@ args:
   name: zarr_path
   required: true
   type: string
-changelog: Update to install from github
+changelog: Update to add cover and use cryocanvas from gh URL
 cite:
 - text: Kyle Harrington.
   url: https://kyleharrington.com
 covers:
-- description: CryoCanvas.
+- description: CryoCanvas screenshot.
   source: cover.png
 description: First portable CryoCanvas demo
 group: cryocanvas
@@ -23,6 +23,6 @@ tags:
 - Python
 - napari
 - cryocanvas
-timestamp: '2024-02-02T13:35:59.912578'
+timestamp: '2024-02-02T13:50:41.185588'
 title: First portable CryoCanvas demo.
 version: 0.0.3

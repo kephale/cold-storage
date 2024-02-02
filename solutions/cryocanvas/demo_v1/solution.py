@@ -143,7 +143,7 @@ setup(
     license="MIT",
     covers=[
         {
-            "description": "CryoCanvas.",
+            "description": "CryoCanvas screenshot.",
             "source": "cover.png",
         }
     ],
