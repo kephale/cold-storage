@@ -87,7 +87,6 @@ dependencies:
   - gql
   - boto3
   - album
-  - "opencv-python-headless>=0.4.8"
   - "napari>=0.4.19"
   - "imageio-ffmpeg>=0.4.8"
   - networkx
@@ -96,6 +95,7 @@ dependencies:
     - idr-py
     - omero-rois
     - "tensorstore>=0.1.51"
+    - "opencv-python-headless>=0.4.8"    
     - "ome-zarr>=0.8.0"
     - tootapari
     - Mastodon.py
@@ -112,7 +112,6 @@ dependencies:
     - "starfile>=0.5.0"
     - "imodmodel>=0.0.7"
     - cryotypes
-    - napari-conference
     - blik
     - napari-properties-plotter
     - napari-properties-viewer
@@ -135,7 +134,7 @@ def run():
 setup(
     group="cryocanvas",
     name="demo_v1",
-    version="0.0.1",
+    version="0.0.2",
     title="First portable CryoCanvas demo.",
     description="First portable CryoCanvas demo",
     solution_creators=["Kyle Harrington"],

@@ -4,7 +4,8 @@ args:
   name: zarr_path
   required: true
   type: string
-changelog: Initial deploy
+changelog: Remove napari-conference dependency and move opencv-python-headless to
+  pip section, thank you Utz!
 cite:
 - text: Kyle Harrington.
   url: https://kyleharrington.com
@@ -23,6 +24,6 @@ tags:
 - Python
 - napari
 - cryocanvas
-timestamp: '2024-02-01T22:05:13.121358'
+timestamp: '2024-02-02T09:11:49.078663'
 title: First portable CryoCanvas demo.
-version: 0.0.1
+version: 0.0.2
