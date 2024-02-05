@@ -4,7 +4,8 @@ args:
   name: zarr_path
   required: true
   type: string
-changelog: Use cryocanvas from git, update cover
+changelog: This version added xgboost and git-based cryocanvas install, updated cover
+  image
 cite:
 - text: Kyle Harrington.
   url: https://kyleharrington.com
@@ -23,6 +24,6 @@ tags:
 - Python
 - napari
 - cryocanvas
-timestamp: '2024-02-02T17:29:10.653901'
+timestamp: '2024-02-05T15:28:52.132579'
 title: First portable CryoCanvas demo.
 version: 0.0.3
