@@ -58,35 +58,35 @@ def run():
                 print("Debug: Captured line:", line.strip())  # Debugging
                 potential_urls.append(line.strip())
 
-        # Start the thread to capture the output
-        capture_thread = threading.Thread(target=capture_output)
-        capture_thread.start()
-
-        # Check for URL in the shared list
+        # Polling for the URL file
+        timeout = 60  # Timeout in seconds
+        start_time = time.time()
+        url_file_path = "/tmp/neuroglancer_viewer_url.txt"
         url = None
-        while url is None:
-            time.sleep(1)  # Wait a bit before checking again
-            while potential_urls:
-                line = potential_urls.pop(0)
-                urls = re.findall(r'http[s]?://\S+', line.strip())
-                if urls:
-                    url = urls[0]
-                    break
 
-        # Extract the port number from the URL
-        parsed_url = urlparse(url)
-        port = parsed_url.port
-        # port = int(url.split(':')[-1].rstrip('/'))
-        print(f"Port extracted: {port}")
+        while time.time() - start_time < timeout:
+            ssh_command_read_url = f"ssh {remote_user}@{remote_host} 'cat {url_file_path}'"
+            proc = subprocess.Popen(ssh_command_read_url, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stdout, stderr = proc.communicate()
 
-        path = parsed_url.path
-        query = parsed_url.query
-        full_path = f"{path}?{query}" if query else path
+            if proc.returncode == 0 and stdout:
+                url = stdout.strip()
+                break
+            else:
+                time.sleep(5)  # Wait for 5 seconds before retrying
 
-        # Construct the full localhost URL including the path and query
-        localhost_url = f"http://localhost:{port}{full_path}"
-        print(f"Access Neuroglancer at: {localhost_url}")
+        if url:
+            parsed_url = urlparse(url)
+            port = parsed_url.port
+            path = parsed_url.path
+            query = parsed_url.query
+            full_path = f"{path}?{query}" if query else path
+            localhost_url = f"http://localhost:{port}{full_path}"
+            print(f"Access Neuroglancer at: {localhost_url}")
+        else:
+            print("Failed to retrieve the Neuroglancer URL within the timeout period.")
 
+                
         # SSH command for port forwarding
         if not reuse_ssh:
             ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
@@ -116,7 +116,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-remote-mrc",
-    version="0.0.5",
+    version="0.0.6",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
     solution_creators=["Kyle Harrington"],

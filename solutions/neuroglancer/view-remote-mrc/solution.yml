@@ -21,7 +21,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Fix localhost URL, use signal to block
+changelog: Update for reading URL from file instead
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -38,6 +38,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2024-02-06T12:21:27.830972'
+timestamp: '2024-02-06T13:15:26.303212'
 title: View a remote MRC file with neuroglancer
-version: 0.0.5
+version: 0.0.6
