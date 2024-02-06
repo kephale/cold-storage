@@ -21,7 +21,7 @@ def run():
     import threading
     import time
     from urllib.parse import urlparse
-
+    import signal
     
     args = get_args()
 
@@ -79,6 +79,14 @@ def run():
         # port = int(url.split(':')[-1].rstrip('/'))
         print(f"Port extracted: {port}")
 
+        path = parsed_url.path
+        query = parsed_url.query
+        full_path = f"{path}?{query}" if query else path
+
+        # Construct the full localhost URL including the path and query
+        localhost_url = f"http://localhost:{port}{full_path}"
+        print(f"Access Neuroglancer at: {localhost_url}")
+
         # SSH command for port forwarding
         if not reuse_ssh:
             ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
@@ -86,18 +94,29 @@ def run():
             ssh_port_forwarding_command = f"ssh -o ControlPath=~/.ssh/sockets/%r@%h-%p -L {port}:localhost:{port} {remote_user}@{remote_host}"
 
         # Start the SSH port forwarding
-        subprocess.Popen(ssh_port_forwarding_command, shell=True)
+        port_forward_proc = subprocess.Popen(ssh_port_forwarding_command, shell=True)
 
-        print(f"Access Neuroglancer at: http://localhost:{port}/")
+        print(f"Access Neuroglancer at: {localhost_url}")
 
     except Exception as e:
         print(f"Error: {e}")
 
+
+    def signal_handler(signum, frame):
+        print("Signal received, exiting.")
+        process.kill()
+        port_forward_proc.kill()
+
+    # Set up signal handling
+    signal.signal(signal.SIGINT, signal_handler)
+
+    print("Press Ctrl+C to exit...")
+    signal.pause()  # This will block until a signal is received
     
 setup(
     group="neuroglancer",
     name="view-remote-mrc",
-    version="0.0.4",
+    version="0.0.5",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
     solution_creators=["Kyle Harrington"],
