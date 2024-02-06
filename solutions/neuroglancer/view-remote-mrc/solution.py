@@ -31,7 +31,7 @@ def run():
     album_path = "/hpc/mydata/kyle.harrington/micromamba/envs/album/bin/album"
 
     # Run the local Album solution remotely with no browser opening
-    remote_album_command = f"{album_path} run neuroglancer:view-mrc:0.0.4 --mrcfile {mrc_file_path} --open_browser False"
+    remote_album_command = f"{album_path} run neuroglancer:view-mrc:0.0.6 --mrcfile {mrc_file_path} --open_browser False"
 
     # SSH command for running the Album solution remotely
     if not reuse_ssh:
@@ -65,7 +65,7 @@ def run():
             time.sleep(1)  # Wait a bit before checking again
             while potential_urls:
                 line = potential_urls.pop(0)
-                urls = re.findall(r'http[s]?://[^/]+/', line)
+                urls = re.findall(r'http[s]?://\S+', line.strip())
                 if urls:
                     url = urls[0]
                     break
@@ -92,7 +92,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-remote-mrc",
-    version="0.0.2",
+    version="0.0.3",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
     solution_creators=["Kyle Harrington"],

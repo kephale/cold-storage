@@ -21,7 +21,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Add support for reuse of ssh connection
+changelog: Switch to new view-mrc solution
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -38,6 +38,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2024-02-06T11:45:47.836881'
+timestamp: '2024-02-06T12:11:02.640640'
 title: View a remote MRC file with neuroglancer
-version: 0.0.2
+version: 0.0.3
