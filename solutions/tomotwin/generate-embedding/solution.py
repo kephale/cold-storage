@@ -22,13 +22,13 @@ dependencies:
   - matplotlib
   - pytables
   - cuml=23.04
-  - cudatoolkit=11.8
+  - cuda-version=11.8
   - protobuf[version='>3.20']
   - tensorboard
   - optuna
   - mysql-connector-python
   - pip
-  - bs4
+  - pytorch-metric-learning
   - pip:
       - tomotwin-cryoet
       - cryoet-data-portal
@@ -103,7 +103,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.6",
+    version="0.0.7",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
