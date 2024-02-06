@@ -20,7 +20,6 @@ dependencies:
 def local_repository_path():
     if not os.path.exists(get_data_path()):
         os.makedirs(get_data_path())
-
     return os.path.join(get_data_path(), "git")
 
 
@@ -64,13 +63,17 @@ def run():
 
     open_browser = get_args().open_browser
 
+    print("Launching neuroglancer")
+    
     try:
         # Start the script without waiting for it to complete
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # Define a function to capture the output
         def capture_output():
             for line in process.stdout:
-                output_lines.append(line.strip())
+                print("STDOUT:", line.strip())
+            for err_line in process.stderr:
+                print("STDERR:", err_line.strip())
 
         # Start the thread to capture the output
         capture_thread = threading.Thread(target=capture_output)
@@ -104,11 +107,13 @@ def run():
 
     except Exception as e:
         print("Error running script:", e)
+
+    print("Done")
     
 setup(
     group="neuroglancer",
     name="view-mrc",
-    version="0.0.4",
+    version="0.0.5",
     title="View a MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files.",
     solution_creators=["Ashley Anderson III, Kyle Harrington"],

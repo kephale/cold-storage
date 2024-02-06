@@ -13,7 +13,7 @@ args:
   name: open_browser
   required: false
   type: boolean
-changelog: More debugging output
+changelog: Add extra debugging output
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -30,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T15:26:53.291828'
+timestamp: '2024-02-06T12:04:21.045773'
 title: View a MRC file with neuroglancer
-version: 0.0.4
+version: 0.0.5
