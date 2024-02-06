@@ -54,9 +54,10 @@ def run():
     command = ["python", "-u", script_path]
     for arg in vars(get_args()):
         value = getattr(get_args(), arg)
-        command.append(f"--{arg}")
-        if value is not None:
-            command.append(str(value))
+        if arg != "open_browser":
+            command.append(f"--{arg}")
+            if value is not None:
+                command.append(str(value))
 
     # Shared list to store output from the subprocess
     output_lines = []
@@ -113,7 +114,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-mrc",
-    version="0.0.5",
+    version="0.0.6",
     title="View a MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files.",
     solution_creators=["Ashley Anderson III, Kyle Harrington"],

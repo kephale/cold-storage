@@ -13,7 +13,7 @@ args:
   name: open_browser
   required: false
   type: boolean
-changelog: Add extra debugging output
+changelog: Skip open_browser argument when calling script
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -30,6 +30,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2024-02-06T12:04:21.045773'
+timestamp: '2024-02-06T12:07:34.443927'
 title: View a MRC file with neuroglancer
-version: 0.0.5
+version: 0.0.6
