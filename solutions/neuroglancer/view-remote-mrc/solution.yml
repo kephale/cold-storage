@@ -8,6 +8,11 @@ args:
   name: remote_user
   required: true
   type: string
+- default: false
+  description: Reuse a SSH connection if your SSH is setup properly
+  name: reuse_ssh
+  required: false
+  type: boolean
 - description: Path to the MRC file on the remote machine
   name: mrcfile
   required: true
@@ -16,7 +21,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: More debugging output
+changelog: Add support for reuse of ssh connection
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -33,6 +38,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2023-11-29T15:33:20.669956'
+timestamp: '2024-02-06T11:45:47.836881'
 title: View a remote MRC file with neuroglancer
-version: 0.0.1
+version: 0.0.2

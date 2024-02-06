@@ -25,6 +25,7 @@ def run():
     remote_host = args.remote_host
     remote_user = args.remote_user
     mrc_file_path = args.mrcfile
+    reuse_ssh = args.reuse_ssh
 
     # TODO fix hard coded remote album
     album_path = "/hpc/mydata/kyle.harrington/micromamba/envs/album/bin/album"
@@ -33,7 +34,10 @@ def run():
     remote_album_command = f"{album_path} run neuroglancer:view-mrc:0.0.4 --mrcfile {mrc_file_path} --open_browser False"
 
     # SSH command for running the Album solution remotely
-    ssh_command = f"ssh {remote_user}@{remote_host} '{remote_album_command}'"
+    if not reuse_ssh:
+        ssh_command = f"ssh {remote_user}@{remote_host} '{remote_album_command}'"
+    else:
+        ssh_command = f"ssh -o ControlPath=~/.ssh/sockets/%r@%h-%p {remote_user}@{remote_host} '{remote_album_command}'"
 
     print(f"Remote command: {remote_album_command}")
     print(f"SSH command: {ssh_command}")
@@ -71,7 +75,10 @@ def run():
         print(f"Port extracted: {port}")
 
         # SSH command for port forwarding
-        ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
+        if not reuse_ssh:
+            ssh_port_forwarding_command = f"ssh -L {port}:localhost:{port} {remote_user}@{remote_host}"
+        else:
+            ssh_port_forwarding_command = f"ssh -o ControlPath=~/.ssh/sockets/%r@%h-%p -L {port}:localhost:{port} {remote_user}@{remote_host}"
 
         # Start the SSH port forwarding
         subprocess.Popen(ssh_port_forwarding_command, shell=True)
@@ -85,7 +92,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-remote-mrc",
-    version="0.0.1",
+    version="0.0.2",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
     solution_creators=["Kyle Harrington"],
@@ -111,6 +118,7 @@ setup(
     args=[
         {"name": "remote_host", "type": "string", "required": True, "description": "Remote host address"},
         {"name": "remote_user", "type": "string", "required": True, "description": "Username for the remote host"},
+        {"name": "reuse_ssh", "type": "boolean", "required": False, "description": "Reuse a SSH connection if your SSH is setup properly", "default": False},
         {"name": "mrcfile", "type": "file", "required": True, "description": "Path to the MRC file on the remote machine"},
         {"name": "mmap", "type": "boolean", "required": False, "description": "Use memory-mapped file for MRC file"},
     ],  
