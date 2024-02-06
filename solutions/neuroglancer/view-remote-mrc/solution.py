@@ -10,6 +10,7 @@ env_file = """channels:
   - defaults
 dependencies:
   - python=3.11
+  - urllib3
 """
 
 # TODO install could check the install status of target solution on remote machine
@@ -19,6 +20,8 @@ def run():
     import re
     import threading
     import time
+    from urllib.parse import urlparse
+
     
     args = get_args()
 
@@ -71,7 +74,9 @@ def run():
                     break
 
         # Extract the port number from the URL
-        port = int(url.split(':')[-1].rstrip('/'))
+        parsed_url = urlparse(url)
+        port = parsed_url.port
+        # port = int(url.split(':')[-1].rstrip('/'))
         print(f"Port extracted: {port}")
 
         # SSH command for port forwarding
@@ -92,7 +97,7 @@ def run():
 setup(
     group="neuroglancer",
     name="view-remote-mrc",
-    version="0.0.3",
+    version="0.0.4",
     title="View a remote MRC file with neuroglancer",
     description="Neuroglancer viewer for MRC files that runs on a remote system.",
     solution_creators=["Kyle Harrington"],

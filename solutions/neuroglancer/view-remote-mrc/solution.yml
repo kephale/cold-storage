@@ -21,7 +21,7 @@ args:
   name: mmap
   required: false
   type: boolean
-changelog: Switch to new view-mrc solution
+changelog: Update port parsing
 cite:
 - text: Neuroglancer by Google folks.
   url: https://github.com/google/neuroglancer
@@ -38,6 +38,6 @@ tags:
 - mrc
 - neuroglancer
 - visualization
-timestamp: '2024-02-06T12:11:02.640640'
+timestamp: '2024-02-06T12:15:12.374386'
 title: View a remote MRC file with neuroglancer
-version: 0.0.3
+version: 0.0.4
