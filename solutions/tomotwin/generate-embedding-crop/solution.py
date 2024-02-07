@@ -82,7 +82,7 @@ def run():
         data = mrc.data[z_start:z_end, y_start:y_end, x_start:x_end]
 
     # Temporary path for cropped MRC
-    temp_cropped_mrc_path = os.path.join(get_cache_path(), "temp_cropped.mrc")
+    temp_cropped_mrc_path = os.path.join("/tmp/temp_cropped.mrc")
     with mrcfile.new(temp_cropped_mrc_path, overwrite=True) as mrc:
         mrc.set_data(data)
     
@@ -123,7 +123,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-crop",
-    version="0.0.8",
+    version="0.0.9",
     title="Generate an embedding with TomoTwin for a crop of a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
