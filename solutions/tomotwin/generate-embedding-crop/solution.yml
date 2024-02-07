@@ -1,0 +1,65 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the MRC file
+  name: mrcfile
+  required: true
+  type: file
+- description: Path for the output embedding file
+  name: embeddingfile
+  required: true
+  type: file
+- default: false
+  description: Use median mask for filtering
+  name: use_median_mask
+  required: false
+  type: boolean
+- description: Crop start on the X axis
+  name: x_start
+  required: true
+  type: integer
+- description: Crop end on the X axis
+  name: x_end
+  required: true
+  type: integer
+- description: Crop start on the Y axis
+  name: y_start
+  required: true
+  type: integer
+- description: Crop end on the Y axis
+  name: y_end
+  required: true
+  type: integer
+- description: Crop start on the Z axis
+  name: z_start
+  required: true
+  type: integer
+- description: Crop end on the Z axis
+  name: z_end
+  required: true
+  type: integer
+changelog: Initial deploy of crop version
+cite:
+- text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
+    of macromolecules in cryo-electron tomograms with structural data mining. Nat
+    Methods (2023). https://doi.org/10.1038/s41592-023-01878-z.'
+  url: https://tomotwin-cryoet.readthedocs.io/en/stable/index.html
+covers:
+- description: Cover image for TomoTwin tutorial 2 applied to data from cryoet-data-portal
+    TS_030 from doi:10.1038/s41592-022-01746-2. The image shows a highlighted region
+    of embedding space that covers some particles in the tomogram.
+  source: cover.png
+description: TomoTwin on an example from the czii cryoet dataportal.
+group: tomotwin
+license: MIT
+name: generate-embedding-crop
+solution_creators:
+- Kyle Harrington
+tags:
+- imaging
+- cryoet
+- Python
+- particle picking
+- machine learning
+timestamp: '2024-02-06T21:46:58.472038'
+title: Generate an embedding with TomoTwin for a crop of a mrc
+version: 0.0.7
