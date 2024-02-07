@@ -123,7 +123,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-crop",
-    version="0.0.7",
+    version="0.0.8",
     title="Generate an embedding with TomoTwin for a crop of a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -148,6 +148,12 @@ setup(
     ],
     run=run,
     install=install,
-    dependencies={"environment_file": env_file},
+    dependencies={
+        "parent": {
+            "group": "tomotwin",
+            "name": "generate-embedding",
+            "version": "0.0.7",
+        }
+    },    
 )
 
