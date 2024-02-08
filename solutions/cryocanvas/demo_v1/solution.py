@@ -87,7 +87,6 @@ dependencies:
   - gql
   - boto3
   - album
-  - "napari>=0.4.19"
   - "imageio-ffmpeg>=0.4.8"
   - networkx
   - ipython  
@@ -117,6 +116,7 @@ dependencies:
     - napari-properties-viewer
     - napari-label-interpolator
     - git+https://github.com/kephale/cryocanvas
+    - git+https://github.com/napari/napari.git@4f4c063ae5dd79d6d188e201d44b8d57eba71909
 """
 )
 
@@ -134,7 +134,7 @@ def run():
 setup(
     group="cryocanvas",
     name="demo_v1",
-    version="0.0.3",
+    version="0.0.4",
     title="First portable CryoCanvas demo.",
     description="First portable CryoCanvas demo",
     solution_creators=["Kyle Harrington"],
