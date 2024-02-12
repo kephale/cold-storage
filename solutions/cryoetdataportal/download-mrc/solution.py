@@ -6,10 +6,13 @@ from album.runner.api import setup
 def run():
     from cryoet_data_portal import Client, Run
     from album.runner.api import get_args
+    import os
 
     output_directory = get_args().output_directory
     dataset_id = get_args().dataset_id
     run_id = get_args().run_id
+
+    os.makedirs(output_directory, exist_ok=True)
     
     # Instantiate a client, using the data portal GraphQL API by default
     client = Client()
@@ -23,7 +26,7 @@ def run():
 setup(
     group="cryoetdataportal",
     name="download-mrc",
-    version="0.0.2",
+    version="0.0.3",
     title="Download a MRC from the CZ CryoET Data Portal",
     description="Download a MRC from the CZ CryoET Data Portal.",
     solution_creators=["Kyle Harrington"],

@@ -12,7 +12,7 @@ args:
   name: output_directory
   required: true
   type: file
-changelog: Update to use improved parent environment
+changelog: Nesure output directory exists
 covers:
 - description: Cover image description
   source: cover.png
@@ -26,6 +26,6 @@ tags:
 - cryoet
 - data
 - download
-timestamp: '2024-01-31T10:03:58.583088'
+timestamp: '2024-02-12T11:01:01.857270'
 title: Download a MRC from the CZ CryoET Data Portal
-version: 0.0.2
+version: 0.0.3
