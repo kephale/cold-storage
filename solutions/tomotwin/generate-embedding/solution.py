@@ -72,14 +72,16 @@ def run():
     
     print(f"Embedding tomogram from mrc ({mrc_path}) to embedding ({output_path})")
 
-    embedding_path = os.path.join(get_cache_path(), "out/embed/tomo/")
+    mrc_directory = os.path.dirname(mrc_path)
+    embedding_path = os.path.join(mrc_directory, "out/embed/tomo/")
     embeddings = os.path.join(embedding_path, f"{os.path.splitext(os.path.basename(mrc_path))[0]}_embeddings.temb")
-    clustering_path = os.path.join(get_cache_path(), "out/clustering/")
-    mask_path = os.path.join(get_cache_path(), "out/mask/")
+    clustering_path = os.path.join(mrc_directory, "out/clustering/")
+    mask_path = os.path.join(mrc_directory, "out/mask/")
 
     # Ensure that embedding_path and clustering_path exist
     os.makedirs(embedding_path, exist_ok=True)
     os.makedirs(clustering_path, exist_ok=True)
+    os.makedirs(mask_path, exist_ok=True)
 
     if get_args().use_median_mask:
         print("Using median mask to filter points for embedding.")
@@ -97,13 +99,13 @@ def run():
     print("Estimate UMAP manifold and generate embedding mask")
     os.system(f"tomotwin_tools.py umap -i {embeddings} -o {clustering_path}")
 
-    shutil.copytree(clustering_path, output_path, dirs_exist_ok=True)
+    shutil.copytree(embedding_path, output_path, dirs_exist_ok=True)
 
     
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.7",
+    version="0.0.8",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],

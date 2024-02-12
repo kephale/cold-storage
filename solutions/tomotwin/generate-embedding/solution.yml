@@ -13,7 +13,7 @@ args:
   name: use_median_mask
   required: false
   type: boolean
-changelog: Update environment to match tomotwin changes
+changelog: Switch from cache to permanent directories for storing embeddings
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -36,6 +36,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-06T16:25:00.833755'
+timestamp: '2024-02-12T10:13:46.582356'
 title: Generate an embedding with TomoTwin for a mrc
-version: 0.0.7
+version: 0.0.8
