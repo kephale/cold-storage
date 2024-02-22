@@ -25,5 +25,8 @@ Update for S3 deps
 ## [0.0.2] - 2024-02-22
 Update for S3
 
+## [0.0.10] - 2024-02-22
+This version seems to do the right thing
+
 ## [0.0.1] - 2024-02-22
 Initial deploy

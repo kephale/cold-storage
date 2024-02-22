@@ -103,6 +103,14 @@ def run():
         # full_tomo = zarr_group['data']  # Load full tomogram to check bounds
         full_tomo = zarr.open_array(input_zarr_path)
 
+        print(f"Tomogram shape: {full_tomo.shape}")
+        print(f"Slices {slices}")
+
+        # Determine the shape for the region of interest based on the provided slices
+        slice_shapes = tuple(s.stop - s.start for s in slices)
+        # Shape of the output embeddings array for the sliced region, adding an extra dimension for embeddings
+        embedding_shape = slice_shapes + (32,)
+        
         # Calculate half of the window size for boundary extension
         half_window = window_size // 2
 
@@ -126,23 +134,38 @@ def run():
         if embeddings is None:
             return
 
+        embedding_array = np.zeros(embedding_shape, dtype=embeddings.dtype)
+                                
+        offsets = [s.start - half_window for s in extended_slices]
+
+        print(f"embedings: min: {(np.min(embeddings[:,0]), np.min(embeddings[:,1]), np.min(embeddings[:,2]))}; max: {(np.max(embeddings[:,0]), np.max(embeddings[:,1]), np.max(embeddings[:,2]))}")
+        print(f"embedding shape: {embedding_shape}")
+        
+        for i in range(embeddings.shape[0]):
+            # Calculate the position within the sliced region by subtracting the offsets
+            x, y, z = int(embeddings[i, 0]), int(embeddings[i, 1]), int(embeddings[i, 2])
+            embedding_vector = embeddings[i, 3:]
+            embedding_array[z - half_window, y - half_window, x - half_window, :] = embedding_vector
+
+        o_slices = tuple(slice(s.start, s.stop) for s in slices) + (slice(None),)
+                                
         # Assuming embeddings are in the correct format, determine the output shape and indices for writing back
-        output_shape = (embeddings.shape[0], embeddings.shape[1], embeddings.shape[2], embeddings.shape[3])  # Example, adjust based on actual embeddings shape
+        print(f"Embeddings shape: {embeddings.shape}")
+        output_shape = full_tomo.shape + (32,)
 
-        # Initialize or open the output Zarr array
-        zarr_group_out = zarr.open(output_zarr_path, mode='a')
-        embeddings_dataset = zarr_group_out.require_dataset('embeddings', shape=output_shape, dtype=embeddings.dtype, chunks=True, overwrite=False)
+        # Create or open the output Zarr array
+        if os.path.exists(output_zarr_path):
+            zarr_group_out = zarr.open(output_zarr_path, mode='a')
+        else:
+            # Initialize the output array with the shape of the full tomogram plus the embedding dimension
+            output_shape = full_tomo.shape + (32,)
+            zarr_group_out = zarr.open(output_zarr_path, shape=output_shape, mode='w', dtype=np.float32, chunks=True)
 
-        # Calculate the indices in the output Zarr array where embeddings should be written
-        # This might involve translating the extended slice indices back to the original request
-        # Here, you would adjust the indices to write only the embeddings corresponding to the originally requested slice
-        write_indices = tuple(
-            slice(s.start - extended_slices[dim].start, s.stop - extended_slices[dim].start) for dim, s in enumerate(slices)
-        )
-
-        # Write embeddings into the specified region of the Zarr dataset
-        embeddings_dataset[write_indices] = embeddings  # Adjust as needed
-
+            
+        # Write the embeddings for the sliced region into the correct position in the output Zarr dataset
+        # Utilizing the offsets to position the embedding array within the larger dataset
+        zarr_group_out[o_slices] = embedding_array
+                                        
         print(f"Embeddings for specified region written to Zarr dataset at {output_zarr_path}")
     
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
@@ -156,14 +179,16 @@ def run():
     conf = EmbedConfiguration(model_path, None, None, None, 2)  # Placeholder for any configuration needed
     conf.model_path = model_path
     conf.batchsize = 2
-    conf.stride = 3
+    conf.stride = 1
 
-    embed_and_write_to_zarr(zarr_input_path, zarr_output_path, conf, window_size=32, slices=slices)
+    print(f"Config: {conf}")
+    
+    embed_and_write_to_zarr(zarr_input_path, zarr_output_path, conf, window_size=37, slices=slices)
 
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.9",
+    version="0.0.10",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],

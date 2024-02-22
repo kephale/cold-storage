@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Use strings instead of file paths
+changelog: This version seems to do the right thing
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -36,6 +36,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-22T16:10:04.309983'
+timestamp: '2024-02-22T18:01:29.655733'
 title: Generate an embedding with TomoTwin for a Zarr file
-version: 0.0.9
+version: 0.0.10
