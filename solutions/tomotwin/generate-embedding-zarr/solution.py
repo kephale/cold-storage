@@ -76,7 +76,7 @@ def run():
     from tomotwin.modules.inference.boxer import Boxer, SlidingWindowBoxer
 
     def is_s3_path(path):
-        return path.startswith("s3://")
+        return str(path).startswith("s3://")
 
     def open_zarr_store(path):
         if is_s3_path(path):
