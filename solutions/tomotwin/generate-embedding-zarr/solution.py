@@ -163,7 +163,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.8",
+    version="0.0.9",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -176,8 +176,8 @@ setup(
     }],
     album_api_version="0.5.1",
     args=[
-        {"name": "zarrinput", "type": "file", "required": True, "description": "Path to the input Zarr file"},
-        {"name": "zarrembedding", "type": "file", "required": True, "description": "Path for the output Zarr embedding file"},
+        {"name": "zarrinput", "type": "string", "required": True, "description": "Path to the input Zarr file"},
+        {"name": "zarrembedding", "type": "string", "required": True, "description": "Path for the output Zarr embedding file"},
         {"name": "slices", "type": "string", "required": True, "description": "Slices for the region of interest, specified as a string, e.g. (slice(0,100), slice(0,100), slice(0,100))"},
     ],
     run=run,
