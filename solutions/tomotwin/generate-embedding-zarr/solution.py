@@ -99,7 +99,7 @@ def run():
         :param mask: Optional mask array, must have the same shape as the input tomogram.
         """
         # Load the full tomogram from Zarr
-        zarr_group = open_zarr_store(input_path)
+        zarr_group = open_zarr_store(input_zarr_path)
         full_tomo = zarr_group['data']  # Load full tomogram to check bounds
 
         # Calculate half of the window size for boundary extension
