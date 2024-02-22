@@ -8,11 +8,12 @@ args:
   name: zarrembedding
   required: true
   type: file
-- description: Slices for the region of interest, specified as a string
+- description: Slices for the region of interest, specified as a string, e.g. (slice(0,100),
+    slice(0,100), slice(0,100))
   name: slices
   required: true
   type: string
-changelog: Fix dependencies
+changelog: Fix embedor usage
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -35,6 +36,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-22T11:40:35.462985'
+timestamp: '2024-02-22T12:31:14.473097'
 title: Generate an embedding with TomoTwin for a Zarr file
-version: 0.0.4
+version: 0.0.5

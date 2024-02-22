@@ -85,7 +85,7 @@ def run():
         else:
             return zarr.open(path, mode='r')
     
-    def embed_and_write_to_zarr(input_zarr_path: str, output_zarr_path: str, embedor: Embedor, conf: EmbedConfiguration, window_size: int, slices: tuple, mask: np.array = None):
+    def embed_and_write_to_zarr(input_zarr_path: str, output_zarr_path: str, conf: EmbedConfiguration, window_size: int, slices: tuple, mask: np.array = None):
         """
         Embeds a specified slice of a tomogram stored in a Zarr array and writes the embeddings into a Zarr array in image space.
         Extends the input slice based on the window size for embedding and handles bounds checking.
@@ -147,20 +147,22 @@ def run():
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
     zarr_input_path = get_args().zarrinput  # Path to the input Zarr file
     zarr_output_path = get_args().zarrembedding  # Path for the output Zarr embedding
-    slices = eval(get_args().slices)  # Slices for the region of interest, passed as a string, e.g., "(slice(0,100), slice(0,100), slice(0,100))"
+    slices = eval(get_args().slices)  # Slices for the region of interest, passed as a string, e.g., 
 
     print(f"Embedding tomogram slice from Zarr ({zarr_input_path}) to Zarr embedding ({zarr_output_path})")
 
     # Example function call - you need to define or adapt these functions (e.g., Embedor, EmbedConfiguration, etc.) based on your actual codebase
-    embedor = Embedor(model_path=model_path)  # Example initialization, adjust as needed
     conf = EmbedConfiguration()  # Placeholder for any configuration needed
+    conf.model_path = model_path
+    conf.batchsize = 2
+    conf.stride = 3
 
-    embed_and_write_to_zarr(zarr_input_path, zarr_output_path, embedor, conf, window_size=32, slices=slices)
+    embed_and_write_to_zarr(zarr_input_path, zarr_output_path, conf, window_size=32, slices=slices)
 
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.4",
+    version="0.0.5",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -175,7 +177,7 @@ setup(
     args=[
         {"name": "zarrinput", "type": "file", "required": True, "description": "Path to the input Zarr file"},
         {"name": "zarrembedding", "type": "file", "required": True, "description": "Path for the output Zarr embedding file"},
-        {"name": "slices", "type": "string", "required": True, "description": "Slices for the region of interest, specified as a string"},
+        {"name": "slices", "type": "string", "required": True, "description": "Slices for the region of interest, specified as a string, e.g. (slice(0,100), slice(0,100), slice(0,100))"},
     ],
     run=run,
     install=install,
