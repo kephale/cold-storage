@@ -10,6 +10,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - python=3.10
   - pytorch[version='>=2.1']
   - torchvision
   - pandas[version='<2']
@@ -27,6 +28,8 @@ dependencies:
   - pytorch-metric-learning
   - zarr
   - s3fs
+  - aiobotocore
+  - botocore
   - pip:
       - tomotwin-cryoet
       - cryoet-data-portal
@@ -156,7 +159,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.2",
+    version="0.0.3",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -175,12 +178,5 @@ setup(
     ],
     run=run,
     install=install,
-    # dependencies={"environment_file": env_file},
-    dependencies={
-        "parent": {
-            "group": "tomotwin",
-            "name": "generate-embedding-zarr",
-            "version": "0.0.1",
-        }
-    },
+    dependencies={"environment_file": env_file},
 )
