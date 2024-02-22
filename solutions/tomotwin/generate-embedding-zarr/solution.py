@@ -80,7 +80,7 @@ def run():
 
     def open_zarr_store(path):
         if is_s3_path(path):
-            fs = s3fs.S3FileSystem(anon=True)  # Adjust anon based on your authentication needs
+            fs = s3fs.S3FileSystem(anon=True)
             return zarr.open(s3fs.S3Map(path, s3=fs), mode='r')
         else:
             return zarr.open(path, mode='r')
@@ -99,8 +99,9 @@ def run():
         :param mask: Optional mask array, must have the same shape as the input tomogram.
         """
         # Load the full tomogram from Zarr
-        zarr_group = open_zarr_store(input_zarr_path)
-        full_tomo = zarr_group['data']  # Load full tomogram to check bounds
+        # zarr_group = open_zarr_store(input_zarr_path)
+        # full_tomo = zarr_group['data']  # Load full tomogram to check bounds
+        full_tomo = zarr.open_array()
 
         # Calculate half of the window size for boundary extension
         half_window = window_size // 2
@@ -162,7 +163,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.6",
+    version="0.0.8",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
