@@ -70,7 +70,8 @@ def run():
     import mrcfile
     import shutil
     from scipy.ndimage import zoom
-    from tomotwin.embedding import Embedor, EmbedConfiguration
+    from tomotwin.modules.inference.embedor import TorchEmbedorDistributed, Embedor, TorchEmbedor
+    from tomotwin.modules.inference.argparse_embed_ui import EmbedConfiguration
     from tomotwin.embed_main import make_embeddor, sliding_window_embedding
     from tomotwin.modules.inference.boxer import Boxer, SlidingWindowBoxer
 
@@ -159,7 +160,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.3",
+    version="0.0.4",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
