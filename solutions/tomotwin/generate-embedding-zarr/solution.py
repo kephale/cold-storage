@@ -101,7 +101,7 @@ def run():
         # Load the full tomogram from Zarr
         # zarr_group = open_zarr_store(input_zarr_path)
         # full_tomo = zarr_group['data']  # Load full tomogram to check bounds
-        full_tomo = zarr.open_array()
+        full_tomo = zarr.open_array(input_zarr_path)
 
         # Calculate half of the window size for boundary extension
         half_window = window_size // 2
