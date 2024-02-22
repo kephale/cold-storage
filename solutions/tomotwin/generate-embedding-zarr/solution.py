@@ -26,6 +26,7 @@ dependencies:
   - pip
   - pytorch-metric-learning
   - zarr
+  - s3fs
   - pip:
       - tomotwin-cryoet
       - cryoet-data-portal
@@ -33,7 +34,6 @@ dependencies:
 """
 
 MODEL_URL = "https://zenodo.org/records/8358240/files/tomotwin_latest.pth?download=1"
-DATA_DIR_URL = "https://ftp.ebi.ac.uk/empiar/world_availability/10499/"
 
 def download_file(url, destination):    
     """Download a file from a URL to a destination path."""
@@ -62,6 +62,7 @@ def run():
     import requests
     import numpy as np
     import zarr
+    import s3fs
 
     import mrcfile
     import shutil
@@ -70,6 +71,16 @@ def run():
     from tomotwin.embed_main import make_embeddor, sliding_window_embedding
     from tomotwin.modules.inference.boxer import Boxer, SlidingWindowBoxer
 
+    def is_s3_path(path):
+        return path.startswith("s3://")
+
+    def open_zarr_store(path):
+        if is_s3_path(path):
+            fs = s3fs.S3FileSystem(anon=True)  # Adjust anon based on your authentication needs
+            return zarr.open(s3fs.S3Map(path, s3=fs), mode='r')
+        else:
+            return zarr.open(path, mode='r')
+    
     def embed_and_write_to_zarr(input_zarr_path: str, output_zarr_path: str, embedor: Embedor, conf: EmbedConfiguration, window_size: int, slices: tuple, mask: np.array = None):
         """
         Embeds a specified slice of a tomogram stored in a Zarr array and writes the embeddings into a Zarr array in image space.
@@ -84,7 +95,7 @@ def run():
         :param mask: Optional mask array, must have the same shape as the input tomogram.
         """
         # Load the full tomogram from Zarr
-        zarr_group = zarr.open(input_zarr_path, mode='r')
+        zarr_group = open_zarr_store(input_path)
         full_tomo = zarr_group['data']  # Load full tomogram to check bounds
 
         # Calculate half of the window size for boundary extension
@@ -145,7 +156,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.1",
+    version="0.0.2",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
@@ -164,5 +175,12 @@ setup(
     ],
     run=run,
     install=install,
-    dependencies={"environment_file": env_file},
+    # dependencies={"environment_file": env_file},
+    dependencies={
+        "parent": {
+            "group": "tomotwin",
+            "name": "generate-embedding-zarr",
+            "version": "0.0.1",
+        }
+    },
 )

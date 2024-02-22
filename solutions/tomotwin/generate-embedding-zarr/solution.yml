@@ -12,7 +12,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Initial deploy
+changelog: Update for S3
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -35,6 +35,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-22T10:23:08.143516'
+timestamp: '2024-02-22T11:19:29.950682'
 title: Generate an embedding with TomoTwin for a Zarr file
-version: 0.0.1
+version: 0.0.2
