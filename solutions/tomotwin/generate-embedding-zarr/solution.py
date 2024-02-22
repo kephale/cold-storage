@@ -145,14 +145,14 @@ def run():
         print(f"Embeddings for specified region written to Zarr dataset at {output_zarr_path}")
     
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
-    zarr_input_path = get_args().zarrinput  # Path to the input Zarr file
-    zarr_output_path = get_args().zarrembedding  # Path for the output Zarr embedding
-    slices = eval(get_args().slices)  # Slices for the region of interest, passed as a string, e.g., 
+    zarr_input_path = get_args().zarrinput
+    zarr_output_path = get_args().zarrembedding
+    slices = eval(get_args().slices)
 
     print(f"Embedding tomogram slice from Zarr ({zarr_input_path}) to Zarr embedding ({zarr_output_path})")
 
     # Example function call - you need to define or adapt these functions (e.g., Embedor, EmbedConfiguration, etc.) based on your actual codebase
-    conf = EmbedConfiguration()  # Placeholder for any configuration needed
+    conf = EmbedConfiguration(model_path, None, None, None, 2)  # Placeholder for any configuration needed
     conf.model_path = model_path
     conf.batchsize = 2
     conf.stride = 3
@@ -162,7 +162,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.5",
+    version="0.0.6",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
