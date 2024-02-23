@@ -178,8 +178,9 @@ def run():
     # Example function call - you need to define or adapt these functions (e.g., Embedor, EmbedConfiguration, etc.) based on your actual codebase
     conf = EmbedConfiguration(model_path, None, None, None, 2)  # Placeholder for any configuration needed
     conf.model_path = model_path
-    conf.batchsize = 2
-    conf.stride = 1
+    conf.batchsize = 35
+    conf.stride = [1, 1, 1]
+    conf.window_size = 37
 
     print(f"Config: {conf}")
     
@@ -188,7 +189,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.10",
+    version="0.0.11",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
