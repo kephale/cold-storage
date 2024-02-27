@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Fix embedding indexing for half window offset
+changelog: Use an alternative version of sliding_window_embedding
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -36,6 +36,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-26T21:00:43.880291'
+timestamp: '2024-02-27T10:14:32.082377'
 title: Generate an embedding with TomoTwin for a Zarr file
-version: 0.0.12
+version: 0.0.13

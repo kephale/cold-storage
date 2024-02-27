@@ -72,7 +72,7 @@ def run():
     from scipy.ndimage import zoom
     from tomotwin.modules.inference.embedor import TorchEmbedorDistributed, Embedor, TorchEmbedor
     from tomotwin.modules.inference.argparse_embed_ui import EmbedConfiguration
-    from tomotwin.embed_main import make_embeddor, sliding_window_embedding
+    from tomotwin.embed_main import make_embeddor
     from tomotwin.modules.inference.boxer import Boxer, SlidingWindowBoxer
 
     def is_s3_path(path):
@@ -84,6 +84,32 @@ def run():
             return zarr.open(s3fs.S3Map(path, s3=fs), mode='r')
         else:
             return zarr.open(path, mode='r')
+
+    def sliding_window_embedding(tomo: np.array, boxer: Boxer, embedor: Embedor) -> np.array:
+        '''
+        Embeds the tomogram using a sliding window approach, placing embeddings in an array based on their positions.
+
+        :param tomo: Tomogram as a numpy array.
+        :param boxer: Box provider that generates positions for embedding.
+        :param embedor: Embedor to embed the boxes extracted from the tomogram.
+        :return: A numpy array with embeddings placed according to their positions.
+        '''
+        boxes = boxer.box(tomogram=tomo)
+        embeddings = embedor.embed(volume_data=boxes)
+        if embeddings is None:
+            return None
+
+        # Assuming the shape of tomo is Z, Y, X and embeddings are in Z, Y, X, Embed_dim
+        # Initialize an empty array for the embeddings with an additional dimension for the embedding vector
+        embedding_array = np.zeros(tomo.shape + (embeddings.shape[-1],), dtype=embeddings.dtype)
+
+        for i in range(embeddings.shape[0]):
+            pos_z, pos_y, pos_x = boxes.get_localization(i)
+            # Here, we assume that each embedding corresponds to a specific position in the tomogram
+            # Adjust as necessary based on how your `Boxer` and `Embedor` implementations work
+            embedding_array[pos_z, pos_y, pos_x, :] = embeddings[i]
+
+        return embedding_array        
     
     def embed_and_write_to_zarr(input_zarr_path: str, output_zarr_path: str, conf: EmbedConfiguration, window_size: int, slices: tuple, mask: np.array = None):
         """
@@ -128,25 +154,16 @@ def run():
 
         # Embedding logic as before, now using the extended slice
         embedor = make_embeddor(conf, rank=None, world_size=1)  # Example setup
-        embeddings = sliding_window_embedding(tomo=tomo_slice_extended, boxer=SlidingWindowBoxer(box_size=window_size, stride=conf.stride, zrange=None, mask=mask), embedor=embedor)
-        if embeddings is None:
+        embedding_array = sliding_window_embedding(tomo=tomo_slice_extended, boxer=SlidingWindowBoxer(box_size=window_size, stride=conf.stride, zrange=None, mask=mask), embedor=embedor)
+        if embedding_array is None:
             return None  # Handle cases where no embeddings were generated
 
-        # Adjust the embeddings to match the original requested slice (remove the context extension)
-        embeddings_adjusted = embeddings[
-            max(0, half_window - slices[0].start):half_window + slice_shapes[0],
-            max(0, half_window - slices[1].start):half_window + slice_shapes[1],
-            max(0, half_window - slices[2].start):half_window + slice_shapes[2],
-            :
-        ]
-
-        assert embeddings_adjusted.shape[:-1] == slice_shapes, "Adjusted embeddings shape does not match target slice shape."
 
         # Write the adjusted embeddings into the output Zarr array
         output_zarr = zarr.open_array(output_zarr_path, mode='a', shape=embedding_shape, chunks=(64, 64, 64, 32), dtype=np.float32)
-        output_zarr[slices] = embeddings_adjusted
+        output_zarr[slices] = embedding_array
 
-        return embeddings_adjusted  # Return the adjusted embeddings
+        return embedding_array
     
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
     zarr_input_path = get_args().zarrinput
@@ -169,7 +186,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.12",
+    version="0.0.13",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
