@@ -99,8 +99,6 @@ def run():
         :param mask: Optional mask array, must have the same shape as the input tomogram.
         """
         # Load the full tomogram from Zarr
-        # zarr_group = open_zarr_store(input_zarr_path)
-        # full_tomo = zarr_group['data']  # Load full tomogram to check bounds
         full_tomo = zarr.open_array(input_zarr_path)
 
         print(f"Tomogram shape: {full_tomo.shape}")
@@ -132,41 +130,23 @@ def run():
         embedor = make_embeddor(conf, rank=None, world_size=1)  # Example setup
         embeddings = sliding_window_embedding(tomo=tomo_slice_extended, boxer=SlidingWindowBoxer(box_size=window_size, stride=conf.stride, zrange=None, mask=mask), embedor=embedor)
         if embeddings is None:
-            return
+            return None  # Handle cases where no embeddings were generated
 
-        embedding_array = np.zeros(embedding_shape, dtype=embeddings.dtype)
-                                
-        offsets = [s.start - half_window for s in extended_slices]
+        # Adjust the embeddings to match the original requested slice (remove the context extension)
+        embeddings_adjusted = embeddings[
+            max(0, half_window - slices[0].start):half_window + slice_shapes[0],
+            max(0, half_window - slices[1].start):half_window + slice_shapes[1],
+            max(0, half_window - slices[2].start):half_window + slice_shapes[2],
+            :
+        ]
 
-        print(f"embedings: min: {(np.min(embeddings[:,0]), np.min(embeddings[:,1]), np.min(embeddings[:,2]))}; max: {(np.max(embeddings[:,0]), np.max(embeddings[:,1]), np.max(embeddings[:,2]))}")
-        print(f"embedding shape: {embedding_shape}")
-        
-        for i in range(embeddings.shape[0]):
-            # Calculate the position within the sliced region by subtracting the offsets
-            x, y, z = int(embeddings[i, 0]), int(embeddings[i, 1]), int(embeddings[i, 2])
-            embedding_vector = embeddings[i, 3:]
-            embedding_array[z - half_window, y - half_window, x - half_window, :] = embedding_vector
+        assert embeddings_adjusted.shape[:-1] == slice_shapes, "Adjusted embeddings shape does not match target slice shape."
 
-        o_slices = tuple(slice(s.start, s.stop) for s in slices) + (slice(None),)
-                                
-        # Assuming embeddings are in the correct format, determine the output shape and indices for writing back
-        print(f"Embeddings shape: {embeddings.shape}")
-        output_shape = full_tomo.shape + (32,)
+        # Write the adjusted embeddings into the output Zarr array
+        output_zarr = zarr.open_array(output_zarr_path, mode='a', shape=embedding_shape, chunks=(64, 64, 64, 32), dtype=np.float32)
+        output_zarr[slices] = embeddings_adjusted
 
-        # Create or open the output Zarr array
-        if os.path.exists(output_zarr_path):
-            zarr_group_out = zarr.open(output_zarr_path, mode='a')
-        else:
-            # Initialize the output array with the shape of the full tomogram plus the embedding dimension
-            output_shape = full_tomo.shape + (32,)
-            zarr_group_out = zarr.open(output_zarr_path, shape=output_shape, mode='w', dtype=np.float32, chunks=True)
-
-            
-        # Write the embeddings for the sliced region into the correct position in the output Zarr dataset
-        # Utilizing the offsets to position the embedding array within the larger dataset
-        zarr_group_out[o_slices] = embedding_array
-                                        
-        print(f"Embeddings for specified region written to Zarr dataset at {output_zarr_path}")
+        return embeddings_adjusted  # Return the adjusted embeddings
     
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
     zarr_input_path = get_args().zarrinput
@@ -189,7 +169,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.11",
+    version="0.0.12",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],

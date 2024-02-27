@@ -25,6 +25,9 @@ Update for S3 deps
 ## [0.0.2] - 2024-02-22
 Update for S3
 
+## [0.0.12] - 2024-02-26
+Fix embedding indexing for half window offset
+
 ## [0.0.11] - 2024-02-23
 Update conf parameters incl batchsize
 

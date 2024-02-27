@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Update conf parameters incl batchsize
+changelog: Fix embedding indexing for half window offset
 cite:
 - text: 'Rice, G., Wagner, T., Stabrin, M. et al. TomoTwin: generalized 3D localization
     of macromolecules in cryo-electron tomograms with structural data mining. Nat
@@ -36,6 +36,6 @@ tags:
 - Python
 - particle picking
 - machine learning
-timestamp: '2024-02-23T12:48:42.635480'
+timestamp: '2024-02-26T21:00:43.880291'
 title: Generate an embedding with TomoTwin for a Zarr file
-version: 0.0.11
+version: 0.0.12
