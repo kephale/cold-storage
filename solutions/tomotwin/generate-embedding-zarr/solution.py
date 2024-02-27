@@ -66,6 +66,7 @@ def run():
     import numpy as np
     import zarr
     import s3fs
+    import math
 
     import mrcfile
     import shutil
@@ -105,65 +106,51 @@ def run():
 
         for i in range(embeddings.shape[0]):
             pos_z, pos_y, pos_x = boxes.get_localization(i).astype(int)
-            # Here, we assume that each embedding corresponds to a specific position in the tomogram
-            # Adjust as necessary based on how your `Boxer` and `Embedor` implementations work
             embedding_array[pos_z, pos_y, pos_x, :] = embeddings[i]
 
         return embedding_array        
     
-    def embed_and_write_to_zarr(input_zarr_path: str, output_zarr_path: str, conf: EmbedConfiguration, window_size: int, slices: tuple, mask: np.array = None):
-        """
-        Embeds a specified slice of a tomogram stored in a Zarr array and writes the embeddings into a Zarr array in image space.
-        Extends the input slice based on the window size for embedding and handles bounds checking.
+    def embed_and_write_to_zarr(input_zarr_path, output_zarr_path, conf, window_size, slices):
+        full_tomo = zarr.open_array(input_zarr_path, mode='r')
+        output_zarr = zarr.open(output_zarr_path, mode='a', shape=full_tomo.shape + (32,), chunks=(64, 64, 64, 32), dtype=np.float32)
 
-        :param input_zarr_path: Path to the input Zarr array containing the tomogram.
-        :param output_zarr_path: Path to the output Zarr array to write embeddings.
-        :param embedor: Embedor instance for generating embeddings.
-        :param conf: Embedding configuration.
-        :param window_size: Size of the sliding window for embedding.
-        :param slices: A tuple of slice objects specifying the region to embed.
-        :param mask: Optional mask array, must have the same shape as the input tomogram.
-        """
-        # Load the full tomogram from Zarr
-        full_tomo = zarr.open_array(input_zarr_path)
-
-        print(f"Tomogram shape: {full_tomo.shape}")
-        print(f"Slices {slices}")
-
-        # Determine the shape for the region of interest based on the provided slices
-        slice_shapes = tuple(s.stop - s.start for s in slices)
-        # Shape of the output embeddings array for the sliced region, adding an extra dimension for embeddings
-        embedding_shape = slice_shapes + (32,)
-        
-        # Calculate half of the window size for boundary extension
-        half_window = window_size // 2
-
-        # Extend the slices to include additional context for the sliding window, while handling bounds
-        extended_slices = tuple(
-            slice(max(0, s.start - half_window), min(full_tomo.shape[dim], s.stop + half_window))
-            for dim, s in enumerate(slices)
+        # Calculate the extended slices to include boundary data for the 37x37x37 box
+        boundary_size = math.ceil(window_size / 2) - 1
+        extended_slices = (
+            slice(max(0, slices[0].start - boundary_size), min(full_tomo.shape[0], slices[0].stop + boundary_size)),
+            slice(max(0, slices[1].start - boundary_size), min(full_tomo.shape[1], slices[1].stop + boundary_size)),
+            slice(max(0, slices[2].start - boundary_size), min(full_tomo.shape[2], slices[2].stop + boundary_size))
         )
 
-        # Extract the extended slice from the tomogram
         tomo_slice_extended = full_tomo[extended_slices]
 
-        # Apply mask if provided (mask must also be sliced accordingly)
-        if mask is not None:
-            mask = mask[extended_slices]  # Adjust mask to the extended slice
-            assert tomo_slice_extended.shape == mask.shape, "Extended tomogram slice and mask shape need to be equal."
+        embedor = make_embeddor(conf, rank=None, world_size=1)
+        embedding_array = sliding_window_embedding(tomo_slice_extended, boxer=SlidingWindowBoxer(box_size=window_size, stride=conf.stride), embedor=embedor)
 
-        # Embedding logic as before, now using the extended slice
-        embedor = make_embeddor(conf, rank=None, world_size=1)  # Example setup
-        embedding_array = sliding_window_embedding(tomo=tomo_slice_extended, boxer=SlidingWindowBoxer(box_size=window_size, stride=conf.stride, zrange=None, mask=mask), embedor=embedor)
         if embedding_array is None:
-            return None  # Handle cases where no embeddings were generated
+            return None
 
+        # Calculate the starting indices for trimming the extended embedding_array to fit back into the original slice dimensions
+        trim_start_z = slices[0].start - extended_slices[0].start
+        trim_start_y = slices[1].start - extended_slices[1].start
+        trim_start_x = slices[2].start - extended_slices[2].start
 
-        # Write the adjusted embeddings into the output Zarr array
-        output_zarr = zarr.open_array(output_zarr_path, mode='a', shape=embedding_shape, chunks=(64, 64, 64, 32), dtype=np.float32)
-        output_zarr[slices] = embedding_array
+        # Calculate the ending indices for trimming
+        trim_end_z = trim_start_z + (slices[0].stop - slices[0].start)
+        trim_end_y = trim_start_y + (slices[1].stop - slices[1].start)
+        trim_end_x = trim_start_x + (slices[2].stop - slices[2].start)
 
-        return embedding_array
+        # Trim the embedding_array to match the original slice dimensions
+        trimmed_embedding_array = embedding_array[
+            trim_start_z:trim_end_z,
+            trim_start_y:trim_end_y,
+            trim_start_x:trim_end_x,
+            :
+        ]
+
+        output_zarr[slices] = trimmed_embedding_array
+
+        print("Embedding written to Zarr.")
     
     model_path = os.path.join(get_data_path(), "tomotwin_latest.pth")
     zarr_input_path = get_args().zarrinput
@@ -172,8 +159,8 @@ def run():
 
     print(f"Embedding tomogram slice from Zarr ({zarr_input_path}) to Zarr embedding ({zarr_output_path})")
 
-    # Example function call - you need to define or adapt these functions (e.g., Embedor, EmbedConfiguration, etc.) based on your actual codebase
-    conf = EmbedConfiguration(model_path, None, None, None, 2)  # Placeholder for any configuration needed
+    # Setup embedding configuration
+    conf = EmbedConfiguration(model_path, None, None, None, 2)
     conf.model_path = model_path
     conf.batchsize = 35
     conf.stride = [1, 1, 1]
@@ -186,7 +173,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.14",
+    version="0.0.15",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
