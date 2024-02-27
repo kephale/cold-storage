@@ -25,6 +25,9 @@ Update for S3 deps
 ## [0.0.2] - 2024-02-22
 Update for S3
 
+## [0.0.14] - 2024-02-27
+Fix index type
+
 ## [0.0.13] - 2024-02-27
 Use an alternative version of sliding_window_embedding
 

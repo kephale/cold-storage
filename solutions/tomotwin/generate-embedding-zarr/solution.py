@@ -104,7 +104,7 @@ def run():
         embedding_array = np.zeros(tomo.shape + (embeddings.shape[-1],), dtype=embeddings.dtype)
 
         for i in range(embeddings.shape[0]):
-            pos_z, pos_y, pos_x = boxes.get_localization(i)
+            pos_z, pos_y, pos_x = boxes.get_localization(i).astype(int)
             # Here, we assume that each embedding corresponds to a specific position in the tomogram
             # Adjust as necessary based on how your `Boxer` and `Embedor` implementations work
             embedding_array[pos_z, pos_y, pos_x, :] = embeddings[i]
@@ -186,7 +186,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding-zarr",
-    version="0.0.13",
+    version="0.0.14",
     title="Generate an embedding with TomoTwin for a Zarr file",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
