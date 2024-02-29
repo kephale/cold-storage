@@ -1,0 +1,32 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the input Zarr file.
+  name: zarrinput
+  required: true
+  type: string
+- description: Path for the output Zarr embedding file.
+  name: zarrembedding
+  required: true
+  type: string
+- description: Slices for the region of interest, specified as a string, e.g., '(slice(0,100),
+    slice(0,100), slice(0,100))'.
+  name: slices
+  required: true
+  type: string
+changelog: Initial deploy
+cite:
+- text: Kyle Harrington for CellCanvas
+  url: https://cellcanvas.org
+description: Use a distilled student model to generate embeddings for a Zarr dataset.
+group: cellcanvas
+license: MIT
+name: create_embedding_zarr_student
+solution_creators:
+- Kyle Harrington
+tags:
+- embeddings
+- deep learning
+- zarr
+timestamp: '2024-02-29T13:31:18.951819'
+title: Generate Embeddings with Student Model
+version: 0.0.1
