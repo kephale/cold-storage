@@ -90,9 +90,11 @@ def run():
         student_model.eval()
         return student_model
 
-    # Generate embeddings for a volume
-    def generate_embeddings(volume, model, device, window_size=37, stride=10):
-        # Assuming volume is a numpy array of shape (Z, Y, X)
+    def generate_embeddings(volume, model, device, window_size=37, stride=10, output_channels=32):
+        Z, Y, X = volume.shape
+        embeddings_shape = (Z, Y, X, output_channels)
+        embeddings = np.zeros(embeddings_shape, dtype=np.float32)  # Initialize the embeddings array
+
         class VolumeDataset(torch.utils.data.Dataset):
             def __init__(self, volume, window_size, stride):
                 self.volume = volume
@@ -116,19 +118,21 @@ def run():
             def __getitem__(self, idx):
                 z, y, x = self.indices[idx]
                 patch = self.volume[z:z+self.window_size, y:y+self.window_size, x:x+self.window_size]
-                return torch.tensor(patch, dtype=torch.float32).unsqueeze(0)  # Add channel dimension
+                return torch.tensor(patch, dtype=torch.float32).unsqueeze(0), (z, y, x)  # Include coordinates
 
         dataset = VolumeDataset(volume, window_size, stride)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False)
 
-        embeddings = []
         with torch.no_grad():
-            for data in tqdm(dataloader, desc="Generating embeddings", leave=False):
+            for data, coords in tqdm(dataloader, desc="Generating embeddings", leave=False):
                 data = data.to(device)
                 output = model(data)
-                embeddings.append(output.cpu().numpy())
+                embeddings_batch = output.cpu().numpy()
 
-        return np.concatenate(embeddings, axis=0)
+                for i, (z, y, x) in enumerate(coords):
+                    embeddings[z:z+window_size, y:y+window_size, x:x+window_size, :] = embeddings_batch[i]
+
+        return embeddings
 
     # Main logic for embedding generation and saving to Zarr
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -155,7 +159,7 @@ def run():
 setup(
     group="cellcanvas",
     name="create_embedding_zarr_student",
-    version="0.0.2",
+    version="0.0.3",
     title="Generate Embeddings with Student Model",
     description="Use a distilled student model to generate embeddings for a Zarr dataset.",
     solution_creators=["Kyle Harrington"],

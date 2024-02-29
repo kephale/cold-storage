@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Use tqdm
+changelog: Write into 4d embedding array instead of 2d
 cite:
 - text: Kyle Harrington for CellCanvas
   url: https://cellcanvas.org
@@ -27,6 +27,6 @@ tags:
 - embeddings
 - deep learning
 - zarr
-timestamp: '2024-02-29T13:51:39.279954'
+timestamp: '2024-02-29T15:31:31.444133'
 title: Generate Embeddings with Student Model
-version: 0.0.2
+version: 0.0.3
