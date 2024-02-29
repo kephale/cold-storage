@@ -8,8 +8,8 @@ args:
   name: zarrembedding
   required: true
   type: string
-- description: Slices for the region of interest, specified as a string, e.g., '(slice(0,100),
-    slice(0,100), slice(0,100))'.
+- description: Slices for the region of interest, specified as a string, e.g., (slice(0,100),
+    slice(0,100), slice(0,100)).
   name: slices
   required: true
   type: string
@@ -27,6 +27,6 @@ tags:
 - embeddings
 - deep learning
 - zarr
-timestamp: '2024-02-29T13:31:18.951819'
+timestamp: '2024-02-29T13:44:14.629218'
 title: Generate Embeddings with Student Model
 version: 0.0.1

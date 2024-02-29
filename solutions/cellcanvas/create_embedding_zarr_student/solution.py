@@ -167,7 +167,7 @@ setup(
     args=[
         {"name": "zarrinput", "type": "string", "required": True, "description": "Path to the input Zarr file."},
         {"name": "zarrembedding", "type": "string", "required": True, "description": "Path for the output Zarr embedding file."},
-        {"name": "slices", "type": "string", "required": True, "description": "Slices for the region of interest, specified as a string, e.g., '(slice(0,100), slice(0,100), slice(0,100))'."},
+        {"name": "slices", "type": "string", "required": True, "description": "Slices for the region of interest, specified as a string, e.g., (slice(0,100), slice(0,100), slice(0,100))."},
     ],
     run=run,
     dependencies={"environment_file": env_file},
