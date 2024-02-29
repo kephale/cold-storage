@@ -134,13 +134,16 @@ def run():
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False, num_workers=22)
 
         with torch.no_grad():
-            for data, coords in tqdm(dataloader, desc="Generating embeddings", leave=False):
+            for data, (z_coords, y_coords, x_coords) in tqdm(dataloader, desc="Generating embeddings", leave=False):
                 data = data.to(device)
                 output = model(data)
                 embeddings_batch = output.cpu().numpy()
 
-                for i, (z, y, x) in enumerate(coords):
+                batch_size = data.size(0)
+                for i in range(batch_size):
+                    z, y, x = z_coords[i].item(), y_coords[i].item(), x_coords[i].item()
                     embeddings[z:z+window_size, y:y+window_size, x:x+window_size, :] = embeddings_batch[i]
+
 
         return embeddings
 
