@@ -101,6 +101,7 @@ def run():
                 self.window_size = window_size
                 self.stride = stride
                 self.indices = self.compute_indices(volume.shape, window_size, stride)
+                self.cache = {}  # Initialize an empty cache
 
             @staticmethod
             def compute_indices(volume_shape, window_size, stride):
@@ -116,12 +117,21 @@ def run():
                 return len(self.indices)
 
             def __getitem__(self, idx):
+                # Check if the requested index is in the cache
+                if idx in self.cache:
+                    return self.cache[idx]
+
                 z, y, x = self.indices[idx]
                 patch = self.volume[z:z+self.window_size, y:y+self.window_size, x:x+self.window_size]
-                return torch.tensor(patch, dtype=torch.float32).unsqueeze(0), (z, y, x)  # Include coordinates
+                data = torch.tensor(patch, dtype=torch.float32).unsqueeze(0)  # Add channel dimension
+
+                # Save to cache before returning
+                self.cache[idx] = data, (z, y, x)
+
+                return data, (z, y, x)
 
         dataset = VolumeDataset(volume, window_size, stride)
-        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False, num_workers=22)
 
         with torch.no_grad():
             for data, coords in tqdm(dataloader, desc="Generating embeddings", leave=False):
@@ -159,7 +169,7 @@ def run():
 setup(
     group="cellcanvas",
     name="create_embedding_zarr_student",
-    version="0.0.3",
+    version="0.0.4",
     title="Generate Embeddings with Student Model",
     description="Use a distilled student model to generate embeddings for a Zarr dataset.",
     solution_creators=["Kyle Harrington"],

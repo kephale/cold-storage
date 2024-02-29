@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Write into 4d embedding array instead of 2d
+changelog: Add data caching
 cite:
 - text: Kyle Harrington for CellCanvas
   url: https://cellcanvas.org
@@ -27,6 +27,6 @@ tags:
 - embeddings
 - deep learning
 - zarr
-timestamp: '2024-02-29T15:31:31.444133'
+timestamp: '2024-02-29T15:55:44.941326'
 title: Generate Embeddings with Student Model
-version: 0.0.3
+version: 0.0.4
