@@ -31,6 +31,7 @@ dependencies:
   - s3fs
   - aiobotocore
   - botocore
+  - tqdm
   - pip:
       - tomotwin-cryoet
       - cryoet-data-portal
@@ -46,6 +47,7 @@ def run():
     import numpy as np
     import zarr
     import os
+    from tqdm import tqdm
 
     # Define the student model architecture within the run function
     class StudentModel(nn.Module):
@@ -117,11 +119,11 @@ def run():
                 return torch.tensor(patch, dtype=torch.float32).unsqueeze(0)  # Add channel dimension
 
         dataset = VolumeDataset(volume, window_size, stride)
-        dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False)
 
         embeddings = []
         with torch.no_grad():
-            for data in dataloader:
+            for data in tqdm(dataloader, desc="Generating embeddings", leave=False):
                 data = data.to(device)
                 output = model(data)
                 embeddings.append(output.cpu().numpy())
@@ -153,7 +155,7 @@ def run():
 setup(
     group="cellcanvas",
     name="create_embedding_zarr_student",
-    version="0.0.1",
+    version="0.0.2",
     title="Generate Embeddings with Student Model",
     description="Use a distilled student model to generate embeddings for a Zarr dataset.",
     solution_creators=["Kyle Harrington"],

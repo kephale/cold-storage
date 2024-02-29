@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Initial deploy
+changelog: Use tqdm
 cite:
 - text: Kyle Harrington for CellCanvas
   url: https://cellcanvas.org
@@ -27,6 +27,6 @@ tags:
 - embeddings
 - deep learning
 - zarr
-timestamp: '2024-02-29T13:44:14.629218'
+timestamp: '2024-02-29T13:51:39.279954'
 title: Generate Embeddings with Student Model
-version: 0.0.1
+version: 0.0.2
