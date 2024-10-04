@@ -25,8 +25,8 @@ Update for S3 deps
 ## [0.0.2] - 2024-02-22
 Update for S3
 
-## [0.0.15] - 2024-02-27
-Update for slices
+## [0.0.15] - 2024-10-03
+Bump for catalog migration
 
 ## [0.0.14] - 2024-02-27
 Fix index type
