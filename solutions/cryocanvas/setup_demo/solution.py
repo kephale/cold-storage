@@ -95,7 +95,7 @@ setup(
         "parent": {
             "group": "kyleharrington",
             "name": "headless-parent",
-            "version": "0.0.2",
+            "version": "0.0.5",
         }
     },
 )
