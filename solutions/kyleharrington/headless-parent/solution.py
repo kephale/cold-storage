@@ -9,7 +9,6 @@ env_file = StringIO(
   - pytorch-nightly
   - fastai
   - conda-forge
-  - defaults    
 dependencies:
   - python>=3.8
   - pybind11
@@ -140,7 +139,7 @@ def run():
 setup(
     group="kyleharrington",
     name="headless-parent",
-    version="0.0.4",
+    version="0.0.5",
     title="Parent environment for a big python environment for cryoET.",
     description="A parent environment for a big python environment for cryoET",
     solution_creators=["Kyle Harrington"],
