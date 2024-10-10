@@ -1,0 +1,52 @@
+album_api_version: 0.5.1
+args:
+- description: Path to the MRC file
+  name: mrcfile
+  required: true
+  type: file
+- description: Path for the output Zarr file
+  name: zarr_path
+  required: true
+  type: string
+- description: Start coordinate in Z dimension
+  name: z_start
+  required: true
+  type: integer
+- description: End coordinate in Z dimension
+  name: z_end
+  required: true
+  type: integer
+- description: Start coordinate in Y dimension
+  name: y_start
+  required: true
+  type: integer
+- description: End coordinate in Y dimension
+  name: y_end
+  required: true
+  type: integer
+- description: Start coordinate in X dimension
+  name: x_start
+  required: true
+  type: integer
+- description: End coordinate in X dimension
+  name: x_end
+  required: true
+  type: integer
+changelog: Fix parent
+description: Computes TomoTwin embeddings for a specified crop of MRC data with edge
+  padding and stores both the cropped data and embeddings in a Zarr file.
+group: cryocanvas
+license: MIT
+name: create-cryocanvas-crop
+solution_creators:
+- Kyle Harrington
+tags:
+- data processing
+- crop
+- tomotwin
+- embedding
+- Zarr
+- Python
+timestamp: '2024-10-10T16:49:32.752560'
+title: Compute TomoTwin Embedding and Store with Cropped MRC in Zarr
+version: 0.0.1
