@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Initial deploy
+changelog: Fix parent version
 cite:
 - text: 'Gaifas, L., Timmins, J. and Gutsche, I., 2023. blik: an extensible napari
     plugin for cryo-ET data visualisation, annotation and analysis. bioRxiv, pp.2023-12..'
@@ -20,7 +20,7 @@ tags:
 - cryoet
 - Python
 - napari
-timestamp: '2024-01-11T10:02:50.525181'
+timestamp: '2024-10-10T16:47:11.769160'
 title: 'blik: a Python tool for visualising and interacting with cryo-ET and subtomogram
   averaging data.'
 version: 0.0.1
