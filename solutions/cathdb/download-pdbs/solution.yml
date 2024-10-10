@@ -1,0 +1,22 @@
+album_api_version: 0.5.1
+args:
+- description: Directory to save the CATH names and downloaded PDB files
+  name: target_dir
+  required: true
+  type: string
+changelog: First deploy
+description: Downloads CATH names and corresponding PDB files into the specified directory.
+group: cathdb
+license: MIT
+name: download-pdbs
+solution_creators:
+- Kyle Harrington
+tags:
+- bioinformatics
+- CATH
+- PDB
+- protein structures
+- data download
+timestamp: '2024-10-10T16:54:04.834307'
+title: CATH Names and PDB Downloader
+version: 0.0.1
