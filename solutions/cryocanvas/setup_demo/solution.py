@@ -71,7 +71,7 @@ def run():
 setup(
     group="cryocanvas",
     name="setup_demo",
-    version="0.0.1",
+    version="0.0.2",
     title="Setup a demo environment for CryoCanvas",
     description="Setup a demo environment for CryoCanvas using the CZ Cryo ET Data Portal.",
     solution_creators=["Kyle Harrington"],
