@@ -6,7 +6,6 @@ from album.runner.api import setup, get_args, get_data_path
 # Environment file for Jupyter Notebook with RISE
 env_file = """channels:
   - conda-forge
-  - defaults
 dependencies:
   - "notebook<7"
   - rise
@@ -145,7 +144,7 @@ def run():
 setup(
     group="album",
     name="tutorial-czii2023",
-    version="0.1.2",
+    version="0.1.3",
     title="album tutorial for czii in 2023",
     description="This solution runs a Jupyter-based album tutorial presentation.",
     solution_creators=["Kyle Harrington"],
