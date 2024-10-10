@@ -1,3 +1,4 @@
+
 ###album catalog: cold-storage
 
 
@@ -94,7 +95,7 @@ def run():
 setup(
     group="cryocanvas",
     name="generate-sample-crop",
-    version="0.0.10",
+    version="0.0.11",
     title="Process Cropped Data with skimage Features",
     description="Processes a crop of the input MRC data and embeddings, computes skimage features, and writes to Zarr.",
     solution_creators=["Kyle Harrington"],
@@ -117,7 +118,7 @@ setup(
         "parent": {
             "group": "kyleharrington",
             "name": "headless-parent",
-            "version": "0.0.4",
+            "version": "0.0.5",
         }        
     },        
 )
