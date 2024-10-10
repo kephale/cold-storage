@@ -13,7 +13,7 @@ args:
   name: slices
   required: true
   type: string
-changelog: Keep memory on GPU longer
+changelog: Fix channels
 cite:
 - text: Kyle Harrington for CellCanvas
   url: https://cellcanvas.org
@@ -27,6 +27,6 @@ tags:
 - embeddings
 - deep learning
 - zarr
-timestamp: '2024-02-29T16:33:34.502321'
+timestamp: '2024-10-10T16:47:32.878238'
 title: Generate Embeddings with Student Model
-version: 0.0.5
+version: 0.0.6

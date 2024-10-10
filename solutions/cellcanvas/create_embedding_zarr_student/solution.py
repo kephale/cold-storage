@@ -9,7 +9,6 @@ channels:
   - pytorch
   - rapidsai
   - conda-forge
-  - defaults
 dependencies:
   - python=3.10
   - pytorch[version='>=2.1']
@@ -166,7 +165,7 @@ def run():
 setup(
     group="cellcanvas",
     name="create_embedding_zarr_student",
-    version="0.0.5",
+    version="0.0.6",
     title="Generate Embeddings with Student Model",
     description="Use a distilled student model to generate embeddings for a Zarr dataset.",
     solution_creators=["Kyle Harrington"],
