@@ -10,7 +10,6 @@ channels:
   - pytorch
   - rapidsai
   - conda-forge
-  - defaults
 dependencies:
   - pytorch[version='>=2.1']
   - torchvision
@@ -59,7 +58,7 @@ def run():
 setup(
     group="cryocanvas",
     name="backend",
-    version="0.0.1",
+    version="0.0.2",
     title="CryoCanvas backend",
     description="TBD.",
     solution_creators=["Kyle Harrington"],

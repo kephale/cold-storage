@@ -12,7 +12,7 @@ args:
   name: flask_port
   required: true
   type: integer
-changelog: Initial commit
+changelog: Fix channels
 cite:
 - text: TBD.
   url: https://github.com/kephale/cryocanvas
@@ -31,6 +31,6 @@ tags:
 - interactive
 - segmentation
 - napari
-timestamp: '2024-01-06T15:28:12.389465'
+timestamp: '2024-10-10T16:47:49.651502'
 title: CryoCanvas backend
-version: 0.0.1
+version: 0.0.2
