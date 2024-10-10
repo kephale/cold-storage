@@ -4,8 +4,8 @@ args:
   name: target_dir
   required: true
   type: string
-changelog: First deploy
-description: Downloads CATH names and corresponding PDB files into the specified directory.
+changelog: Bump
+description: Downloads CATHDB and corresponding PDB files into the specified directory.
 group: cathdb
 license: MIT
 name: download-pdbs
@@ -17,6 +17,6 @@ tags:
 - PDB
 - protein structures
 - data download
-timestamp: '2024-10-10T16:54:04.834307'
-title: CATH Names and PDB Downloader
-version: 0.0.1
+timestamp: '2024-10-10T16:59:41.231953'
+title: PDB Downloader for CATHDB
+version: 0.0.2

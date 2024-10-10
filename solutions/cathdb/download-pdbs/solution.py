@@ -50,9 +50,9 @@ def run():
 setup(
     group="cathdb",
     name="download-pdbs",
-    version="0.0.1",
-    title="CATH Names and PDB Downloader",
-    description="Downloads CATH names and corresponding PDB files into the specified directory.",
+    version="0.0.2",
+    title="PDB Downloader for CATHDB",
+    description="Downloads CATHDB and corresponding PDB files into the specified directory.",
     solution_creators=["Kyle Harrington"],
     tags=["bioinformatics", "CATH", "PDB", "protein structures", "data download"],
     license="MIT",
