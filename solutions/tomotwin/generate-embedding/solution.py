@@ -12,7 +12,6 @@ channels:
   - pytorch
   - rapidsai
   - conda-forge
-  - defaults
 dependencies:
   - pytorch[version='>=2.1']
   - torchvision
@@ -105,7 +104,7 @@ def run():
 setup(
     group="tomotwin",
     name="generate-embedding",
-    version="0.0.8",
+    version="0.0.9",
     title="Generate an embedding with TomoTwin for a mrc",
     description="TomoTwin on an example from the czii cryoet dataportal.",
     solution_creators=["Kyle Harrington"],
