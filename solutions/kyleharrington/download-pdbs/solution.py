@@ -1,10 +1,9 @@
-from album.runner.api import setup, get_args
-
 ###album catalog: cold-storage
+
+from album.runner.api import setup, get_args
 
 env_file = """channels:
   - conda-forge
-  - defaults
 dependencies:
   - python=3.9
   - requests
@@ -40,7 +39,7 @@ def run():
 setup(
     group="kyleharrington",
     name="download-pdbs",
-    version="0.0.4",
+    version="0.0.5",
     title="PDB File Downloader",
     description="A utility to download PDB files from a list of PDB IDs.",
     solution_creators=["Kyle Harrington"],

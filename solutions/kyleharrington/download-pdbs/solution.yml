@@ -9,7 +9,7 @@ args:
   name: output_dir
   required: false
   type: string
-changelog: Add missing solution author name
+changelog: Fix channels
 covers:
 - description: Visualization of PDB:6zqj with Lorenzo Gaifas' napari-molecule-reader
     plugin.
@@ -25,6 +25,6 @@ tags:
 - PDB
 - protein structures
 - data download
-timestamp: '2023-12-05T15:01:30.132017'
+timestamp: '2024-10-10T16:45:56.725041'
 title: PDB File Downloader
-version: 0.0.4
+version: 0.0.5
