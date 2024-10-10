@@ -100,7 +100,7 @@ def run():
 setup(
     group="cryocanvas",
     name="embedding_df_to_zarr",
-    version="0.0.9",
+    version="0.0.10",
     title="Convert a TomoTwin embedding DataFrame to Zarr Format",
     description="Converts a given DataFrame to a Zarr file format.",
     solution_creators=["Kyle Harrington"],

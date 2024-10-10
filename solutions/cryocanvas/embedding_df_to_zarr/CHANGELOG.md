@@ -28,5 +28,8 @@ Add extra output to catch out of bounds
 ## [0.0.2] - 2024-01-31
 Take zarr_group as an additional argument
 
+## [0.0.10] - 2024-10-10
+Fix parent
+
 ## [0.0.1] - 2024-01-17
 Initial deploy
