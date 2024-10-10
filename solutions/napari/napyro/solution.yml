@@ -1,6 +1,6 @@
 album_api_version: 0.5.1
 args: []
-changelog: Add a cover image
+changelog: Fix channels
 cite:
 - text: Kyle. Also check out TeamTomo
   url: ''
@@ -19,6 +19,6 @@ tags:
 - cryoet
 - Python
 - napari
-timestamp: '2024-01-10T17:21:46.682049'
+timestamp: '2024-10-10T16:46:54.704776'
 title: Parent environment for a big napari environment for cryoET.
-version: 0.0.2
+version: 0.0.3

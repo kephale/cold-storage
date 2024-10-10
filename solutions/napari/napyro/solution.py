@@ -10,7 +10,6 @@ channels:
   - pytorch-nightly
   - fastai
   - conda-forge
-  - defaults
 dependencies:
   - python>=3.10
   - pybind11
@@ -179,7 +178,7 @@ def run():
 setup(
     group="napari",
     name="napyro",
-    version="0.0.2",
+    version="0.0.3",
     title="Parent environment for a big napari environment for cryoET.",
     description="A parent environment for a big napari environment for cryoET",
     solution_creators=["Kyle Harrington"],
